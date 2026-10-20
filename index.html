@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07090D">
+<title>رصد | موتور کشف فرصت کسب‌وکار با هوش مصنوعی</title>
+<meta name="description" content="رصد با تحلیل پروفایل تو، ۹۶ سناریوی درآمدی بومیِ بازار ایران را با امتیازدهی شش‌معیارهٔ شفاف رتبه‌بندی می‌کند: بریف استراتژیک، ماتریس مقایسه، نقشهٔ ۷ روز اول و جستجوی هوشمند فرصت‌ها.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ====== TOKENS ====== */
+:root{
+  --bg:#07090D; --bg2:#0B0F16; --surface:#101623; --surface2:#151D2E;
+  --line:rgba(148,163,184,.14); --line2:rgba(148,163,184,.24);
+  --text:#EAF0F8; --muted:#9AA7BC; --faint:#64748B;
+  --accent:#2DE2C5; --accent-dim:rgba(45,226,197,.12); --accent-line:rgba(45,226,197,.35);
+  --amber:#FFB454; --danger:#FF6B6B;
+  --r:18px; --r2:12px; --pill:999px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:120px;
+  --fs-xs:12px; --fs-sm:14px; --fs-md:16px; --fs-lg:18px; --fs-xl:22px; --fs-2xl:28px; --fs-3xl:40px; --fs-4xl:56px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Vazirmatn',Tahoma,sans-serif;font-size:var(--fs-md);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--accent);color:#04211B}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:#1E293B;border-radius:8px}
+mark{background:var(--accent);color:#04211B;border-radius:3px;padding:0 2px}
+.lat{font-family:ui-monospace,'Courier New',monospace;letter-spacing:.08em;direction:ltr;unicode-bidi:embed}
+
+/* ====== LAYOUT ====== */
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--s5)}
+section{padding:var(--s10) 0}
+.sec-head{margin-bottom:var(--s7)}
+.kicker{display:inline-flex;align-items:center;gap:var(--s2);color:var(--accent);font-size:var(--fs-sm);font-weight:700;border:1px solid var(--accent-line);border-radius:var(--pill);padding:6px 16px;margin-bottom:var(--s4)}
+.kicker::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+h2{font-size:clamp(28px,4vw,var(--fs-3xl));font-weight:800;line-height:1.4}
+.sec-sub{color:var(--muted);max-width:680px;margin-top:var(--s3);font-size:var(--fs-lg);font-weight:300}
+
+/* ====== PROGRESS ====== */
+#prog{position:fixed;top:0;right:0;height:3px;background:var(--accent);width:0;z-index:200;transition:width .1s linear}
+
+/* ====== NAV ====== */
+header{position:sticky;top:0;z-index:100;background:rgba(7,9,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:var(--s3);font-weight:900;font-size:var(--fs-xl)}
+.logo-mark{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--accent),#0E9F8C);display:grid;place-items:center;color:#04211B;font-size:21px;font-weight:900;flex-shrink:0;position:relative}
+.logo-mark::after{content:'';position:absolute;top:5px;left:6px;width:7px;height:7px;border-radius:50%;background:#fff;opacity:.85}
+.logo small{display:block;font-size:10px;color:var(--faint);font-weight:400;line-height:1.2}
+.nav-links{display:flex;gap:var(--s6);list-style:none;align-items:center}
+.nav-links a{color:var(--muted);font-size:var(--fs-sm);font-weight:500;transition:color .3s ease}
+.nav-links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);border-radius:var(--pill);font-weight:700;font-size:var(--fs-sm);padding:12px 28px;border:1px solid transparent;transition:all .3s ease}
+.btn-primary{background:var(--accent);color:#04211B}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 24px rgba(45,226,197,.25)}
+.btn-ghost{border-color:var(--line2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm{padding:9px 20px;font-size:13px}
+.btn-block{width:100%;padding:15px;font-size:var(--fs-md)}
+.link-btn{background:none;border:1px solid var(--line2);color:var(--muted);border-radius:var(--pill);padding:8px 18px;font-size:13px;font-weight:600;transition:all .3s ease}
+.link-btn:hover{border-color:var(--accent);color:var(--accent)}
+.link-btn.acc{background:var(--accent);border-color:var(--accent);color:#04211B;font-weight:800}
+.link-btn.acc:hover{filter:brightness(1.1);color:#04211B}
+.nav-right{display:flex;align-items:center;gap:var(--s4)}
+.nav-burger{display:none;background:none;border:1px solid var(--line2);border-radius:10px;width:44px;height:44px;color:var(--text);font-size:20px}
+.mobile-menu{display:none;border-top:1px solid var(--line);padding:var(--s4) var(--s5);background:var(--bg2)}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:var(--s3) 0;color:var(--muted);border-bottom:1px solid var(--line);font-weight:500}
+.mobile-menu a:last-child{border:none}
+
+/* ====== HERO ====== */
+.hero{position:relative;padding:var(--s9) 0 var(--s10);overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.35;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 30%,transparent 75%);pointer-events:none}
+.hero-glow{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(45,226,197,.14),transparent 65%);pointer-events:none}
+.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s8);align-items:center;position:relative}
+.hero h1{font-size:clamp(34px,5.2vw,var(--fs-4xl));font-weight:900;line-height:1.35;margin:var(--s4) 0}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{color:var(--muted);font-size:var(--fs-lg);font-weight:300;max-width:580px}
+.hero-cta{display:flex;gap:var(--s4);margin-top:var(--s6);flex-wrap:wrap}
+.hero-meta{display:flex;gap:var(--s5);margin-top:var(--s6);color:var(--faint);font-size:var(--fs-sm);flex-wrap:wrap}
+.hero-meta span{display:flex;align-items:center;gap:6px}
+.hero-meta svg{width:15px;height:15px;color:var(--accent);flex-shrink:0}
+.radar-box{position:relative;aspect-ratio:1;max-width:420px;margin:0 auto}
+.radar-box svg{width:100%;height:100%}
+.radar-sweep{transform-origin:50% 50%;animation:sweep 4.5s linear infinite}
+@keyframes sweep{to{transform:rotate(360deg)}}
+.radar-tag{position:absolute;background:var(--surface);border:1px solid var(--accent-line);color:var(--accent);font-size:11px;font-weight:700;border-radius:var(--pill);padding:4px 12px;animation:blip 3s ease infinite;white-space:nowrap}
+.radar-tag.t1{top:12%;right:2%}
+.radar-tag.t2{bottom:26%;left:0;animation-delay:1.2s}
+.radar-tag.t3{top:40%;left:4%;animation-delay:2.1s}
+@keyframes blip{0%,100%{opacity:.4}50%{opacity:1}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s4);margin-top:var(--s9);position:relative}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:var(--s5);text-align:center}
+.stat b{display:block;font-size:var(--fs-2xl);font-weight:900;color:var(--accent)}
+.stat span{color:var(--muted);font-size:var(--fs-sm)}
+
+/* ====== CARDS / GENERIC ====== */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:var(--s5)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s4)}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);color:var(--muted);border-radius:var(--pill);padding:5px 14px;font-size:var(--fs-xs);font-weight:500}
+.chip.acc{color:var(--accent);border-color:var(--accent-line);background:var(--accent-dim)}
+.chip.amb{color:var(--amber);border-color:rgba(255,180,84,.4);background:rgba(255,180,84,.1)}
+.chip .x{cursor:pointer;font-weight:900;margin-inline-start:4px}
+
+/* ====== GENERATOR ====== */
+.gen-shell{display:grid;grid-template-columns:400px 1fr;gap:var(--s5);align-items:start}
+.gen-form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:var(--s5);position:sticky;top:96px}
+.field{margin-bottom:var(--s4)}
+.field label{display:block;font-size:var(--fs-sm);font-weight:700;margin-bottom:var(--s2)}
+.field label i{color:var(--accent);font-style:normal;font-size:11px;font-weight:400;margin-inline-start:6px}
+.field textarea,.field input,.field select{width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r2);padding:12px 14px;color:var(--text);transition:border-color .3s ease;resize:vertical}
+.field textarea:focus,.field input:focus,.field select:focus{border-color:var(--accent);outline:none}
+.field select option{background:var(--surface)}
+.field .err{border-color:var(--danger)!important}
+.field .hint{color:var(--faint);font-size:11px;margin-top:4px}
+.engine-box{border:1px solid var(--line);border-radius:var(--r2);padding:var(--s3);margin-bottom:var(--s4);background:var(--bg2)}
+.engine-box b{font-size:13px;display:block;margin-bottom:var(--s2)}
+.radio-row{display:flex;gap:var(--s3);flex-wrap:wrap}
+.radio-row label{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;padding:6px 12px;border:1px solid var(--line);border-radius:var(--pill);transition:all .3s ease}
+.radio-row input{accent-color:var(--accent)}
+.radio-row label:has(input:checked){border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
+#apiWrap{display:none;margin-top:var(--s3)}
+#apiWrap.show{display:block}
+.focus-chip{display:none;align-items:center;justify-content:space-between;gap:var(--s3);background:var(--accent-dim);border:1px solid var(--accent-line);color:var(--accent);border-radius:var(--r2);padding:10px 14px;font-size:13px;font-weight:700;margin-bottom:var(--s4)}
+.focus-chip.show{display:flex}
+.focus-chip button{background:none;border:none;color:var(--accent);font-size:16px}
+.gen-trust{color:var(--faint);font-size:11px;text-align:center;margin-top:var(--s2)}
+.brief-empty{border:2px dashed var(--line2);border-radius:var(--r);padding:var(--s9) var(--s5);text-align:center;color:var(--faint)}
+.brief-empty svg{width:56px;height:56px;margin-bottom:var(--s4);color:#243040}
+.brief{display:none}
+.brief.show{display:block}
+.doc{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r);overflow:hidden;position:relative}
+.doc-head{background:var(--bg2);border-bottom:1px solid var(--line2);padding:var(--s4) var(--s5);display:flex;align-items:center;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+.doc-head .serial{color:var(--muted);font-size:12px}
+.doc-actions{display:flex;gap:var(--s2);flex-wrap:wrap}
+.stamp{position:absolute;top:70px;left:24px;transform:rotate(-8deg);border:2px solid rgba(255,180,84,.5);color:rgba(255,180,84,.75);border-radius:8px;padding:4px 14px;font-size:11px;font-weight:800;pointer-events:none}
+.exec{padding:var(--s5);border-bottom:1px solid var(--line)}
+.exec h3{font-size:var(--fs-lg);font-weight:800;margin-bottom:var(--s2);display:flex;align-items:center;gap:var(--s2)}
+.exec h3::before{content:'';width:4px;height:20px;background:var(--accent);border-radius:2px}
+.exec p{color:var(--muted);font-size:var(--fs-sm)}
+.exec p b{color:var(--text)}
+.sig-row{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center;margin-top:var(--s4)}
+.sig-l{font-size:12px;color:var(--faint);font-weight:700}
+.scan{display:flex;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s3)}
+.strategy{margin-top:var(--s3);padding:var(--s3) var(--s4);background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);font-size:var(--fs-sm);color:var(--muted)}
+.strategy b{color:var(--accent)}
+.refine{margin:var(--s4) 0 0;padding:var(--s4);background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2)}
+.refine b{font-size:13px;display:block;margin-bottom:10px;color:var(--text)}
+.rrow{display:flex;gap:8px;flex-wrap:wrap}
+.fchip{background:var(--surface);border:1px solid var(--line2);color:var(--muted);border-radius:var(--pill);padding:7px 16px;font-size:13px;cursor:pointer;transition:all .3s}
+.fchip:hover{border-color:var(--accent-line);color:var(--text)}
+.fchip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.coach{margin:var(--s4) 0 0;padding:var(--s3) var(--s4);background:var(--accent-dim);border:1px solid var(--accent-line);border-radius:var(--r2);color:var(--accent);font-size:var(--fs-sm);font-weight:500}
+.mtx-wrap{padding:var(--s4) var(--s5);border-bottom:1px solid var(--line)}
+.mtx{width:100%;border-collapse:collapse;font-size:13px}
+.mtx th{color:var(--faint);font-weight:700;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line2);font-size:11px}
+.mtx td{padding:9px 8px;border-bottom:1px solid var(--line);color:var(--muted)}
+.mtx tr:last-child td{border:none}
+.mtx b.acc{color:var(--accent);font-size:15px}
+.doc-note{padding:var(--s3) var(--s5);color:var(--faint);font-size:11px;border-top:1px solid var(--line)}
+.idea{padding:var(--s5);border-bottom:1px solid var(--line)}
+.idea-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);margin-bottom:var(--s3);flex-wrap:wrap}
+.idea-rank{display:flex;align-items:center;gap:var(--s3)}
+.rank-num{width:44px;height:44px;border-radius:12px;background:var(--bg2);border:1px solid var(--line2);display:grid;place-items:center;font-size:19px;font-weight:900;color:var(--accent);flex-shrink:0}
+.idea h4{font-size:var(--fs-xl);font-weight:800;line-height:1.5}
+.idea .dom{color:var(--faint);font-size:12px;margin-top:2px}
+.score-final{text-align:center;flex-shrink:0}
+.score-final b{display:block;font-size:34px;font-weight:900;line-height:1}
+.grade{display:inline-block;margin-top:6px;font-size:11px;font-weight:800;border-radius:var(--pill);padding:3px 12px}
+.g-S{background:var(--accent);color:#04211B}.g-A{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-line)}.g-B{background:rgba(255,180,84,.12);color:var(--amber);border:1px solid rgba(255,180,84,.4)}.g-C{background:var(--surface2);color:var(--muted);border:1px solid var(--line2)}
+.pitch{color:var(--muted);font-size:var(--fs-sm);margin-bottom:var(--s3)}
+.why{background:var(--bg2);border-inline-start:3px solid var(--accent);border-radius:var(--r2);padding:var(--s3) var(--s4);font-size:var(--fs-sm);margin-bottom:var(--s4)}
+.why b{color:var(--accent)}
+.scores3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-bottom:var(--s3)}
+.sc-row label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:6px}
+.sc-row label b{color:var(--text)}
+.bar{height:6px;background:var(--surface2);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.bd-row{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s4)}
+.bd-row .chip{font-size:11px;padding:4px 10px}
+.bd-row .chip i{opacity:.45;font-style:normal}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin-bottom:var(--s4)}
+.mini-box{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);padding:var(--s4)}
+.mini-box h5{font-size:13px;font-weight:800;margin-bottom:var(--s3);color:var(--text);display:flex;align-items:center;gap:6px}
+.mini-box h5 svg{width:14px;height:14px;color:var(--accent)}
+.rev-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.rev-row:last-of-type{border:none}
+.rev-row span{color:var(--muted)}
+.rev-row b{font-weight:700}
+.g90{margin-top:var(--s3);font-size:12.5px;color:var(--accent);background:var(--accent-dim);border-radius:8px;padding:8px 12px}
+.steps{margin:0}
+.steps li{display:flex;gap:var(--s3);font-size:13px;color:var(--muted);padding:7px 0;list-style:none;line-height:1.7}
+.steps li b{color:var(--accent);font-size:12px;background:var(--accent-dim);border-radius:8px;min-width:24px;height:24px;display:grid;place-items:center;flex-shrink:0;margin-top:2px}
+.risk-row{font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line);color:var(--muted)}
+.risk-row:last-child{border:none}
+.risk-row b{color:var(--danger);font-weight:700}
+.tools-row{display:flex;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s2)}
+.idea-foot{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+.idea-foot .acts{display:flex;gap:var(--s2);flex-wrap:wrap}
+.idea-foot .s-mini{font-size:12px;color:var(--faint)}
+.alts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);padding:var(--s4) var(--s5);border-bottom:1px solid var(--line)}
+.alt{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);padding:var(--s3) var(--s4);display:flex;flex-direction:column;gap:8px}
+.alt h6{font-size:13.5px;font-weight:700;line-height:1.6}
+.alt .a-score{color:var(--accent);font-weight:900;font-size:12px}
+.alt .acts{display:flex;gap:6px;flex-wrap:wrap}
+.alt button{padding:5px 12px;font-size:11.5px}
+.loading{display:none;text-align:center;padding:var(--s8) 0}
+.loading.show{display:block}
+.load-ring{width:56px;height:56px;border:3px solid var(--surface2);border-top-color:var(--accent);border-radius:50%;margin:0 auto var(--s4);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-steps{color:var(--muted);font-size:var(--fs-sm)}
+.load-steps div{opacity:0;animation:stepIn .5s forwards}
+@keyframes stepIn{to{opacity:1}}
+
+/* ====== SEARCH ====== */
+.search-sec{background:var(--bg2);border-block:1px solid var(--line)}
+.search-wrap{position:relative}
+.search-bar{display:flex;gap:var(--s3);align-items:center;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r);padding:var(--s3) var(--s4);margin-bottom:var(--s4);transition:border-color .3s ease}
+.search-bar:focus-within{border-color:var(--accent)}
+.search-bar svg{width:22px;height:22px;color:var(--faint);flex-shrink:0}
+.search-bar input{flex:1;background:none;border:none;color:var(--text);font-size:var(--fs-lg);outline:none}
+.search-bar input::placeholder{color:var(--faint)}
+.kbd{background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:2px 10px;font-size:12px;color:var(--muted);white-space:nowrap}
+.sug{position:absolute;top:100%;right:0;left:0;margin-top:6px;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r2);overflow:hidden;display:none;z-index:50;box-shadow:0 16px 48px rgba(0,0,0,.5)}
+.sug.show{display:block}
+.sug-item{padding:11px 18px;font-size:14px;color:var(--muted);cursor:pointer;display:flex;justify-content:space-between;gap:var(--s3);border-bottom:1px solid var(--line)}
+.sug-item:last-child{border:none}
+.sug-item:hover,.sug-item.on{background:var(--surface2);color:var(--text)}
+.sug-item small{color:var(--faint);font-size:11px}
+.facets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:var(--s3)}
+.achips{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
+.achips:empty{display:none}
+.filters{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
+.filters select{background:var(--surface);border:1px solid var(--line2);color:var(--muted);border-radius:var(--pill);padding:8px 16px;font-size:13px;cursor:pointer;transition:border-color .3s}
+.filters select:hover,.filters select:focus{border-color:var(--accent);color:var(--text)}
+.filters select option{background:var(--surface)}
+.filters .sort{margin-inline-start:auto;border-color:var(--accent-line);color:var(--accent)}
+.s-count{color:var(--faint);font-size:13px;margin-bottom:var(--s4)}
+.s-count b{color:var(--accent)}
+.s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}
+.s-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);cursor:pointer;transition:all .3s ease;display:flex;flex-direction:column;gap:var(--s3);position:relative}
+.s-card:hover{border-color:var(--accent-line);transform:translateY(-3px);background:var(--surface2)}
+.star{position:absolute;top:10px;left:10px;background:none;border:none;color:var(--faint);font-size:18px;padding:4px;cursor:pointer;transition:color .3s;line-height:1}
+.star:hover{color:var(--amber)}
+.star.on{color:var(--amber)}
+.s-card .chips{display:flex;gap:6px;flex-wrap:wrap;padding-left:28px}
+.s-card h4{font-size:var(--fs-md);font-weight:700;line-height:1.6}
+.s-card p{color:var(--muted);font-size:13px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.s-card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:var(--s3);border-top:1px solid var(--line);gap:var(--s2)}
+.s-mini{display:flex;gap:var(--s3);font-size:12px;color:var(--faint);flex-wrap:wrap}
+.s-mini b{color:var(--accent);font-weight:800}
+.s-card .go{color:var(--accent);font-size:12px;font-weight:700;white-space:nowrap}
+.s-empty{text-align:center;padding:var(--s8);color:var(--faint)}
+.pop-chips{display:flex;gap:var(--s2);justify-content:center;flex-wrap:wrap;margin-top:var(--s4)}
+.pop-chips button{background:var(--surface2);border:1px solid var(--line);color:var(--muted);border-radius:var(--pill);padding:7px 18px;font-size:13px;transition:all .3s}
+.pop-chips button:hover{color:var(--accent);border-color:var(--accent-line)}
+.cmpbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:150;display:none;align-items:center;gap:var(--s3);background:var(--surface2);border:1px solid var(--accent-line);border-radius:var(--pill);padding:10px 12px 10px 24px;box-shadow:0 16px 48px rgba(0,0,0,.5)}
+.cmpbar.show{display:flex}
+.cmpbar span{color:var(--muted);font-size:13px;font-weight:600}
+.cmpbar button.clear{background:none;border:none;color:var(--faint);font-size:16px}
+
+/* ====== FEATURES ====== */
+.feat-icon{width:48px;height:48px;border-radius:13px;background:var(--accent-dim);border:1px solid var(--accent-line);display:grid;place-items:center;margin-bottom:var(--s4)}
+.feat-icon svg{width:22px;height:22px;color:var(--accent)}
+.feat h4{font-size:var(--fs-lg);font-weight:800;margin-bottom:var(--s2)}
+.feat p{color:var(--muted);font-size:var(--fs-sm)}
+
+/* ====== HOW ====== */
+.how-sec{background:var(--bg2);border-block:1px solid var(--line)}
+.pipe{display:flex;align-items:stretch;justify-content:center;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s7)}
+.pnode{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r2);padding:14px 22px;text-align:center;min-width:150px}
+.pnode b{color:var(--accent);font-size:13px;display:block;margin-bottom:2px}
+.pnode span{font-size:12px;color:var(--muted)}
+.parr{color:var(--accent);font-weight:900;font-size:20px;align-self:center}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s4);counter-reset:step}
+.how-step{position:relative;padding:var(--s5);background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.how-step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:ui-monospace,monospace;font-size:13px;color:var(--accent);letter-spacing:.1em;direction:ltr;display:block;margin-bottom:var(--s3)}
+.how-step h4{font-size:var(--fs-md);font-weight:800;margin-bottom:var(--s2)}
+.how-step p{color:var(--muted);font-size:13px}
+
+/* ====== VOICES ====== */
+.voice p{color:var(--muted);font-size:var(--fs-sm)}
+.vq{font-size:44px;line-height:1;color:var(--accent);font-weight:900;margin-bottom:var(--s2)}
+.vwho{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--line)}
+.vwho b{display:block;font-size:var(--fs-sm)}
+.vwho span{color:var(--faint);font-size:12px}
+
+/* ====== PRICING ====== */
+.price-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:var(--s6);position:relative;display:flex;flex-direction:column}
+.price-card.hot{border-color:var(--accent-line);background:linear-gradient(180deg,rgba(45,226,197,.06),var(--surface))}
+.hot-badge{position:absolute;top:-13px;right:32px;background:var(--accent);color:#04211B;font-size:11px;font-weight:900;border-radius:var(--pill);padding:4px 16px}
+.price-card h4{font-size:var(--fs-lg);font-weight:800}
+.price-num{font-size:var(--fs-2xl);font-weight:900;margin:var(--s3) 0 var(--s1)}
+.price-num small{font-size:13px;color:var(--faint);font-weight:400}
+.price-card ul{list-style:none;margin:var(--s5) 0;flex:1}
+.price-card li{font-size:var(--fs-sm);color:var(--muted);padding:7px 0;display:flex;gap:var(--s2);align-items:flex-start}
+.price-card li svg{width:16px;height:16px;color:var(--accent);flex-shrink:0;margin-top:5px}
+.price-card li.off{opacity:.4}
+.price-card li.off svg{color:var(--faint)}
+
+/* ====== FAQ ====== */
+.faq-sec{background:var(--bg2);border-top:1px solid var(--line)}
+.faq{max-width:760px;margin:0 auto}
+.faq-item{border:1px solid var(--line);border-radius:var(--r2);margin-bottom:var(--s3);background:var(--surface);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-size:var(--fs-md);font-weight:700;padding:var(--s4) var(--s5);display:flex;justify-content:space-between;align-items:center;text-align:right;gap:var(--s3)}
+.faq-q .ic{color:var(--accent);transition:transform .3s ease;font-size:20px;flex-shrink:0}
+.faq-item.open .faq-q .ic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--muted);font-size:var(--fs-sm)}
+.faq-a div{padding:0 var(--s5) var(--s4)}
+.faq-item.open .faq-a{max-height:340px}
+
+/* ====== FOOTER ====== */
+footer{border-top:1px solid var(--line);background:var(--bg2);padding:var(--s8) 0 var(--s5)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:var(--s7);margin-bottom:var(--s7)}
+.foot-grid h5{font-size:var(--fs-sm);font-weight:800;margin-bottom:var(--s4)}
+.foot-grid p,.foot-grid a{color:var(--muted);font-size:var(--fs-sm)}
+.foot-links{list-style:none}
+.foot-links li{margin-bottom:var(--s2)}
+.foot-links a:hover{color:var(--accent)}
+.news-row{display:flex;gap:var(--s2);margin-top:var(--s3)}
+.news-row input{flex:1;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r2);padding:11px 14px;color:var(--text);font-size:var(--fs-sm)}
+.news-row input:focus{border-color:var(--accent);outline:none}
+.foot-bottom{border-top:1px solid var(--line);padding-top:var(--s5);display:flex;justify-content:space-between;align-items:center;color:var(--faint);font-size:12px;flex-wrap:wrap;gap:var(--s3)}
+
+/* ====== MODAL / TOAST ====== */
+.modal{position:fixed;inset:0;z-index:210;display:none;align-items:center;justify-content:center;padding:var(--s4)}
+.modal.show{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(4,6,10,.75);backdrop-filter:blur(6px)}
+.modal-card{position:relative;background:var(--surface);border:1px solid var(--line2);border-radius:20px;max-width:720px;width:100%;max-height:86vh;overflow-y:auto;padding:var(--s6)}
+.modal-close{position:sticky;top:0;float:left;background:var(--bg2);border:1px solid var(--line2);color:var(--muted);width:38px;height:38px;border-radius:10px;font-size:18px;z-index:2}
+.modal-close:hover{color:var(--danger);border-color:var(--danger)}
+.m-title{font-size:var(--fs-xl);font-weight:900;margin-bottom:var(--s2);padding-left:48px}
+.m-dom{color:var(--faint);font-size:13px;margin-bottom:var(--s4)}
+.m-sec{margin-top:var(--s4)}
+.m-sec h5{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:var(--s2)}
+.m-sec p,.m-sec div.tx{color:var(--muted);font-size:var(--fs-sm)}
+.m-req{display:flex;gap:var(--s2);flex-wrap:wrap}
+#toasts{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;gap:var(--s2)}
+.toast{background:var(--surface2);border:1px solid var(--line2);border-inline-start:3px solid var(--accent);color:var(--text);border-radius:var(--r2);padding:13px 20px;font-size:var(--fs-sm);font-weight:500;box-shadow:0 12px 40px rgba(0,0,0,.5);animation:toastIn .35s cubic-bezier(.2,.8,.2,1)}
+.toast.err{border-inline-start-color:var(--danger)}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ====== REVEAL ====== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ====== PRINT ====== */
+@media print{
+  body{background:#fff}
+  body *{visibility:hidden}
+  .doc,.doc *{visibility:visible}
+  .doc{position:absolute;inset:0;width:100%;border:none;background:#fff;color:#111}
+  .doc *{color:#111!important;border-color:#ddd!important;background:#fff!important}
+  .doc-actions,.stamp,.modal,.radar-box,.gen-form,.refine{display:none!important}
+  .bar{border:1px solid #ccc}
+}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:var(--s7)}
+  .radar-box{max-width:340px}
+  .gen-shell{grid-template-columns:1fr}
+  .gen-form{position:static}
+  .s-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .alts{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links,.nav-right .btn{display:none}
+  .nav-burger{display:grid;place-items:center}
+  section{padding:var(--s8) 0}
+  .grid-3,.grid-2,.s-grid,.how-grid,.mini-grid,.scores3,.stats{grid-template-columns:1fr}
+  .scores3{gap:var(--s3)}
+  .alts{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:var(--s5)}
+  .hero h1{font-size:32px}
+  .doc-actions{width:100%}
+  .search-bar .kbd{display:none}
+  #toasts{left:16px;right:16px;bottom:16px}
+  .stamp{display:none}
+  .mtx th:nth-child(n+5),.mtx td:nth-child(n+5){display:none}
+  .parr{display:none}
+  .pnode{min-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ====== NAV ====== -->
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#home">
+      <span class="logo-mark">ر</span>
+      <span>رصد<small>موتور کشف فرصت کسب‌وکار</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#engine">موتور بریف</a></li>
+      <li><a href="#search">جستجوی فرصت</a></li>
+      <li><a href="#features">امکانات</a></li>
+      <li><a href="#pricing">تعرفه</a></li>
+      <li><a href="#faq">سوالات</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="link-btn" id="historyBtn">بریف‌های من</button>
+      <a class="btn btn-primary btn-sm" href="#engine">شروع رایگان</a>
+      <button class="nav-burger" id="navBtn" aria-label="منو" aria-expanded="false">☰</button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#engine">موتور بریف</a>
+    <a href="#search">جستجوی فرصت</a>
+    <a href="#features">امکانات</a>
+    <a href="#pricing">تعرفه</a>
+    <a href="#faq">سوالات</a>
+    <a href="#engine" style="color:var(--accent)">شروع رایگان ←</a>
+  </nav>
+</header>
+
+<main>
+<!-- ====== HERO ====== -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <span class="kicker">رصد v5 — موتور دانش ۹۶ سناریویی</span>
+      <h1>تصمیمِ بعدیِ کسب‌وکارت را<br><em>حدس نزن؛ بسنج.</em></h1>
+      <p class="lead">رصد پروفایل تو را تحلیل می‌کند، ۹۶ سناریوی درآمدیِ بومیِ بازار ایران را با شش معیارِ شفاف رتبه‌بندی می‌کند و سه مسیرِ امتیازدار با ماتریس مقایسه، نقشهٔ ۷ روز اول و باز-رتبه‌بندی زنده تحویل می‌دهد.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#engine">ساخت بریف رایگان ←</a>
+        <a class="btn btn-ghost" href="#search">جستجوی فرصت‌ها</a>
+      </div>
+      <div class="hero-meta">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> بدون نیاز به ثبت‌نام</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> داده‌ها فقط روی مرورگر خودت</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> کمتر از ۹۰ ثانیه تا بریف</span>
+      </div>
+    </div>
+    <div class="radar-box" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="sweepG" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#2DE2C5" stop-opacity=".35"/>
+            <stop offset="1" stop-color="#2DE2C5" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(45,226,197,.18)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="64" fill="none" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="36" fill="none" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <line x1="8" y1="100" x2="192" y2="100" stroke="rgba(148,163,184,.1)"/>
+        <line x1="100" y1="8" x2="100" y2="192" stroke="rgba(148,163,184,.1)"/>
+        <g class="radar-sweep">
+          <path d="M100 100 L192 100 A92 92 0 0 0 164 35 Z" fill="url(#sweepG)"/>
+        </g>
+        <circle cx="142" cy="58" r="4" fill="#2DE2C5"><animate attributeName="opacity" values="1;.2;1" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="58" cy="128" r="4" fill="#FFB454"><animate attributeName="opacity" values="1;.2;1" dur="2.7s" repeatCount="indefinite"/></circle>
+        <circle cx="120" cy="140" r="3" fill="#2DE2C5"><animate attributeName="opacity" values="1;.2;1" dur="3.4s" repeatCount="indefinite"/></circle>
+        <circle cx="100" cy="100" r="3.5" fill="#EAF0F8"/>
+      </svg>
+      <span class="radar-tag t1">اسکن بازار</span>
+      <span class="radar-tag t2">رتبه‌بندی ۶ معیاره</span>
+      <span class="radar-tag t3">باز-رتبه‌بندی زنده</span>
+    </div>
+  </div>
+  <div class="wrap stats">
+    <div class="stat reveal"><b data-count="96">۰</b><span>سناریوی تخصصی درآمدی</span></div>
+    <div class="stat reveal"><b data-count="12">۰</b><span>حوزهٔ کسب‌وکار</span></div>
+    <div class="stat reveal"><b data-count="6">۰</b><span>معیار امتیازدهی شفاف</span></div>
+    <div class="stat reveal"><b data-count="90">۰</b><span>ثانیه تا بریف کامل</span></div>
+  </div>
+</section>
+
+<!-- ====== GENERATOR ====== -->
+<section id="engine">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">موتور بریف استراتژیک</span>
+      <h2>پروفایلت را بده؛ سه مسیرِ امتیازدار بگیر.</h2>
+      <p class="sec-sub">هرچه صادقانه‌تر بنویسی، تحلیل عمیق‌تر می‌شود. موتور از متن تو سیگنال استخراج می‌کند — فوریت درآمد، گرایش B2B یا B2C، پهنای مهارت — و بعد از بریف، با سه پاسخ کوتاهِ «دقت‌سنج» رتبه‌بندی را دقیق‌تر می‌کند.</p>
+    </div>
+    <div class="gen-shell">
+      <form class="gen-form reveal" id="genForm" novalidate>
+        <div class="focus-chip" id="focusChip">
+          <span id="focusText"></span>
+          <button type="button" id="focusClear" aria-label="حذف ایدهٔ منتخب">×</button>
+        </div>
+        <div class="field">
+          <label for="fPain">درد یا هدف اصلی <i>اجباری</i></label>
+          <textarea id="fPain" rows="2" placeholder="مثلاً: بدهی دارم و باید سریع درآمد شروع کنم؛ یا: مغازه‌ام رک زده و دنبال کانال فروش تازه‌ام"></textarea>
+          <div class="hint">همین جمله، نقطهٔ شروع کل تحلیل است — فوریت و گرایش بازار از همین‌جا خوانده می‌شود.</div>
+        </div>
+        <div class="field">
+          <label for="fSkills">مهارت‌ها و تجربه‌ها <i>اجباری</i></label>
+          <input id="fSkills" placeholder="مثلاً: فتوشاپ، فروش تلفنی، آشپزی، کدنویسی...">
+          <div class="hint">با کاما جدا کن — موتور همین‌ها را با ۹۶ سناریو تطبیق می‌دهد.</div>
+        </div>
+        <div class="field">
+          <label for="fDom">حوزهٔ موردعلاقه</label>
+          <select id="fDom"></select>
+        </div>
+        <div class="field">
+          <label for="fCap">سرمایهٔ در دسترس</label>
+          <select id="fCap">
+            <option value="1">زیر ۱۰ میلیون تومان</option>
+            <option value="2" selected>۱۰ تا ۵۰ میلیون تومان</option>
+            <option value="3">بالای ۵۰ میلیون تومان</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fHrs">زمان آزاد در هفته</label>
+          <select id="fHrs">
+            <option value="1">کمتر از ۱۰ ساعت</option>
+            <option value="2" selected>۱۰ تا ۲۵ ساعت</option>
+            <option value="3">بیش از ۳۰ ساعت</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fMk">بازار هدف</label>
+          <select id="fMk">
+            <option value="local">محلی — شهر خودم</option>
+            <option value="national" selected>ملی — کل ایران</option>
+            <option value="online">آنلاین — بدون مرز جغرافیایی</option>
+            <option value="global">جهانی — بازار خارج</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fRisk">ریسک‌پذیری</label>
+          <select id="fRisk">
+            <option value="1">کم — امن‌ترین مسیر</option>
+            <option value="2" selected>متوسط</option>
+            <option value="3">زیاد — برای بازدهٔ بالاتر</option>
+          </select>
+        </div>
+        <div class="engine-box">
+          <b>انتخاب موتور تحلیل</b>
+          <div class="radio-row">
+            <label><input type="radio" name="engine" value="native" checked> موتور رصد (بومی)</label>
+            <label><input type="radio" name="engine" value="gemini"> Gemini زنده</label>
+          </div>
+          <div id="apiWrap">
+            <div class="field" style="margin-bottom:8px">
+              <input type="password" id="apiKey" placeholder="کلید API گوگل (aistudio.google.com/apikey)">
+            </div>
+            <div class="hint">کلید فقط در مرورگر خودت ذخیره می‌شود. اگر Gemini پاسخ ندهد، موتور بومی به‌طور خودکار بریف را می‌سازد.</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="genBtn">تحلیل عمیق و ساخت بریف ←</button>
+        <div class="gen-trust">۹۶ سناریو · امتیازدهی ۶ معیاره · بدون ارسال داده به سرور</div>
+      </form>
+      <div class="reveal" id="outCol">
+        <div class="brief-empty" id="briefEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.6L19 9.4V19a2 2 0 01-2 2z"/><path d="M14 3v6h6"/></svg>
+          <h4 style="color:var(--muted);font-weight:700;margin-bottom:8px">بریف استراتژیک تو اینجا ساخته می‌شود</h4>
+          <p style="font-size:14px">فرم کنار را کامل کن و «تحلیل عمیق» را بزن.<br>خروجی: خلاصهٔ اجرایی + سیگنال‌ها + ماتریس مقایسه + ۳ ایدهٔ کامل + ۳ کشف تازه + دقت‌سنج.</p>
+        </div>
+        <div class="loading" id="loading">
+          <div class="load-ring"></div>
+          <div class="load-steps">
+            <div style="animation-delay:.1s">◆ استخراج سیگنال‌ها از متن تو…</div>
+            <div style="animation-delay:.6s">◆ اسکن ۹۶ سناریو در ۱۲ حوزه…</div>
+            <div style="animation-delay:1.2s">◆ رتبه‌بندی ۶ معیاره: مهارت، سرمایه، زمان، ریسک، بازار، فوریت…</div>
+            <div style="animation-delay:1.8s">◆ شبیه‌سازی درآمد و ارزیابی ریسک…</div>
+            <div style="animation-delay:2.4s">◆ تدوین بریف و کشف‌های تازه…</div>
+          </div>
+        </div>
+        <div class="brief" id="brief">
+          <article class="doc">
+            <span class="stamp">سند استراتژیک</span>
+            <div class="doc-head">
+              <div>
+                <b style="font-size:15px">بریف استراتژیک کسب‌وکار</b>
+                <div class="serial lat"><span id="briefSerial"></span> · <span id="briefEngine"></span></div>
+              </div>
+              <div class="doc-actions">
+                <button class="link-btn" id="copyBrief">رونوشت</button>
+                <button class="link-btn" id="dlBrief">دانلود TXT</button>
+                <button class="link-btn" id="printBrief">چاپ</button>
+                <button class="link-btn" id="newBrief">بریف جدید</button>
+              </div>
+            </div>
+            <div class="exec" id="exec"></div>
+            <div class="mtx-wrap" id="mtxWrap"></div>
+            <div id="ideas"></div>
+            <div id="altsWrap"></div>
+            <div class="doc-note">این سند چارچوب تصمیم‌گیری است، نه پیش‌بینی. اعداد، بازهٔ واقع‌بینانهٔ بازار ایران برای سناریوی مشابه‌اند و به اجرا، شهر و شرایط تو بستگی دارند. هیچ تضمین سودی وجود ندارد.</div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SEARCH ====== -->
+<section id="search" class="search-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">موتور جستجوی فرصت‌ها</span>
+      <h2>طبیعی حرف بزن؛ رصد می‌فهمد.</h2>
+      <p class="sec-sub">«با ۲۰ میلیون و کم‌ریسک» را مستقیم تایپ کن — موتور، عدد و نیت را از جستجوی تو می‌فهمد و فیلترهای درست را خودش فعال می‌کند. مترادف‌یاب، پیشنهاد زنده، هفت فیلتر، مقایسه‌گر و مرتب‌سازی چندمحوری در خدمت توست.</p>
+    </div>
+    <div class="reveal">
+      <div class="search-wrap">
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input id="q" type="search" placeholder="جستجو: «فروش با ۱۵ میلیون»، «کم‌ریسک دورکاری»، «آموزش»…" aria-label="جستجوی فرصت‌ها" autocomplete="off">
+          <span class="kbd">Ctrl + K</span>
+        </div>
+        <div class="sug" id="sug" role="listbox"></div>
+      </div>
+      <div class="facets" id="facets"></div>
+      <div class="filters">
+        <select id="fSDom" aria-label="فیلتر حوزه"><option value="">همهٔ حوزه‌ها</option></select>
+        <select id="fSCap" aria-label="فیلتر سرمایه">
+          <option value="">هر سرمایه‌ای</option><option value="1">زیر ۱۰ میلیون</option><option value="2">۱۰ تا ۵۰ میلیون</option><option value="3">بالای ۵۰ میلیون</option>
+        </select>
+        <select id="fSHrs" aria-label="فیلتر زمان">
+          <option value="">هر زمانی</option><option value="1">کمتر از ۱۰ ساعت</option><option value="2">۱۰ تا ۲۵ ساعت</option><option value="3">بیش از ۳۰ ساعت</option>
+        </select>
+        <select id="fSMk" aria-label="فیلتر بازار">
+          <option value="">هر بازاری</option><option value="local">محلی</option><option value="national">ملی</option><option value="online">آنلاین</option><option value="global">جهانی</option>
+        </select>
+        <select id="fSRisk" aria-label="فیلتر ریسک">
+          <option value="">هر ریسکی</option><option value="1">ریسک کم</option><option value="2">ریسک متوسط</option><option value="3">ریسک زیاد</option>
+        </select>
+        <select id="sortSel" class="sort" aria-label="مرتب‌سازی">
+          <option value="rel">مرتبط‌ترین</option>
+          <option value="mk">بیشترین جذابیت بازار</option>
+          <option value="pf">بیشترین سودآوری</option>
+          <option value="rf">کمترین ریسک</option>
+        </select>
+      </div>
+      <div class="achips" id="achips"></div>
+      <div class="s-count" id="sCount" aria-live="polite"></div>
+      <div class="s-grid" id="sGrid"></div>
+      <div class="pop-chips" id="popChips"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">امکانات</span>
+      <h2>یک اتاق فکر کامل، <em style="font-style:normal;color:var(--accent)">پشت ۲۴ ساعته</em>.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card feat reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h4>تحلیل زندهٔ پروفایل</h4>
+        <p>موتور از متن آزادِ تو سیگنال می‌خواند: فوریت درآمد، گرایش B2B/B2C، پهنای مهارت — و سیگنال‌های استخراج‌شده را جلوی چشمت در بریف نمایش می‌دهد.</p>
+      </div>
+      <div class="card feat reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h4>امتیازدهی ۶ معیارهٔ شفاف</h4>
+        <p>هر ایده روی مهارت، سرمایه، زمان، ریسک، بازار و فوریت نمره می‌گیرد و تفکیک کامل امتیاز را می‌بینی — نه جعبهٔ سیاه، حساب‌وکتاب شفاف.</p>
+      </div>
+      <div class="card feat reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9" stroke-dasharray="3 4"/></svg></div>
+        <h4>دقت‌سنج دستیار</h4>
+        <p>بعد از بریف، با سه پاسخ کوتاه (فروش حضوری؟ شبکهٔ معرفین؟ فوریت پول؟) موتور همان لحظه رتبه‌بندی را باز-محاسبه و مرتب می‌کند.</p>
+      </div>
+      <div class="card feat reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg></div>
+        <h4>جستجوی طبیعی زبان</h4>
+        <p>«با ۱۵ میلیون و کم‌ریسک» تایپ کن — عدد و نیت خوانده می‌شود، فیلترها خودکار فعال می‌شوند. مترادف‌یاب، غلط‌گیریِ فازی و پیشنهاد زنده هم هست.</p>
+      </div>
+      <div class="card feat reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="13" width="7" height="7" rx="1.5"/><rect x="14" y="13" width="7" height="7" rx="1.5"/></svg></div>
+        <h4>مقایسه‌گر سناریوها</h4>
+        <p>هر سناریو را ستاره کن؛ تا ۴ سناریو را کنار هم در یک جدول مقایسه کن: سرمایه، ریسک، اولین درآمد و گام اول — انتخاب، مقایسه‌ای می‌شود.</p>
+      </div>
+      <div class="card feat reveal">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 9h6M7 13h10M17 9h.01"/></svg></div>
+        <h4>سند بریف حرفه‌ای</h4>
+        <p>سریال اختصاصی، ماتریس مقایسه، نقشهٔ ۷ روز اول، هدف ۹۰ روزه، پیام مربی و ۳ «کشف تازه»ی جایگزین — قابل رونوشت، دانلود و چاپ تمیز.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW ====== -->
+<section id="how" class="how-sec">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center">
+      <span class="kicker">موتور چطور فکر می‌کند؟</span>
+      <h2>خط تحلیل در پنج ایستگاه.</h2>
+    </div>
+    <div class="pipe reveal">
+      <div class="pnode"><b>۱ · سیگنال‌ها</b><span>خواندن متن تو</span></div>
+      <span class="parr">←</span>
+      <div class="pnode"><b>۲ · تطبیق</b><span>اسکن ۹۶ سناریو</span></div>
+      <span class="parr">←</span>
+      <div class="pnode"><b>۳ · رتبه‌بندی</b><span>شش معیار شفاف</span></div>
+      <span class="parr">←</span>
+      <div class="pnode"><b>۴ · غنی‌سازی</b><span>درآمد، ریسک، دقت‌سنج</span></div>
+      <span class="parr">←</span>
+      <div class="pnode"><b>۵ · بریف</b><span>سند قابل اجرا</span></div>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal"><h4>پروفایل بده</h4><p>درد، مهارت، سرمایه، زمان، بازار و ریسک — دو دقیقه وقت می‌برد.</p></div>
+      <div class="how-step reveal"><h4>موتور تحلیل می‌کند</h4><p>۹۶ سناریو روی شش معیار نمره می‌گیرند و با سیگنال‌های پروفایل تو تطبیق داده می‌شوند.</p></div>
+      <div class="how-step reveal"><h4>بریف تحویل بگیر</h4><p>سه مسیر برتر با ماتریس مقایسه، مدل درآمد و نقشهٔ ۷ روز اول + ۳ کشف تازه.</p></div>
+      <div class="how-step reveal"><h4>دقیق‌ترش کن و اجرا کن</h4><p>با دقت‌سنج رتبه‌بندی را تنظیم کن؛ قدم اول هر ایده برای همین هفته طراحی شده است.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== VOICES ====== -->
+<section id="voices">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">تجربهٔ کاربران</span>
+      <h2>از سردرگمی تا اولین فروش.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card voice reveal">
+        <div class="vq">«</div>
+        <p>قبل از رصد، هشت ماه بین سه ایده بالا و پایین می‌پریدم. بریف اول نشان داد کدام‌یک واقعاً با مهارت و بودجهٔ من جور است — دو هفته بعد اولین فروش را ثبت کردم.</p>
+        <div class="vwho"><b>سارا محمدی</b><span>بنیان‌گذار برند پوشاک، اصفهان</span></div>
+      </div>
+      <div class="card voice reveal">
+        <div class="vq">«</div>
+        <p>تفکیک امتیازها را بیش از خود اعداد دوست دارم؛ می‌بینم چرا یک سناریو برای تیم ما بهتر است. این شفافیت در مشاوره‌های چند ده میلیونی هم کم پیدا می‌شود.</p>
+        <div class="vwho"><b>امیر رضایی</b><span>مدیر توسعهٔ کسب‌وکار، تهران</span></div>
+      </div>
+      <div class="card voice reveal">
+        <div class="vq">«</div>
+        <p>سه سناریو را ستاره کردم و کنار هم مقایسه کردم — سرمایه، ریسک و اولین درآمد همه در یک جدول. تصمیمی که یک سال عقبش می‌افتادم، در یک عصر گرفته شد.</p>
+        <div class="vwho"><b>نگار کریمی</b><span>طراح مستقل، شیراز</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRICING ====== -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center">
+      <span class="kicker">تعرفه</span>
+      <h2>ساده و شفاف.</h2>
+      <p class="sec-sub" style="margin-inline:auto">پرداخت امن از طریق درگاه رسمی. هر زمان بخواهی لغو کن.</p>
+    </div>
+    <div class="grid-3">
+      <div class="price-card reveal">
+        <h4>رایگان</h4>
+        <div class="price-num">۰ <small>تومان</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>۳ بریف استراتژیک در ماه</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>جستجوی کامل ۹۶ سناریو</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>موتور رصد با تفکیک امتیاز</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>مقایسه‌گر و دقت‌سنج پیشرفته</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6L6 18M6 6l12 12"/></svg>موتور Gemini زنده و تاریخچهٔ کامل</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="#engine">شروع کن</a>
+      </div>
+      <div class="price-card hot reveal">
+        <span class="hot-badge">انتخاب اکثر کاربران</span>
+        <h4>حرفه‌ای</h4>
+        <div class="price-num">۲۴۹٬۰۰۰ <small>تومان / ماه</small></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>بریف نامحدود با تحلیل عمیق</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>دقت‌سنج و مقایسه‌گر کامل</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>موتور Gemini زنده در کنار موتور بومی</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>تاریخچهٔ کامل، خروجی TXT و چاپ سند</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>پشتیبانی اولویت‌دار</li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="#engine">ارتقا به حرفه‌ای</a>
+      </div>
+      <div class="price-card reveal">
+        <h4>سازمانی</h4>
+        <div class="price-num">توافقی</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>پایگاه دانش سفارشیِ حوزهٔ شما</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>میزبانی اختصاصی و API</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>مدیریت کاربران تیمی</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>قرارداد SLA و آموزش تیم</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="#faq">درخواست مشاوره</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section id="faq" class="faq-sec">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center">
+      <span class="kicker">سوالات متداول</span>
+      <h2>قبل از شروع بخوان.</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item reveal">
+        <button class="faq-q">موتور رصد دقیقاً چطور کار می‌کند؟<span class="ic">+</span></button>
+        <div class="faq-a"><div>یک پایگاه دانش از ۹۶ سناریوی واقعی بازار ایران با دادهٔ ساخت‌یافته (مدل درآمد، الزامات، ریسک، ابزار) به‌همراه امتیازدهی شش‌معیارهٔ شفاف: مهارت، سرمایه، زمان، ریسک، بازار و فوریت. موتور اول از متن تو سیگنال استخراج می‌کند، بعد پروفایل را با هر سناریو تطبیق می‌دهد و تفکیک امتیاز را جلوی چشمت نمایش می‌دهد. نه جادوست، نه جعبهٔ سیاه.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">دقت‌سنج چطور بریف را بهتر می‌کند؟<span class="ic">+</span></button>
+        <div class="faq-a"><div>بعد از تحویل بریف، سه پرسش کوتاه می‌پرسد: امکان ملاقات حضوری با مشتری داری؟ شبکهٔ معرفین فعال داری؟ اولویتت رسیدن سریع پول است؟ هر پاسخ، وزن‌های امتیازدهی را همان لحظه باز-تنظیم می‌کند و ترتیب ایده‌ها دوباره محاسبه می‌شود — بریف با هر پاسخ دقیق‌تر می‌شود.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">جستجوی طبیعی یعنی چه؟<span class="ic">+</span></button>
+        <div class="faq-a"><div>می‌توانی مثل حرف‌زدن معمولی جستجو کنی: «فروش با ۲۰ میلیون و کم‌ریسک». موتور عدد را به محدودهٔ سرمایه و «کم‌ریسک» را به فیلتر ریسک تبدیل می‌کند، مترادف‌ها را می‌فهمد («پول» = سرمایه، «خونه» = خانه) و حتی غلط‌های تایپی نزدیک را با تطبیق فازی پیدا می‌کند.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">کلید Gemini من امن است؟<span class="ic">+</span></button>
+        <div class="faq-a"><div>کلید فقط در حافظهٔ مرورگر خودت (localStorage) ذخیره می‌شود و درخواست مستقیم از مرورگر تو به گوگل می‌رود. با این حال، هر کلیدی که سمت کلاینت باشد از نظر مهندسی قابل‌دیدن است؛ برای استفادهٔ عمومی و تجاری، نسخهٔ سازمانی با کلید سمت سرور راه استاندارد است. اگر Gemini در دسترس نباشد، موتور بومی به‌طور خودکار بریف را می‌سازد.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">بریف‌ها و داده‌های من کجا ذخیره می‌شوند؟<span class="ic">+</span></button>
+        <div class="faq-a"><div>همه‌چیز — پروفایل، بریف‌ها، ستاره‌های مقایسه و کلید — فقط در حافظهٔ محلی مرورگر خودت ذخیره می‌شود. هیچ سروری، هیچ پایگاه داده‌ای، هیچ لاگی. اگر حافظهٔ مرورگر را پاک کنی، همه‌چیز پاک می‌شود.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">آیا این «مشاورهٔ مالی» یا وعدهٔ سود است؟<span class="ic">+</span></button>
+        <div class="faq-a"><div>خیر. رصد چارچوب تصمیم‌گیری است، نه پیش‌بینی. اعداد درآمد، بازهٔ واقع‌بینانهٔ بازار ایران برای سناریوی مشابه‌اند و به اجرا، شهر و شرایط تو بستگی دارند. هیچ تضمین سودی وجود ندارد و نباید داشته باشد.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#home" style="margin-bottom:16px;display:inline-flex">
+          <span class="logo-mark">ر</span>
+          <span>رصد<small>موتور کشف فرصت کسب‌وکار</small></span>
+        </a>
+        <p style="max-width:320px;margin-top:12px">ما جای «همه‌چیز را امتحان کن» را با «این سه را بسنج» عوض می‌کنیم. ساخته‌شده برای تصمیم‌گیرانِ واقعی بازار ایران.</p>
+      </div>
+      <div>
+        <h5>دسترسی سریع</h5>
+        <ul class="foot-links">
+          <li><a href="#engine">موتور بریف</a></li>
+          <li><a href="#search">جستجوی فرصت‌ها</a></li>
+          <li><a href="#pricing">تعرفه‌ها</a></li>
+          <li><a href="#faq">سوالات متداول</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>خبرنامهٔ تصمیم</h5>
+        <p>هر هفته یک تحلیل کوتاه دربارهٔ مسیرهای درآمدی واقعی بازار ایران.</p>
+        <form class="news-row" id="newsForm">
+          <input type="email" id="newsEmail" placeholder="ایمیل شما" aria-label="ایمیل خبرنامه">
+          <button class="btn btn-primary btn-sm" type="submit">عضویت</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© ۱۴۰۵ رصد (RASAD) — همهٔ حقوق محفوظ است.</span>
+      <span>ساخته‌شده با دقت، برای بازار ایران</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== COMPARE BAR / MODAL / TOASTS ====== -->
+<div class="cmpbar" id="cmpbar">
+  <span id="cmpLabel"></span>
+  <button class="link-btn acc" id="cmpOpen">مقایسه کن</button>
+  <button class="clear" id="cmpClear" aria-label="پاک‌کردن ستاره‌ها">×</button>
+</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-bg" id="modalBg"></div>
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" aria-label="بستن">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div id="toasts" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   رصد (RASAD) v5 — موتور دانش ۹۶ سناریویی + جستجوی طبیعی + مقایسه‌گر
+   ============================================================ */
+'use strict';
+const $=id=>document.getElementById(id);
+const FA='۰۱۲۳۴۵۶۷۸۹';
+const fa=s=>String(s).replace(/\d/g,d=>FA[d]);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const escRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const norm=s=>String(s).toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/ة/g,'ه').replace(/\u200c/g,' ');
+const tokenize=s=>norm(s).split(/[\s،,.؛;:()\[\]"+\-\/]+/).filter(t=>t.length>1);
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const DOMAINS=['فناوری و نرم‌افزار','فروش آنلاین و تجارت','آموزش و محتوا','خدمات خانگی و ساختمان','سلامت و زیبایی','غذا و کترینگ','گردشگری و سفر','کشاورزی و تولید','خدمات B2B و اداری','خلاقانه و طراحی','مالی و سرمایه','خودرو و حمل‌ونقل'];
+const CAPL={1:'زیر ۱۰ میلیون تومان',2:'۱۰ تا ۵۰ میلیون تومان',3:'بالای ۵۰ میلیون تومان'};
+const HRSL={1:'کمتر از ۱۰ ساعت',2:'۱۰ تا ۲۵ ساعت',3:'بیش از ۳۰ ساعت'};
+const MKL={local:'محلی',national:'ملی',online:'آنلاین',global:'جهانی'};
+const RISKL={1:'کم',2:'متوسط',3:'زیاد'};
+const CHANNELS=[
+  ['لینکدین','تماس سرد B2B','نمونه‌کار آنلاین'],
+  ['باسلام','دیوار','اینستاگرام'],
+  ['اینستاگرام','آپارات/یوتیوب','شبکهٔ آشنایان'],
+  ['دیوار','گروه‌های محله‌ای','مجتمع‌های مسکونی'],
+  ['اینستاگرام','دیوار','معرفی مشتری'],
+  ['باسلام','اینستاگرام','خواربارفروشی محلی'],
+  ['اینستاگرام','دیوار/جاجیگا','گروه‌های سفر'],
+  ['باسلام','فروشگاه محلی','شبکهٔ رستوران'],
+  ['لینکدین','جابینجا','تماس سرد'],
+  ['اینستاگرام','باسلام','ارجاع مشتری'],
+  ['لینکدین','شبکهٔ ارجاع','جلسهٔ رایگان'],
+  ['دیوار','گروه‌های خودرویی','قرارداد ناوگان']
+];
+const FACETS=['کم‌سرمایه','سریع‌درآمد','جانبی','B2B','ارزی','کم‌ریسک','تکرارشو'];
+
+/* ====== پایگاه دانش: ۹۶ سناریو (۱۲ حوزه × ۸) ====== */
+const DB=[
+/* --- ۰ فناوری --- */
+{dom:0,t:'آتلیهٔ لندینگ‌پیج با تحویل ۷۲ ساعته',tags:['طراحی وب','کدنویسی','فروش B2B'],kw:['وب','سایت','برنامه','فرانت','طراحی سایت'],w:'ساخت لندینگ‌پیج فروش‌محور برای کسب‌وکارهای کوچک با قیمت پکیجی و تحویل تضمینی ۷۲ ساعته.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ تا ۱۵۰ میلیون'},
+ steps:['در ۴۸ ساعت سه نمونه‌کار دمو برای سه صنف بساز (کلینیک، کافه، پیمانکار).','به ۳۰ کسب‌وکار فعال اینستاگرامی پیام مستقیم با اسکرین‌شات دموی اختصاصی بده.','پکیج ثابت ۸ میلیونی با پیش‌پرداخت ۵۰٪ و تحویل ۷۲ ساعته بفروش.'],
+ risks:[['رقابت قیمت‌شکن‌ها','روی «نتیجهٔ فروش» بفروش نه زیبایی؛ ضمانت بازطراحی رایگان بده.'],['وابستگی به تک‌مشتری','بعد از هر تحویل، قرارداد نگهداری ماهانه پیشنهاد بده.']],
+ tools:['Tailwind یا Framer','زرین‌پال برای پیش‌پرداخت','دایرکت/تلگرام برای فروش B2B'],
+ time:'همان هفتهٔ اول',req:{c:1,h:2,r:2,mk:'online'},base:{mk:78,pf:74}},
+{dom:0,t:'ربات تلگرامی نوبت‌دهی محلی',tags:['ربات تلگرام','نوبت‌دهی','محلی'],kw:['ربات','تلگرام','نوبت','برنامه‌نویس','بات'],w:'ربات نوبت‌دهی و یادآوری پیامکی برای آرایشگاه‌ها، پزشکان و مشاوران با اشتراک ماهانه.',
+ rev:{s:'۲ تا ۶ میلیون تومان در ماه',m:'۱۵ تا ۳۰ میلیون',y:'۴۰ تا ۹۰ میلیون'},
+ steps:['یک MVP ده‌روزه برای یک آرایشگاهِ آشنا بساز و رایگان راه‌اندازی کن.','اشتراک ۴۰۰ هزار تومانی ماهانه با دورهٔ آزمایشی ۲ هفته‌ای بفروش.','از هر مشتری راضی یک معرف بساز: یک ماه رایگان بابت هر معرفی موفق.'],
+ risks:[['چرخهٔ فروش کند','از شبکهٔ آشنایان و قرارداد آزمایشی شروع کن، نه تبلیغات.'],['نگرانی مشتری از داده‌ها','میزبانی روی سرور داخل و تعهد کتبی عدم اشتراک داده بده.']],
+ tools:['Telegram Bot API','زرین‌پال','پیامک کاوه‌نگار'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:2,r:2,mk:'local'},base:{mk:70,pf:70}},
+{dom:0,t:'اتوماسیون فرایند برای شرکت‌ها',tags:['اتوماسیون','n8n','CRM','B2B'],kw:['اتوماسیون','n8n','make','crm','اپراتور','داده'],w:'ساخت خودکارسازی‌های Make/n8n برای تیم‌های فروش و پشتیبانی: فاکتور، CRM و گزارش خودکار.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه',m:'۳۵ تا ۷۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['سه قالب آماده بساز: فاکتور خودکار، گزارش روزانه، ثبت لید در گوگل‌شیت.','به ۲۰ شرکت کوچک دمو ۱۵ دقیقه‌ای رایگان بده.','قرارداد راه‌اندازی ۱۵ میلیونی + نگهداری ماهانهٔ ۳ میلیونی ببند.'],
+ risks:[['شرکت‌ها تغییر را دوست ندارند','با یک فرایند کوچکِ دردناک شروع کن، نه بازسازی کل شرکت.'],['نگهداری طولانی','از اول قالب تکرارشونده بساز، نه کد یک‌بارمصرف.']],
+ tools:['n8n یا Make','Google Sheets','تلگرام کاری'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:76,pf:78}},
+{dom:0,t:'کاتالوگ و سفارش‌گیری واتساپی صنف‌ها',tags:['واتساپ','کاتالوگ','صنف'],kw:['واتساپ','کاتالوگ','فروشگاه','صنف','سفارش'],w:'ساخت کاتالوگ آنلاین + سیستم سفارش واتساپی برای صنف‌های بدون سایت؛ اشتراک ماهانه.',
+ rev:{s:'۳ تا ۷ میلیون تومان در ماه',m:'۱۵ تا ۳۰ میلیون',y:'۴۰ تا ۷۰ میلیون'},
+ steps:['یک قالب کاتالوگ ثابت با ۳ رنگ بساز و برای یک کافهٔ آشنا راه‌اندازی کن.','در هر محله به ۲۰ صنف دمو زنده بده: «مشتری کاتالوگ می‌بیند، سفارش را در واتساپ می‌فرستد».','اشتراک ۶۰۰ هزار تومانی ماهانه با دامنهٔ اختصاصی و گزارش سفارش هفتگی.'],
+ risks:[['کالای قشنگ، فروش سخت','اول ۵ مشتری را با کار دستی بگیر؛ اتوماسیون بعد از اعتبارسنجی.'],['گردش فروش کم صنف','پکیج فصلی (نوروز/یلدا) بفروش تا ریزش را جبران کن.']],
+ tools:['واتساپ‌بیزینس','زرین‌پال','قالب کاتالوگ آماده'],
+ time:'۱ هفته',req:{c:1,h:2,r:1,mk:'local'},base:{mk:72,pf:68}},
+{dom:0,t:'فروش قالب و افزونهٔ نیچ (درآمد ارزی)',tags:['وردپرس','قالب','درآمد ارزی'],kw:['وردپرس','قالب','افزونه','درآمد دلاری','پرداخت','محصول'],w:'توسعه و فروش قالب/افزونهٔ تخصصی برای یک صنف مشخص در بازار جهانی وردپرس.',
+ rev:{s:'۵ تا ۱۲ میلیون تومان (ارزی)',m:'۲۰ تا ۴۵ میلیون',y:'۶۰ میلیون به بالا'},
+ steps:['یک درد تکرارشونده در انجمن‌های وردپرس پیدا کن (رزرو، لندینگ صنفی، فروش دوره).','نسخهٔ مینیمال را ۳ هفته‌ای بساز و در مارکت‌پلیس منتشر کن.','نسخهٔ پرو سالانه + پشتیبانی؛ بازخورد کاربران را به نقشهٔ محصول تبدیل کن.'],
+ risks:[['پرداخت‌های بین‌المللی','از مارکت‌پلیس واسطه شروع کن؛ پرداخت مستقیم بعداً.'],['پشتیبانی فرساینده','مستندسازی و FAQ از روز اول؛ پشتیبانی ساعتی ممنوع.']],
+ tools:['PHP/JS','Envato یا Gumroad','Git'],
+ time:'۴ تا ۸ هفته',req:{c:1,h:2,r:3,mk:'global'},base:{mk:74,pf:70}},
+{dom:0,t:'بازطراحی و بهینه‌سازی فروشگاه اینترنتی',tags:['فروشگاه آنلاین','ووکامرس','بهینه‌سازی'],kw:['فروشگاه','ووکامرس','شاپیفای','سئو','نرخ تبدیل'],w:'سرویس بازطراحی و بهینه‌سازی نرخ تبدیل فروشگاه‌های آنلاین موجود با قرارداد رشد ماهانه.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۵ تا ۶۰ میلیون',y:'۸۰ میلیون به بالا'},
+ steps:['برای ۵ فروشگاه آشنا، ممیزی رایگان ۱۰ نقطه‌ای نرخ تبدیل انجام بده و سند بده.','قرارداد بازطراحی ۲۰ میلیونی + پلن بهینه‌سازی ماهانهٔ ۵ میلیونی ببند.','گزارش ماهانهٔ عددی (تغییر نرخ تبدیل، سبد خرید) = تمدید خودکار.'],
+ risks:[['دادهٔ ناکافی فروشگاه','قبل از قرارداد، حداقل یک ماه آمار گردش شرط بگذار.'],['انتظار معجزه','تعهد به فرایند بهبود، نه درصد مشخص در قرارداد.']],
+ tools:['ووکامرس/شاپیفای','GA4','هات‌جار'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:78,pf:76}},
+{dom:0,t:'پشتیبانی فنی اشتراکی دفاتر',tags:['IT','شبکه','پشتیبانی'],kw:['شبکه','کامپیوتر','پشتیبانی فنی','چاپگر','تعمیر'],w:'قرارداد ماهانهٔ پشتیبانی فنی (شبکه، سیستم، چاپگر، امنیت پایه) برای دفاتر ۵ تا ۳۰ نفره.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه (۶ دفتر)',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ میلیون به بالا'},
+ steps:['دو دفتر آشنا را با نرخ ورودی و SLA مکتوب بگیر.','چک‌لیست ماهانهٔ نگهداری + پاسخ اضطراری ۴ ساعته را مزیت کن.','از هر دفتر راضی، یک معرفی قراردادی؛ هدف: ۸ قرارداد در ۶ ماه.'],
+ risks:[['اضافه‌کاری اضطراری','SLA شفاف با سقف ساعت رایگان ماهانه.'],['وابستگی تک‌تکنسین','از ماه سوم یک تکنسین قراردادی دوم آموزش بده.']],
+ tools:['ابزار شبکه','نرم‌افزار تیکتینگ سبک','قرارداد SLA'],
+ time:'۲ هفته',req:{c:1,h:3,r:1,mk:'local'},base:{mk:72,pf:70}},
+{dom:0,t:'اپلیکیشن MVP نیش با پرداخت مرحله‌ای',tags:['اپلیکیشن','MVP','موبایل'],kw:['اپلیکیشن','اپ','موبایل','MVP','برنامه‌نویسی'],w:'ساخت MVP اندرویدی یک ایدهٔ مشخص (رزرو، باشگاه، مغازه) با قرارداد سه‌مرحله‌ای و ۵۰٪ پیش‌پرداخت.',
+ rev:{s:'یک پروژه در ماه: ۲۰ تا ۴۰ میلیون',m:'۶۰ تا ۱۰۰ میلیون',y:'۱۵۰ میلیون به بالا'},
+ steps:['سه قالب MVP آماده (رزرو، باشگاه مشتریان، سفارش) بساز تا زمان ساخت نصف شود.','به ۳۰ کسب‌وکارِ فعال، دموی ویدیویی قالب مرتبط را مستقیم بفرست.','قرارداد مرحله‌ای: پیش‌پرداخت ۵۰٪، تحویل فاز ۱، تحویل نهایی.'],
+ risks:[['بزرگ‌شدن دامنهٔ پروژه','حد مختصات MVP مکتوب؛ هر افزونه، فاکتور جدا.'],['تسویه‌نشدهٔ آخر پروژه','انتشار نهایی فقط پس از تسویهٔ کامل.']],
+ tools:['Flutter','Figma','قرارداد مرحله‌ای'],
+ time:'۴ تا ۸ هفته',req:{c:1,h:3,r:3,mk:'national'},base:{mk:76,pf:78}},
+/* --- ۱ فروش آنلاین --- */
+{dom:1,t:'برند خصوصی نیش در باسلام و دیوار',tags:['فروش','باسلام','دیوار','برند'],kw:['فروش','تجارت','باسلام','دیوار','کالا','واردات','تولید'],w:'ساخت برند خصوصی در یک دستهٔ کم‌رقابت (لوازم منزل، ابزار، لوازم هنری) با تأمین مستقیم از تولیدکننده.',
+ rev:{s:'۵ تا ۱۲ میلیون تومان در ماه',m:'۲۵ تا ۵۰ میلیون',y:'۷۰ تا ۱۴۰ میلیون'},
+ steps:['سه دستهٔ کم‌رقابت را در باسلام آنالیز کن؛ دسته‌ای را انتخاب کن که عرضه کم و تقاضا ثابت دارد.','از ۳ تولیدکنندهٔ داخلی نمونهٔ برنددار با لیبل خودت سفارش بده.','هر روز یک آگهی حرفه‌ای با عکس واقعی و توضیح صادقانه در دیوار و باسلام ثبت کن.'],
+ risks:[['کالای بی‌فروش','با ۲۰ عدد شروع کن؛ روی هیچ کالایی بیش از ۳۰٪ سرمایه نگذار.'],['کپی‌شدن برند','کیفیت و سرویس (ارسال سریع، ضمانت برگشت) را برند کن، نه فقط لیبل.']],
+ tools:['باسلام','دیوار','کارتن‌سازی و لیبل چاپی محلی'],
+ time:'۲ تا ۳ هفته',req:{c:2,h:2,r:2,mk:'online'},base:{mk:80,pf:76}},
+{dom:1,t:'واسطهٔ فروش تولیدکنندگان بی‌سابقهٔ آنلاین',tags:['فروش','تولید','واسطه‌گری'],kw:['فروش','تولید','واسطه','کارخانه','حاشیه سود'],w:'قرارداد فروش آنلاین برای ۵ تولیدکنندهٔ کوچکی که هیچ حضور دیجیتالی ندارند؛ سود از حاشیهٔ فروش.',
+ rev:{s:'۳ تا ۸ میلیون تومان در ماه',m:'۱۵ تا ۳۵ میلیون',y:'۵۰ تا ۱۰۰ میلیون'},
+ steps:['در شهر خودت ۱۰ کارگاه کوچک (کفاشی، قوطادوزی، صنایع دستی) پیدا کن.','با ۵ نفر قرارداد سادهٔ «فروش به حاشیه» ببند: تو می‌فروشی، او تولید و ارسال می‌کند.','در دیوار و باسلام برای هرکدام ویترین اختصاصی بساز و از اولین فروش توصیهٔ مشتری بگیر.'],
+ risks:[['کیفیت ناهماهنگ تولیدکننده','قبل از قرارداد، ۳ سفارش آزمایشی با استاندارد خودت تست کن.'],['تأخیر ارسال','زمان‌بندی واقعی در آگهی بنویس؛ اعتبار فروشنده‌ای مهم‌تر از فروش سریع است.']],
+ tools:['دیوار','باسلام','قرارداد سادهٔ دوطرفه'],
+ time:'۱ تا ۲ هفته',req:{c:1,h:2,r:1,mk:'online'},base:{mk:74,pf:68}},
+{dom:1,t:'مغازهٔ اینستاگرامی تخصصی',tags:['اینستاگرام','فروش','محتوا'],kw:['اینستاگرام','فروش','پیج','محتوا','گجت'],w:'فروش تخصصی یک دستهٔ اشتیاق‌ساز (لوازم سفر، گجت‌های جیبی، اسباب‌بازی فکری) در اینستاگرام با محتوای خودت.',
+ rev:{s:'۴ تا ۱۰ میلیون تومان در ماه',m:'۲۰ تا ۴۵ میلیون',y:'۶۰ تا ۱۲۰ میلیون'},
+ steps:['یک دسته را قفل کن که خودت واقعاً مصرفش می‌کنی؛ اعتبار محتوایی از همین می‌آید.','روزی یک ریلز آموزشی/مقایسه‌ای بگذار؛ سبد خرید را با دایرکت نهایی کن.','پس از ۵۰ سفارش، پکینگ برنددار و سیستم پیگیری مشتری بساز.'],
+ risks:[['الگوریتم بی‌رحم','هم‌زمان یک کانال تلگرامی پشتیبان بساز تا مشتری گروگان الگوریتم نشود.'],['مارجین خوردن رقابت','روی «پکیج» و مشاورهٔ انتخاب بفروش، نه کالای تکی.']],
+ tools:['اینستاگرام','تلگرام','پست/تیپاکس'],
+ time:'۳ تا ۶ هفته',req:{c:1,h:3,r:2,mk:'online'},base:{mk:72,pf:70}},
+{dom:1,t:'فروش عمدهٔ استوک و مازاد تولیدی',tags:['عمده','استوک','تولید'],kw:['عمده','استوک','مازاد','تخفیف','کارخانه','پالت'],w:'خرید پالت‌های مازاد و استوک کارخانه‌ها و فروشگاه‌ها با تخفیف عمده و فروش سریع آنلاین.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ تا ۱۳۰ میلیون'},
+ steps:['۵ تولیدکننده یا واحد پخش را پیدا کن که کالای راکد بالا دارند.','فقط کالای بدون تاریخ انقضا و موج‌دار را نقدی با تخفیف ۴۰٪+ بخر.','ویترین دیوار/باسلام + پیج عمده‌فروشی؛ تحویل سریع = مزیت اصلی.'],
+ risks:[['کالای راکد دست تو بماند','حجم کم و تنوع زیاد؛ نقدشوندگی قبل از حاشیهٔ سود.'],['اعتبارسنجی فروشنده','فقط حضوری و با فاکتور رسمی خرید کن.']],
+ tools:['دیوار عمده','باسلام','حمل باربری'],
+ time:'۲ هفته',req:{c:3,h:2,r:3,mk:'national'},base:{mk:76,pf:78}},
+{dom:1,t:'کالای مصرفی تکرارشو با اشتراک',tags:['اشتراک','مصرفی','تکرار'],kw:['فیلتر','تیغ','خوراکی','مصرفی','اشتراک','بازخرید'],w:'فروش کالای مصرفی پرتکرار (فیلتر، تیغ، خوراکی سالم) با بستهٔ اشتراکی ماهانه.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['یک کالای مصرفی با بازخرید ۳۰ تا ۶۰ روزه انتخاب کن و ۳۰ مشتری اول را جمع کن.','پکیج اشتراک ۲ ماهه با ۱۲٪ تخفیف و ارسال رایگان بفروش.','یادآوری خودکار تمدید در تلگرام؛ ریزش را با سرویس بعد از فروش ببند.'],
+ risks:[['ریزش مشترک','کیفیت ثابت + یادآوری هوشمند؛ اشتراک بدون تجربهٔ خوب می‌میرد.'],['حاشیهٔ کم مصرفی','حجم بفروش؛ سود در گردش است نه در هر سفارش.']],
+ tools:['باسلام','تلگرام','زرین‌پال'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:2,r:1,mk:'online'},base:{mk:70,pf:66}},
+{dom:1,t:'سبد فصلی هدیه (نوروز/یلدا)',tags:['فصلی','هدیه','بسته‌بندی'],kw:['هدیه','نوروز','یلدا','بسته','فصلی','پک'],w:'طراحی و فروش بسته‌های هدیهٔ فصلی (خوراکی ممتاز، صنایع دستی) به خانواده‌ها و شرکت‌ها.',
+ rev:{s:'فصل اوج: ۲۵ تا ۵۰ میلیون در ماه',m:'۱۰ تا ۲۰ میلیون',y:'۸۰ تا ۱۲۰ میلیون'},
+ steps:['سه بستهٔ ۵۰۰هزار تا ۲ میلیونی طراحی و عکاسی کن؛ مارجین حداقل ۴۵٪.','پیش‌فروش به شرکت‌ها ۲ ماه قبل از فصل با تخفیف ۱۵٪ سفارش زودهنگام.','فروشگاه محلی + باسلام + اینستاگرام؛ پس از فصل، موجودی را مینیمال نگه دار.'],
+ risks:[['موجودی فصل‌گذشته','تولید فقط بر اساس پیش‌سفارش؛ سقف موجودی مازاد ۱۰٪.'],['رقابت قیمت هدیه','بسته‌بندی و روایت برند را برند کن؛ قیمت پایین‌تر نرو.']],
+ tools:['تأمین عمدهٔ خوراکی','چاپخانهٔ جعبه','باسلام'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:2,r:2,mk:'online'},base:{mk:74,pf:72}},
+{dom:1,t:'فروش حرفه‌ای در دیجی‌کالا',tags:['دیجی‌کالا','مارکت‌پلیس','فروش'],kw:['دیجی کالا','مارکت‌پلیس','فروش','لیستینگ','تبلیغات'],w:'راه‌اندازی و مدیریت حرفه‌ای فروش در دیجی‌کالا برای یک دستهٔ مشخص؛ درآمد از حاشیهٔ فروش.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ تا ۱۴۰ میلیون'},
+ steps:['یک دستهٔ با تقاضای ثابت و رقابت متوسط انتخاب کن؛ آنالیز ۲۰ فروشندهٔ برتر.','ساختار قیمت با حاشیهٔ خالص ۲۵٪+ بعد از کمیسیون تنظیم کن.','تبلیغات درون‌سایت را با بودجهٔ آزمایشی ۲ میلیون و هدف بازگشت زیر ۱۵٪ اجرا کن.'],
+ risks:[['کمیسیون و بازگشت کالا','قبل از سفارش عمده، نرخ مرجوعی دسته را بسنج.'],['قوانین پلتفرم','قوانین انبار و بسته‌بندی را دقیق رعایت کن؛ جریمهٔ دیجی‌کالا جدی است.']],
+ tools:['پنل فروشندگان دیجی‌کالا','حسابداری ساده','انبار مینی'],
+ time:'۴ تا ۶ هفته',req:{c:3,h:2,r:2,mk:'national'},base:{mk:82,pf:74}},
+{dom:1,t:'سبد هدیهٔ شرکتی B2B',tags:['B2B','هدیهٔ شرکتی','ایونت'],kw:['هدیه شرکتی','سازمانی','ایونت','تشویقی','برند'],w:'تأمین بسته‌های هدیه و تشویقی سازمانی (مناسبت‌ها، رویدادها، کارکنان) با قرارداد B2B.',
+ rev:{s:'۱۵ تا ۳۰ میلیون تومان در ماه (فصل)',m:'۴۰ تا ۷۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['کاتالوگ ۶ بسته‌ای با لوگوی برند مشتری بساز؛ نمونهٔ فیزیکی برای جلسات.','به ۴۰ شرکت (منابع انسانی و روابط عمومی) پیشنهاد مستقیم با نمونه بده.','قرارداد سالانهٔ «مناسبت‌ها»؛ هر سفارش، مشتریِ سال بعد است.'],
+ risks:[['چرخهٔ فروش اداری کند','از ماه قبلِ مناسبت‌ها پیتچ کن؛ فصلی بودن شدید است.'],['فشار قیمت خریدار سازمانی','سه سطح قیمت با سقف مشخص؛ زیر حداقل مارجین نرو.']],
+ tools:['کاتالوگ PDF','لینکدین B2B','قرارداد رسمی'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:2,r:1,mk:'national'},base:{mk:76,pf:74}},
+/* --- ۲ آموزش و محتوا --- */
+{dom:2,t:'بوت‌کمپ پیش‌فروشی مهارت پردرآمد',tags:['آموزش','دوره','پیش‌فروش'],kw:['آموزش','تدریس','دوره','کلاس','مهارت'],w:'دورهٔ فشردهٔ ۴ هفته‌ای یک مهارت پردرآمد، با پیش‌فروش به ۱۰ نفر قبل از ضبط کامل.',
+ rev:{s:'۸ تا ۲۰ میلیون (پیش‌فروش اول)',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ تا ۲۰۰ میلیون'},
+ steps:['مهارتی را انتخاب کن که خودت در آن نمونهٔ کاری قابل‌نمایش داری.','کوهرت ۱۰ نفره با تخفیف ۵۰٪ پیش‌فروش کن؛ تعهد ضبط تا اولین پرداخت.','دوره را زنده برگزار کن، ضبطش را دارایی همیشگی کن.'],
+ risks:[['دوره‌ای که کسی نمی‌خرد','قبل از ساخت، پیش‌فروش؛ اگر ۱۰ نفر نخریدند، موضوع را عوض کن.'],['افت کیفیت پشتیبانی','ظرفیت هر کوهرت را حداکثر ۲۰ نفر بگذار.']],
+ tools:['گوگل‌میت یا اسکای‌روم','زرین‌پال','اینستاگرام برای جذب'],
+ time:'۳ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'online'},base:{mk:82,pf:80}},
+{dom:2,t:'آژانس ویدیوی کوتاه برندها',tags:['ویدیو','ریلز','برند','آژانس'],kw:['ویدیو','ریلز','تدوین','محتوا','اینستاگرام','برند'],w:'تولید ۱۲ ریلز ماهانه برای برندها با خط تولید محتوا و تیم کوچک برون‌سپاری‌شده.',
+ rev:{s:'۱۲ تا ۲۵ میلیون تومان در ماه',m:'۴۰ تا ۸۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['۳ ریلز نمونه با موبایل و تدوین رایگان بساز؛ کیفیت قبل از قیمت.','به ۲۰ کسب‌وکار محلی با فروش ضعیفِ محتوا پیشنهاد ماه اول نیم‌بها بده.','قرارداد ۸ تا ۱۵ میلیونی ماهانه؛ تدوین را به فریلنسر برون‌سپاری کن و تو استراتژی و فروش بمان.'],
+ risks:[['وابستگی به یک برند بزرگ','هیچ مشتری‌ای بیش از ۴۰٪ درآمدت نشود.'],['فرسودگی تولید','از ماه دوم، ساخت قالب‌های تکرارشونده و بانک ایده را اجباری کن.']],
+ tools:['CapCut','اینستاگرام','قرارداد فریلنسری'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:3,r:2,mk:'national'},base:{mk:84,pf:74}},
+{dom:2,t:'استودیو لینکدین مدیران (Ghostwriting)',tags:['لینکدین','نویسندگی','برند شخصی'],kw:['لینکدین','نویسنده','برند شخصی','مدیر','محتوای تخصصی'],w:'خدمات نگارش تخصصی لینکدین برای مدیران و پزشکان: ۸ پست حرفه‌ای + تعامل ماهانه.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه (۴ مشتری)',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ میلیون به بالا — با بازار ارزی'},
+ steps:['پروفایل لینکدین خودت را ۳۰ روز جدی بنویس تا ویترین زنده داشته باشی.','به ۳۰ مدیرِ فعال اما کم‌محتوا پیام بده: «من صدای حرفه‌ای شما را می‌نویسم».','بستهٔ ۴ تا ۶ میلیونی ماهانه با جلسهٔ مصاحبهٔ ماهانه.'],
+ risks:[['مشتری بی‌حوصلگی برای نتیجه','قرارداد ۳ ماهه با گزارش رشد ماهانه ببند.'],['سوءبرداشت از محتوای مدیر','هر پست قبل از انتشار تأیید کتبی مشتری را بگیرد.']],
+ tools:['لینکدین','Notion برای گردش کار','گوگل‌داکس'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:1,mk:'global'},base:{mk:78,pf:76}},
+{dom:2,t:'آموزش سازمانی نرم (Microlearning)',tags:['آموزش سازمانی','B2B','کارگاه'],kw:['آموزش','شرکت','کارگاه','نرم','ارتباط','تیم'],w:'پکیج‌های آموزش کوتاه سازمانی (ارتباط، فروش، مذاکره) برای تیم‌های شرکت‌ها.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه (۲ شرکت)',m:'۳۰ تا ۵۵ میلیون',y:'۷۰ میلیون به بالا'},
+ steps:['دو کارگاه ۳ ساعتهٔ آزمایشی برای یک شرکت آشنا مجانی برگزار کن.','خروجی مکتوب (ارزیابی قبل/بعد) را سند نتایج کن.','قرارداد فصلی: ۴ کارگاه + پشتیبانی آنلاین؛ بفروش به مدیر منابع انسانی.'],
+ risks:[['چرخهٔ فروش اداری کند','از شبکهٔ آشنایان و رویدادهای منابع انسانی شروع کن.'],['کیفیت جلسهٔ تکراری','محتوای هر دوره را با دادهٔ همان شرکت شخصی‌سازی کن.']],
+ tools:['اسلاید و کارت تمرین','لینکدین','قرارداد فصلی'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:1,mk:'national'},base:{mk:78,pf:76}},
+{dom:2,t:'پادکست و خبرنامهٔ نیچ اسپانسردار',tags:['پادکست','خبرنامه','اسپانسر'],kw:['پادکست','خبرنامه','محتوا','تبلیغات','اسپانسر','مخاطب'],w:'رسانهٔ نیچ هفتگی (پادکست + خبرنامه) در یک صنف مشخص؛ درآمد از اسپانسر و عضویت حامی.',
+ rev:{s:'۳ تا ۸ میلیون تومان در ماه',m:'۱۵ تا ۳۰ میلیون',y:'۴۰ تا ۷۰ میلیون'},
+ steps:['یک نیچ کم‌سروصدا ولی پردرد (قانون کار، بیمه، سرمایهٔ شخصی) انتخاب کن.','۱۰ قسمت اول را بدون اسپانسر منتشر کن؛ ۵۰۰ مخاطب واقعی هدف.','از قسمت ۱۲، اسپانسر صنفی + عضویت حامی ماهانه بفروش.'],
+ risks:[['رشد کُند رسانه','ریتم هفتگی آهنین؛ کیفیت مهم‌تر از کمیت.'],['وابستگی به پلتفرم','هم‌زمان ایمیل‌لیست بساز؛ لیست مالکیت توست.']],
+ tools:['کاست‌باکس/آپارات','تلگرام کانال','زرین‌پال حمایت'],
+ time:'۶ تا ۱۰ هفته',req:{c:1,h:1,r:2,mk:'online'},base:{mk:64,pf:62}},
+{dom:2,t:'کارگاه مصاحبه و رزومه برای فارغ‌التحصیلان',tags:['کار','رزومه','آموزش'],kw:['رزومه','مصاحبه','استخدام','کار','شغلی'],w:'کارگاه‌های آمادگی بازار کار (رزومه، لینکدین، مصاحبه) با همکاری دانشگاه‌ها و آموزشگاه‌ها.',
+ rev:{s:'۴ تا ۹ میلیون تومان در ماه',m:'۱۵ تا ۳۰ میلیون',y:'۴۰ تا ۶۰ میلیون'},
+ steps:['یک کارگاه ۳ ساعتهٔ آزمایشی مجانی برای ۲۰ دانشجو برگزار کن.','قرارداد برگزاری ماهانه با انجمن‌های دانشگاهی و آموزشگاه‌های فنی.','نسخهٔ آنلاین هفتگی با ظرفیت ۳۰ نفر و ثبت‌نام ۳۰۰ هزار تومانی.'],
+ risks:[['مخاطب کم‌بودجه','فروش به سازمان (دانشگاه/آموزشگاه) به‌جای فرد.'],['نتیجهٔ نامحسوس','گزارش «X نفر مصاحبه رفتند» = سند تمدید.']],
+ tools:['گوگل‌میت','لینکدین','قرارداد با دانشگاه'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:1,r:1,mk:'online'},base:{mk:70,pf:64}},
+{dom:2,t:'آژانس تدریس خصوصی ریاضی و فیزیک',tags:['تدریس','کنکور','آژانس'],kw:['تدریس','کنکور','ریاضی','فیزیک','معلم','دانشجو'],w:'آژانس تدریس خصوصی با شبکهٔ ۵ معلم تأییدشده؛ سود از حاشیهٔ ساعتی.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['۵ معلم سنجیده را با قرارداد تقسیم درآمد (۷۰/۳۰) جذب کن.','در دیوار و گروه‌های والدین با «معلم تأییدشده + تضمین جلسهٔ اول» شروع کن.','جلسهٔ ارزیابی اول ۵۰٪ تخفیف؛ گزارش پیشرفت ماهانه = تمدید.'],
+ risks:[['مستقیم‌شدن ارتباط معلم-دانشجو','قرارداد تعهد عدم توافق مستقیم؛ بونس تمدید برای معلم.'],['کیفیت ناهماهنگ معلم‌ها','چک‌لیست جلسهٔ استاندارد + بازخورد والدین ماهانه.']],
+ tools:['دیوار','گروه‌های والدین','گوگل‌شیت برنامه'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:1,mk:'local'},base:{mk:74,pf:70}},
+{dom:2,t:'تولید UGC برای برندها',tags:['UGC','ویدیو','محتوا'],kw:['UGC','ویدیو','تولید محتوا','برند','تستیمونیال'],w:'بسته‌های ویدیوی UGC (تستیمونیال، آنباکس، توضیح محصول) برای برندهای اینستاگرامی؛ تولید با موبایل.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۶۰ تا ۹۰ میلیون'},
+ steps:['۵ نمونهٔ UGC برای محصولات آشنا ضبط کن؛ سبک ساده و صادقانه.','به ۳۰ برند اینستاگرامی پکیج «۶ ویدیو در ماه» پیشنهاد بده.','شبکهٔ ۳ خالق کوچک بساز تا ظرفیت تولید را بدون استخدام بزرگ کن.'],
+ risks:[['برداشت حقوقی محصول','تعهد عدم استفادهٔ تصویر محصول خارج از قرارداد.'],['ریتم تولید','تقویم محتوایی ثابت؛ ویدیوهای عقب‌افتاده = ریزش قرارداد.']],
+ tools:['موبایل + مایک','CapCut','قرارداد فریلنسری'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'online'},base:{mk:78,pf:72}},
+/* --- ۳ خدمات خانگی --- */
+{dom:3,t:'تیم نظافت مسکونی تضمینی',tags:['نظافت','خدمات','محلی'],kw:['نظافت','خدمات منزل','سرایدار','تمیزکاری'],w:'شرکت نظافت مسکونی با تیم ثابت آموزش‌دیده، چک‌لیست ۴۰ آیتمی و ضمانت بازگشت هزینه.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ تا ۱۵۰ میلیون'},
+ steps:['دو نفر نیروی موثق استخدام و چک‌لیست ۴۰ آیتمی خودت را آموزش بده.','در دیوار و گروه‌های محله‌ای با ضمانت «راضی نبودی، پول برمی‌گردد» شروع کن.','قرارداد ماهانهٔ نظافت هفتگی ساختمان‌ها و شرکت‌ها را هدف بگیر — درآمدِ پایدار اینجاست.'],
+ risks:[['سوءظن به نیروی غریبه','تیم ثابت با معرفی‌نامه و بیمهٔ مسئولیت؛ عکس نیروها را در پروفایل بگذار.'],['فرسایش نیرو','سقف پروژهٔ روزانه و پاداش کیفیت از ماه اول.']],
+ tools:['دیوار','گروه‌های محله‌ای','بیمهٔ مسئولیت مدنی'],
+ time:'۱ تا ۲ هفته',req:{c:2,h:3,r:1,mk:'local'},base:{mk:84,pf:66}},
+{dom:3,t:'خدمات ساعتهٔ تعمیرات (Handyman)',tags:['تعمیرات','فنی','ساعته'],kw:['تعمیرات','لوله‌کشی','برق','فنی','کابینت','دستیار فنی'],w:'سرویس ساعتهٔ تعمیرات: لوله‌کاری، برق، کابینت با تعرفهٔ شفاف و ورود اضطراری.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ تا ۱۲۰ میلیون'},
+ steps:['تخصص اصلی خودت را اعلام کن و دو متخصص مکمل را قراردادی جذب کن.','تعرفهٔ ساعتی شفاف را در آگهی‌ها بنویس؛ شفافیت در این بازار مزیت رقابتی است.','شمارهٔ اضطراری ۲۴ ساعته + قرارداد سالانه با ۲۰ خانه.'],
+ risks:[['خسارت به ملک مشتری','قبل و بعد از کار، عکس مستند بگیر؛ بیمهٔ مسئولیت بگیر.'],['پیک‌وفنای درخواست','قرارداد نگهداری ماهانه با املاک و مدیران ساختمان.']],
+ tools:['دیوار','همشهری‌محل','گروه‌های مدیران ساختمان'],
+ time:'۱ هفته',req:{c:1,h:3,r:2,mk:'local'},base:{mk:80,pf:70}},
+{dom:3,t:'بازسازی سبک آشپزخانه و دکوراسیون',tags:['بازسازی','ساختمان','دکوراسیون'],kw:['بازسازی','ساختمان','دکوراسیون','کابینت','پیمانکاری'],w:'بازسازی آشپزخانه و سرویس بهداشتی با پروژه‌های ۳۰ تا ۱۲۰ میلیونی و تیم پیمانکاری سبک.',
+ rev:{s:'یک پروژه در ماه: ۱۵ تا ۳۰ میلیون سود',m:'۵۰ تا ۱۰۰ میلیون',y:'۱۵۰ میلیون به بالا'},
+ steps:['دو نمونه‌کار: آشپزخانهٔ خودت یا یک آشنا را با عکس قبل/بعد مستند کن.','به ۱۰ واحد نوسازِ درحال تحویل سر بزن و پیشنهاد پکیج بازسازی سبک بده.','زنجیرهٔ ۴ پیمانکار ثابت (کابینت، گرانیت، نقاشی، برق) را شکل بده.'],
+ risks:[['تعویق پروژه و چک','پیش‌پرداخت ۴۰٪ و پرداخت مرحله‌ای با امضای صورت‌وضعیت.'],['پیمانکار بی‌ثبات','هر نقش دو پیمانکار جایگزین داشته باشد.']],
+ tools:['دیوار املاک','قرارداد مرحله‌ای','اینستاگرام قبل/بعد'],
+ time:'۳ تا ۶ هفته',req:{c:3,h:3,r:3,mk:'local'},base:{mk:76,pf:82}},
+{dom:3,t:'سبزکاری شهری و نگهداری فضای سبز',tags:['فضای سبز','نهال','محلی'],kw:['گل','نهال','فضای سبز','بالکن','باغبانی','چمن'],w:'طراحی و نگهداری ماهانهٔ فضای سبز ویلا، بام و حیاط با قرارداد تمدیدشو.',
+ rev:{s:'۸ تا ۱۴ میلیون تومان در ماه',m:'۲۵ تا ۵۰ میلیون',y:'۶۰ تا ۱۰۰ میلیون'},
+ steps:['۳ پروژهٔ نمونهٔ کوچک (بالکن/حیاط) را با عکس قبل/بعد بساز.','قرارداد ماهانهٔ نگهداری بفروش: هر پروژهٔ ساخت، یک قرارداد ماهانهٔ پیوسته.','در فصل بهار، پکیج «بهارآورِ بام و حیاط» برای مجتمع‌ها عرضه کن.'],
+ risks:[['مرگ گیاه = نارضایتی','انتخاب گونه‌های مقاوم + تعهد تعویض در ماه اول.'],['فصلی‌بودن','زمستان: کاشت گلخانه‌ای داخل ساختمان و قرارداد شرکت‌ها.']],
+ tools:['تأمین نهال عمده','دیوار','قرارداد ماهانه'],
+ time:'۲ تا ۳ هفته',req:{c:2,h:3,r:1,mk:'local'},base:{mk:70,pf:66}},
+{dom:3,t:'سرویس فصلی کولر و تجهیزات',tags:['کولر','سرویس','فصلی'],kw:['کولر','کولرگازی','سرویس','شارژ گاز','فصلی','تعمیر'],w:'سرویس، شارژ گاز و قرارداد نگهداری سالانهٔ کولرگازی و پکیج در محدودهٔ مشخص.',
+ rev:{s:'۱۰ تا ۱۶ میلیون تومان در ماه (فصل گرم)',m:'۳۰ تا ۵۰ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['یک دورهٔ فنی کوتاه + ابزار پایه (شارژ گاز، وکیوم) تهیه کن.','قبل از فصل گرم، ۲۰۰ بروشور و پیام محله‌ای با تعرفهٔ شفاف بده.','قرارداد سالانهٔ «۲ سرویس + اولویت اضطراری» برای ۵۰ واحد هدف بگذار.'],
+ risks:[['فصلی‌زدگی درآمد','زمستان: قرارداد پکیج/فن‌کویل و آبگرمکن همان مشتریان.'],['رقابت ارزان‌فروش','سرویس اصولی با گارانتی ۳۰ روزه را برند کن.']],
+ tools:['ابزار شارژ گاز','دیوار','بروشور محله‌ای'],
+ time:'۱ تا ۲ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:74,pf:72}},
+{dom:3,t:'قرارداد نظافت مجتمع‌های تجاری',tags:['نظافت','B2B','قرارداد'],kw:['نظافت','مجتمع','تجاری','شرکت','قرارداد','خدمات'],w:'قرارداد ماهانهٔ نظافت و خدمات روزانهٔ مجتمع‌های تجاری و اداری با تیم ثابت.',
+ rev:{s:'۲۰ تا ۳۵ میلیون تومان در ماه (۲ مجتمع)',m:'۶۰ تا ۱۰۰ میلیون',y:'۱۲۰ میلیون به بالا'},
+ steps:['با ۲ مجتمع کوچک قرارداد آزمایشی سه‌ماهه با نرخ رقابتی ببند.','چک‌لیست ساعتی و ناظر دوره‌ای؛ گزارش ماهانهٔ تصویری برای مدیر ساختمان.','از رضایت اولین مجتمع، معرفی به مجتمع‌های همسایه بگیر.'],
+ risks:[['نقدینگی قرارداد بزرگ','حق‌الزحمهٔ ماهانه با چک صیادی؛ پیش‌دریافت ماه اول.'],['گردش نیرو','تیم ثابت + پاداش سابقه؛ جایگزین آماده برای هر پست.']],
+ tools:['ماشین‌های نظافتی','قرارداد رسمی','بیمهٔ نیرو'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:3,r:1,mk:'local'},base:{mk:78,pf:70}},
+{dom:3,t:'خدمات اسباب‌کشی و بسته‌بندی حرفه‌ای',tags:['اسباب‌کشی','حمل','بسته‌بندی'],kw:['اسباب کشی','حمل اثاثیه','بسته‌بندی','باربری'],w:'سرویس اسباب‌کشی درجه‌یک: بسته‌بندی حرفه‌ای، تخلیه و چیدمان، با تیم ثابت و تعرفهٔ شفاف.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه (۸ اسباب‌کشی)',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ تا ۱۱۰ میلیون'},
+ steps:['دو کارگر سنجیده + وسیلهٔ حمل اجاره‌ای؛ ست بسته‌بندی (کارتن، فوم، نوار) بخر.','بستهٔ «اسباب‌کشی بدون استرس» با قیمت ثابت و بیمهٔ آسیب بفروش.','گزارش عکاسی قبل/بعد و نظرسنجی؛ هر مشتری راضی، معرف دو مشتری بعدی.'],
+ risks:[['آسیب به اثاثیه','بیمهٔ بار + عکس‌برداری پیش از بارگیری.'],['فصلی بودن','زمستان: خدمات انباری و بسته‌بندی اثاثیهٔ شرکت‌ها.']],
+ tools:['وسیلهٔ حمل','ست بسته‌بندی','بیمهٔ بار'],
+ time:'۱ تا ۲ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:72,pf:68}},
+{dom:3,t:'قرارداد نگهداری استخر و سونا',tags:['استخر','نگهداری','ویلا'],kw:['استخر','سونا','جکوزی','نگهداری','ویلا','شیمیایی'],w:'قرارداد ماهانهٔ نگهداری و آب‌درمانی استخر/سونای ویلاها و مجتمع‌ها با اندازه‌گیری هفتگی.',
+ rev:{s:'۱۰ تا ۱۶ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۵۵ تا ۸۰ میلیون'},
+ steps:['دورهٔ کوتاه آب‌درمانی استخر + ست آزمون کلر و pH.','با ۱۰ ویلا در محله‌های ممتاز قرارداد بازدید هفتگی ببند.','فروش مصرفی (کلر، فیلتر) به مشتریان قراردادی = درآمد دوم.'],
+ risks:[['آسیب شیمیایی','دستکش و استاندارد؛ قرارداد با سقف مسئولیت.'],['زمستان کم‌کاری','پوشش زمستانی + قرارداد نگهداری فواره‌ها و آکواریوم‌ها.']],
+ tools:['ست آزمون آب','مواد مصرفی عمده','قرارداد ماهانه'],
+ time:'۲ تا ۳ هفته',req:{c:2,h:2,r:2,mk:'local'},base:{mk:68,pf:70}},
+/* --- ۴ سلامت و زیبایی --- */
+{dom:4,t:'کوچ تمرین و تغذیهٔ هیبریدی',tags:['فیتنس','ورزش','سلامت'],kw:['فیتنس','ورزش','تمرین','مربی','سلامت','لاغری'],w:'برنامهٔ تمرین و تغذیهٔ شخصی با پیگیری هفتگی؛ ترکیب حضوری + آنلاین.',
+ rev:{s:'۶ تا ۱۲ میلیون تومان در ماه',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['برای ۳ آشنا برنامهٔ یک‌ماههٔ مجانی بده و نتیجه را با اجازهٔ آن‌ها مستند کن.','بستهٔ ۲ میلیونی ماهانه: برنامه + جلسهٔ هفتگی + پیگیری روزانه در تلگرام.','قرارداد گروهی با شرکت‌ها: سلامت کارکنان، ۱۰ نفر به‌بالا.'],
+ risks:[['مسئولیت سلامتی','فرم سلامت پیش از شروع بگیر؛ موارد پزشکی را به پزشک ارجاع بده.'],['ریزش مشتری','نتیجهٔ ماهانه را با گزارش تصویری نشان بده؛ تمدید را از ماه اول هدف بگیر.']],
+ tools:['تلگرام','گوگل‌فرم سلامت','اینستاگرام'],
+ time:'همان هفتهٔ اول',req:{c:1,h:2,r:1,mk:'online'},base:{mk:76,pf:72}},
+{dom:4,t:'سالن سیار مراقبت پوست و زیبایی',tags:['زیبایی','پوست','خدمات در محل'],kw:['زیبایی','پوست','ناخن','مژه','سالن','در محل'],w:'خدمات پوست، مژه و ناخن در محل مشتری با ست سیار حرفه‌ای و رزرو آنلاین.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۵۰ میلیون',y:'۶۰ تا ۱۰۰ میلیون'},
+ steps:['ست سیار با مواد باکیفیت جمع کن؛ دو خدمات پرطرفدار را تخصص کن.','در دیوار و اینستاگرام با عکس کار واقعی و رزرو تلفنی شروع کن.','اشتراک ماهانهٔ «مراقبت ۲ جلسه» بفروش تا درآمد تکرارشو شود.'],
+ risks:[['حساسیت پوستی مشتری','پرسش‌نامهٔ حساسیت پیش از هر جلسه؛ تست پچ اجباری.'],['هزینهٔ رفت‌وآمد','منطقهٔ خدمت را به یک محدودهٔ مشخص قفل کن.']],
+ tools:['دیوار','اینستاگرام','زرین‌پال برای پیش‌رزرو'],
+ time:'۲ هفته',req:{c:2,h:2,r:1,mk:'local'},base:{mk:78,pf:74}},
+{dom:4,t:'فروش و نصب تجهیزات ورزشی خانگی',tags:['فروش','تجهیزات ورزشی','نصب'],kw:['ورزش','تجهیزات','تردمیل','فروش','نصب'],w:'فروش و نصب تجهیزات ورزشی خانگی با آموزش ویدیویی و ضمانت نصب.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه',m:'۳۰ تا ۶۰ میلیون',y:'۸۰ تا ۱۵۰ میلیون'},
+ steps:['از ۲ تأمین‌کنندهٔ عمده، ۵ کالای پرفروش با حاشیهٔ بالای ۲۵٪ بگیر.','آگهی‌های «قیمت + نصب رایگان + آموزش» در دیوار و باسلام ثبت کن.','پس از فروش، ویدیوی آموزش استفاده و رژیم پیشنهادی بفرست — تمایز همین‌جاست.'],
+ risks:[['کالای حجیم و مرجوعی','فقط کالاهایی با نرخ مرجوعی زیر ۵٪ بفروش.'],['رقابت قیمت مغازه‌دارها','بستهٔ «فروش + نصب + آموزش» را قیمت‌گذاری کن نه کالای تنها.']],
+ tools:['دیوار','باسلام','ارسال باربری'],
+ time:'۲ تا ۳ هفته',req:{c:2,h:2,r:2,mk:'national'},base:{mk:70,pf:68}},
+{dom:4,t:'کلاس‌های زندهٔ گروهی آنلاین',tags:['فیتنس','گروهی','آنلاین'],kw:['کلاس','یوگا','فیتنس','گروهی','آنلاین','زنده'],w:'کلاس‌های زندهٔ گروهی (فیتنس/یوگا/حرکات اصلاحی) با اشتراک ماهانه و آرشیو ضبط‌شده.',
+ rev:{s:'۶ تا ۱۲ میلیون تومان در ماه',m:'۲۰ تا ۳۵ میلیون',y:'۴۵ تا ۸۰ میلیون'},
+ steps:['هفته‌ای ۳ کلاس زندهٔ آزمایشی مجانی در اینستاگرام برگزار کن.','اشتراک ماهانهٔ ۸ جلسه + آرشیو ضبط؛ سقف ۳۰ نفر در هر کلاس.','چالش‌های ۲۱ روزهٔ فصلی بفروش؛ چالش = جذب مشترک جدید.'],
+ risks:[['ریزش مشترک','گزارش پیشرفت ماهانه + جامعهٔ تلگرامی چالش.'],['مسئولیت حرکتی','فرم سلامت + ارجاع پزشکی برای موارد خاص.']],
+ tools:['اسکای‌روم/گوگل‌میت','اینستاگرام','زرین‌پال'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:2,r:1,mk:'online'},base:{mk:72,pf:70}},
+{dom:4,t:'استودیو ناخن تخصصی + آکادمی',tags:['زیبایی','ناخن','آموزش'],kw:['ناخن','کاشت','زیبایی','آموزش','استودیو','ترمیم'],w:'استودیو تخصصی خدمات ناخن با قرارداد ماهانهٔ مشتریان ثابت + کلاس‌های آموزشی درآمدزا.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۵ میلیون',y:'۶۰ تا ۱۱۰ میلیون'},
+ steps:['اتاق کار مجاز با استاندارد بهداشتی و نمونه‌کار عکس‌محور بساز.','اشتراک «ترمیم ماهانه» با تخفیف بفروش؛ تقویم رزرو پر = درآمد ثابت.','از ماه سوم، کلاس‌های ۴ نفرهٔ تخصصی با مدرک داخلی راه بینداز.'],
+ risks:[['عفونت و مسئولیت','استریل و یک‌بارمصرف آهنین؛ بدون استثنا.'],['درآمد فقط ساعتی','آکادمی و فروش محصولات مراقبت را ستون دوم کن.']],
+ tools:['ست استریل','اینستاگرام','گواهی دورهٔ تخصصی'],
+ time:'۳ تا ۶ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:76,pf:76}},
+{dom:4,t:'خدمات مو و آرایش عروس در محل',tags:['عروس','آرایش','خدمات در محل'],kw:['عروس','آرایش','مو','گریم','جشن','در محل'],w:'پکیج کامل مو، گریم و آرایش عروس در محل (خانه/سالن/هتل) با رزرو تضمینی تاریخ.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه (فصل)',m:'۲۵ تا ۴۵ میلیون',y:'۶۰ تا ۹۰ میلیون'},
+ steps:['۲ عروس نمونه (آشنا) را مجانی کن؛ آلبوم عکس حرفه‌ای بساز.','پکیج سه‌سطحی (ساده/ممتاز/ویژه) با جلسهٔ تست اجباری یک هفته قبل.','همکاری با ۵ آتلیهٔ عروس: هر معرفی، ۱۰٪ پورسانت.'],
+ risks:[['نارضایتی روز جشن','جلسهٔ تست اجباری و تأیید مکتوب استایل قبل از روز اصلی.'],['فصلی بودن','فصل کم: خدمات آرایش مهمانی و آموزش خودآرایی گروهی.']],
+ tools:['ست حرفه‌ای','اینستاگرام','همکاری آتلیه'],
+ time:'۲ تا ۴ هفته',req:{c:2,h:2,r:1,mk:'local'},base:{mk:76,pf:74}},
+{dom:4,t:'پکیج سلامت کارکنان (B2B)',tags:['سلامت','B2B','کارکنان'],kw:['سلامت','شرکت','کارمند','ارگونومی','ویزیت','باشگاه'],w:'پکیج سلامت محیط کار: ایستگاه سنجش، کارگاه ارگونومی و چالش قدم‌شمار برای شرکت‌ها.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه (۲ شرکت)',m:'۳۰ تا ۵۵ میلیون',y:'۶۰ میلیون به بالا'},
+ steps:['با یک آزمایشگاه و یک فیزیوتراپ همکار، پکیج مشترک ببند.','به ۲۰ شرکت با نشست‌های طولانی پیشنهاد ۳ ماهه بده.','گزارش ماهانهٔ مشارکت کارکنان = سند تمدید برای منابع انسانی.'],
+ risks:[['حریم خصوصی دادهٔ سلامت','داده‌ها فقط تجمیعی؛ هیچ گزارش فردی به کارفرما.'],['استقبال کم کارکنان','جایزه و لیدربورد تیمی؛ ورود با ترغیب نه اجبار.']],
+ tools:['دستگاه سنجش ساده','قرارداد B2B','لینکدین'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:1,r:1,mk:'national'},base:{mk:72,pf:70}},
+{dom:4,t:'فروش مکمل ورزشی با مشاورهٔ تغذیه',tags:['مکمل','فروش','تغذیه'],kw:['مکمل','پروتئین','ورزشی','تغذیه','فروش','ساپلمنت'],w:'فروش مکمل ورزشی برنددار اصلی + جلسهٔ مشاورهٔ تغذیهٔ ورزشی؛ تمرکز بر مشتری تکرارشو.',
+ rev:{s:'۸ تا ۱۶ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['تأمین فقط از پخش رسمی؛ ۵ کالای پرفروش با سقف سرمایهٔ اولیه.','در پیج/باسلام با «توصیهٔ اختصاصی رایگان قبل از خرید» تمایز بگذار.','بستهٔ ۳ ماههٔ «مکمل + برنامهٔ تغذیه» با تخفیف؛ بازخرید = موتور رشد.'],
+ risks:[['مکمل تقلبی','فاکتور زنجیرهٔ تأمین مکتوب؛ اعتبار برند تو در اصل بودن است.'],['ادعای درمانی','فقط توصیهٔ تغذیه‌ای ورزشی؛ هرگز ادعای درمان نکن.']],
+ tools:['باسلام','اینستاگرام','پخش رسمی'],
+ time:'۳ تا ۴ هفته',req:{c:2,h:2,r:2,mk:'online'},base:{mk:72,pf:70}},
+/* --- ۵ غذا --- */
+{dom:5,t:'کترینگ قراردادی شرکتی',tags:['کترینگ','غذا','B2B'],kw:['غذا','کترینگ','آشپز','شرکت','سالم'],w:'غذای سالم روزانه برای دفاتر ۱۰ تا ۵۰ نفره با قرارداد ماهانه و منوی چرخشی.',
+ rev:{s:'۱۵ تا ۳۰ میلیون تومان در ماه (۲ دفتر)',m:'۵۰ تا ۹۰ میلیون',y:'۱۲۰ میلیون به بالا'},
+ steps:['منوی ۱۰ روزهٔ چرخشی سالم با هزینه‌شکنی دقیق ببند.','اولین قرارداد را با یک دفتر آشنا با تخفیف ماه اول ببند.','آشپزخانهٔ اجاره‌ای با مجوز؛ تحویل با ظروف برنددار و فاکتور رسمی.'],
+ risks:[['افزایش قیمت مواد','قرارداد با فرمول تعدیل قیمت ماهانه.'],['کمال‌گرایی منو','منو را هفتگی با نظرسنجی کارکنان تنظیم کن، نه ذائقهٔ شخصی.']],
+ tools:['قرارداد رسمی','ظروف برنددار','تلگرام سفارش'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:82,pf:78}},
+{dom:5,t:'برند غذای نیش خانگی',tags:['غذا','تولید','باسلام'],kw:['غذا','خانگی','رژیمی','دسر','بیسکویت','گیاهی','تولید'],w:'تولید یک محصول رژیمی/گیاهی مشخص (دسر دیابتی، فلافل گیاهی آماده) با مجوز و فروش در باسلام.',
+ rev:{s:'۴ تا ۸ میلیون تومان در ماه',m:'۱۵ تا ۳۰ میلیون',y:'۴۰ تا ۸۰ میلیون'},
+ steps:['یک محصول را قفل کن که دستورش را بهتر از بازار می‌پزی.','پروانهٔ کسب مجاز و برچسب استاندارد را از همان اول بگیر.','هفته‌ای دو بار تولید کوچک؛ فروش در باسلام + دو فروشگاه ارگانیک محله.'],
+ risks:[['ماندگاری کالا','شروع از محصولات خشک یا منجمد با ماندگاری بالا.'],['مقررات بهداشتی','قبل از اولین فروش رسمی، مجوز؛ جریمه گرانی‌تر از پروانه است.']],
+ tools:['باسلام','فروشگاه ارگانیک محلی','برچسب‌زنی استاندارد'],
+ time:'۳ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'online'},base:{mk:74,pf:66}},
+{dom:5,t:'رُستری قهوهٔ تخصصی با اشتراک',tags:['قهوه','رُست','اشتراک'],kw:['قهوه','کافه','رُست','اسپرسو','اشتراک'],w:'برشته‌کاری کوچک قهوهٔ تخصصی + فروش آنلاین با اشتراک ماهانهٔ قهوه‌خورها.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۷۰ تا ۱۲۰ میلیون'},
+ steps:['رُستر ۱ کیلویی دست دوم و سبزخریبی از واردکنندهٔ معتبر.','سه پروفایل رُست ثابت با طعم‌نامهٔ مکتوب بساز؛ بستهٔ ۲۵۰ گرمی برنددار.','اشتراک ماهانهٔ «هر ۲ هفته یک بسته» با تخفیف ۱۰٪ — ستون درآمد پایدار.'],
+ risks:[['نوسان قیمت سبز','خرید سه‌ماهه و ذخیرهٔ استراتژیک.'],['ذائقهٔ ناآشنا','با طعم‌نامهٔ ساده و راهنمای دم‌آوری، آموزش را بخشی از محصول کن.']],
+ tools:['رُستر کوچک','باسلام','اینستاگرام طعم‌محور'],
+ time:'۴ تا ۸ هفته',req:{c:3,h:2,r:3,mk:'national'},base:{mk:68,pf:74}},
+{dom:5,t:'ادویه و ترکیبات آمادهٔ برنددار',tags:['ادویه','تولید','برند'],kw:['ادویه','ترکیب','آشپزی','خورش','برند','بسته‌بندی'],w:'ترکیب و بسته‌بندی ادویهٔ اختصاصی غذاهای خاص (قورمه‌سبزی، کباب، دسر) با برند و دستور در بسته.',
+ rev:{s:'۵ تا ۱۲ میلیون تومان در ماه',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['۳ ترکیب امضادار با آزمون ذائقهٔ ۳۰ خانواده تنظیم کن.','بستهٔ برنددار با دستور پخت کوتاه روی پشت جعبه — محصول + آموزش یک‌جا.','فروش در باسلام + قفسهٔ ۱۰ خواربارفروشی محلی با پورسانت.'],
+ risks:[['یکنواختی محصول','هر فصل یک ترکیب محدود «ادیشن» برای هیجان برند.'],['تقلب در خلوص ادویه','تأمین فقط از برندهای معتبر عمده با برگهٔ آزمون.']],
+ tools:['بسته‌بندی ساده','باسلام','خواربارفروشی محلی'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:1,mk:'online'},base:{mk:70,pf:68}},
+{dom:5,t:'کترینگ گیاهی برای ایونت‌ها',tags:['گیاهی','ایونت','کترینگ'],kw:['گیاهی','وگان','ایونت','سمینار','بوفه','سالم'],w:'بوفهٔ گیاهی و سالم برای سمینارها و رویدادهای شرکت‌ها؛ سفارش‌محور بدون مغازه.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['منوی ۵ آیتم گیاهی قابل‌حمل با هزینه‌شکنی دقیق ببند.','با ۲ شرکت برگزاری همایش قرارداد ارجاع ببند.','از هر ایونت، عکس و توصیه‌نامهٔ برگزارکننده برای پیتچ بعدی بگیر.'],
+ risks:[['سردرگمی سفارش آخر لحظه','قرارداد با پیش‌پرداخت ۵۰٪ و سقف مهمان.'],['ذائقهٔ محافظه‌کار','هر منو ۲۰٪ گزینهٔ آشنا (برنج/ماکارونی) داشته باشد.']],
+ tools:['ظروف گیاهی','اینستاگرام B2B','شرکت‌های برگزاری'],
+ time:'۳ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'local'},base:{mk:68,pf:70}},
+{dom:5,t:'جعبهٔ غذای آمادهٔ هفتگی (Meal-Prep)',tags:['Meal-Prep','رژیمی','اشتراک'],kw:['غذا','رژیمی','آماده','هفتگی','کالری','بسته'],w:'اشتراک هفتگی جعبه‌های غذای آماده با کالری و ماکروی درج‌شده برای علاقه‌مندان تناسب اندام.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه (۴۰ مشترک)',m:'۳۰ تا ۵۵ میلیون',y:'۶۰ تا ۱۰۰ میلیون'},
+ steps:['منوی ۵ روزه با دو سطح کالری؛ هزینه‌شکنی هر جعبه تا تومان.','۲۰ مشترک اول را از باشگاه‌های محله با قرارداد ارجاع بگیر.','تحویل یک‌وقت ثابت هفتگی؛ منو را هفتگی با نظرسنجی تمدید کن.'],
+ risks:[['ماندگاری و حمل سرد','ظرف سرد + مسیر تحویل کوتاه؛ از مجوز بسته‌بندی غذا مطمئن شو.'],['ریزش اشتراک','تنوع منو + گزارش تغییر وزن/رضایت ماهانه.']],
+ tools:['آشپزخانهٔ مجاز','ظروف سرد','باشگاه‌های محله'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:74,pf:72}},
+{dom:5,t:'تجهیز و مشاورهٔ راه‌اندازی کافه',tags:['کافه','B2B','تجهیزات'],kw:['کافه','تجهیزات','اسپرسو','راه‌اندازی','مشاوره','قهوه'],w:'بستهٔ تأمین تجهیزات + مشاورهٔ راه‌اندازی کافه‌های کوچک؛ پورسانت تأمین‌کننده + حق مشاوره.',
+ rev:{s:'۱۵ تا ۲۵ میلیون تومان در ماه (۲ پروژه)',m:'۴۵ تا ۷۰ میلیون',y:'۹۰ میلیون به بالا'},
+ steps:['قرارداد معرفی با ۳ تأمین‌کنندهٔ تجهیزات و ۲ برشته‌کاری (۵-۱۰٪ پورسانت).','پکیج «از صفر تا افتتاح» با قیمت مشاورهٔ ثابت؛ راه‌اندازی کامل ۲۰ روزه.','از هر افتتاح، توصیه‌نامهٔ مکتوب برای پیتچ بعدی بگیر.'],
+ risks:[['وابستگی به تأمین‌کنندهٔ کم‌کیفیت','هر تأمین‌کننده را با یک پروژهٔ کوچک تست کن.'],['کاهش تقاضای افتتاح','در رکود: سرویس بهینه‌سازی منو و هزینهٔ کافه‌های موجود.']],
+ tools:['شبکهٔ تأمین','Excel هزینه‌شکنی','اینستاگرام صنفی'],
+ time:'۴ تا ۶ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:70,pf:74}},
+{dom:5,t:'فروشگاه خشک‌بار و هدیهٔ ممتاز',tags:['خشکبار','برند','هدیه'],kw:['خشکبار','آجیل','پسته','برند','هدیه'],w:'برند خشک‌بار ممتاز با بسته‌بندی هدیه؛ فروش آنلاین + B2B به شرکت‌ها.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۵ تا ۶۰ میلیون',y:'۸۰ تا ۱۳۰ میلیون'},
+ steps:['تأمین از بازار عمدهٔ معتبر با تست هر محموله.','بسته‌های ۵۰۰ گرمی تا ۲ کیلویی + بستهٔ هدیهٔ جعبه‌ای برنددار.','فروش آنلاین + کاتالوگ شرکتی برای هدیهٔ مناسبت‌ها.'],
+ risks:[['نوسان شدید قیمت خشکبار','ذخیرهٔ کنترل‌شده؛ فروش روز بعد از خرید برای گردش.'],['ماندگاری کالا','بسته‌بندی دو جداره + موجودی ۳۰ روزهٔ حداکثر.']],
+ tools:['باسلام','چاپخانهٔ جعبه','تأمین عمده'],
+ time:'۳ تا ۵ هفته',req:{c:3,h:2,r:2,mk:'online'},base:{mk:76,pf:72}},
+/* --- ۶ گردشگری --- */
+{dom:6,t:'تورهای تجربه‌محور نیش',tags:['تور','سفر','تجربه'],kw:['تور','سفر','گردشگری','کویر','طبیعت','عکاسی'],w:'تورهای کوچک ۸ نفرهٔ تجربه‌محور (کویر، عکاسی طلوع، غذای محلی) با قیمت پرمارجین.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه (۴ تور)',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['یک مسیر نزدیک شهر را خودت ۲ بار تست کن؛ لجستیک و ریسک‌ها را یادداشت کن.','تور اول را با تخفیف به ۸ نفر از شبکه‌ات بفروش؛ مستندسازی حرفه‌ای.','برگزارکنندهٔ مجاز شو و تقویم تور ماهانه ثابت بگذار.'],
+ risks:[['حادثه و مسئولیت','بیمهٔ مسافرتی گروهی و قوانین برگزاری مجاز اجباری.'],['فصلی‌بودن','در فصل کم، تور شهری و کارگاه عکاسی جایگزین بگذار.']],
+ tools:['اینستاگرام','بیمهٔ گروهی','مجوز دفتر گردشگری'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:72,pf:70}},
+{dom:6,t:'مدیریت خانه‌های اقامتی',tags:['اقامتی','بوم‌گردی','مدیریت'],kw:['اقامتی','بوم‌گردی','ویلا','رزرو','میزبانی'],w:'مدیریت رزرو، پذیرایی و بهره‌برداری خانه‌های ویلایی به ازای ۲۰٪ از درآمد.',
+ rev:{s:'۶ تا ۱۲ میلیون تومان در ماه (۵ ملک)',m:'۲۵ تا ۴۵ میلیون',y:'۶۰ میلیون به بالا'},
+ steps:['۳ ویلای کم‌بازده در حوالی شهر پیدا کن که مالکش خسته از اجارهٔ بی‌نظم است.','قرارداد مدیریت ۲۰٪ با تعهد نظافت، عکاسی حرفه‌ای و پاسخ‌گویی سریع.','در جاجیگا و دیوار آگهی حرفه‌ای بگذار؛ سامانهٔ نظرات را آهنین مدیریت کن.'],
+ risks:[['خسارت ملک','قوانین خانهٔ مکتوب + ودیعهٔ الکترونیکی.'],['مالک ناراضی','گزارش ماهانهٔ شفاف درآمد/هزینه از روز اول.']],
+ tools:['جاجیگا','دیوار','تیم نظافت قراردادی'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:2,r:1,mk:'national'},base:{mk:76,pf:68}},
+{dom:6,t:'آژانس برنامه‌ریزی سفر سفارشی',tags:['سفر','برنامه‌ریزی','میزبانی'],kw:['سفر','برنامه‌ریزی','بلیط','هتل','راهنما'],w:'طرح سفر دقیقه‌به‌دقیقه + رزرو برای خانواده‌ها و مسافران خارجیِ علاقه‌مند به ایران.',
+ rev:{s:'۴ تا ۸ میلیون تومان در ماه',m:'۱۵ تا ۳۰ میلیون',y:'۴۰ تا ۷۰ میلیون'},
+ steps:['دو مسیر امضادار بساز (مثلاً ۵ روز کویر مرکزی) با هزینه‌شکنی کامل.','برای مسافر خارجی، نسخهٔ انگلیسی و پرداخت ارزی (پلتفرم واسطه) آماده کن.','با یک هتل و یک راهنمای محلی در هر مسیر قرارداد همکاری ببند.'],
+ risks:[['لغو سفر','سیاست لغو مکتوب با جریمهٔ پلکانی.'],['مسئولیت عملیات','عملیات اجرایی را فقط به مجریان مجاز بسپار؛ تو طراح و هماهنگ‌کن بمان.']],
+ tools:['واتس‌اپ','پلتفرم پرداخت ارزی','شبکهٔ راهنمایان محلی'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:1,r:1,mk:'global'},base:{mk:70,pf:64}},
+{dom:6,t:'اجارهٔ تجهیزات کمپ و سفر',tags:['کمپ','اجاره','تجهیزات'],kw:['کمپ','چادر','اجاره','تجهیزات','سفر','کوله'],w:'اجارهٔ کوتاه‌مدت تجهیزات کمپینگ و عکاسی سفر در شهرهای مقصد؛ دارایی گردنده.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه',m:'۱۸ تا ۳۵ میلیون',y:'۴۰ تا ۷۰ میلیون'},
+ steps:['با ۲۰ تا ۳۰ میلیون، ۱۰ ست کمپ پایه + ۳ ست عکاسی بخر.','قرارداد اجاره با ودیعهٔ الکترونیکی و چک‌لیست تحویل عکاسی‌شده.','همکاری با ۵ تورگردان: تجهیزات تورها را فقط از تو اجاره کنند.'],
+ risks:[['آسیب و مفقودی','ودیعه + قیمت جایگزین مکتوب در قرارداد.'],['فصلی‌بودن','زمستان چادر و کولهٔ سرمایی و لوازم سفر شمال را به سبد اضافه کن.']],
+ tools:['دیوار','قرارداد ودیعه','تلگرام رزرو'],
+ time:'۲ تا ۴ هفته',req:{c:2,h:1,r:2,mk:'local'},base:{mk:66,pf:64}},
+{dom:6,t:'تورهای عکاسی تجربه‌محور',tags:['عکاسی','تور','تجربه'],kw:['عکاسی','تور','فتوگراف','پرتره','سفر','مستند'],w:'تورهای کوچک عکاسی (شهرگردی عکس، طلوع کویر) + سرویس پرترهٔ سفر برای گردشگران.',
+ rev:{s:'۵ تا ۹ میلیون تومان در ماه',m:'۱۸ تا ۳۰ میلیون',y:'۴۰ تا ۶۰ میلیون'},
+ steps:['۳ مسیر عکاسی نزدیک شهر را با شات‌لیست دقیق طراحی کن.','تور اول با نیم‌بها به ۶ نفر؛ آلبوم عکس نتیجه = تبلیغ تور بعدی.','پکیج «عکاس همراه مسافر خارجی» با پرداخت ارزی عرضه کن.'],
+ risks:[['هوا و لغو','تاریخ جایگزین رایگان در قرارداد.'],['درآمد محدود','فروش عکس به برندها و رسانه‌ها را ستون دوم کن.']],
+ tools:['دوربین/گیمبال','اینستاگرام','پلتفرم پرداخت ارزی'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:1,r:2,mk:'national'},base:{mk:64,pf:62}},
+{dom:6,t:'رویدادهای شهری و تیم‌سازی (CityQuest)',tags:['ایونت','تیم‌سازی','شهری'],kw:['ایونت','تیم‌سازی','رویداد','شهری','سرگرمی','شرکت'],w:'برگزاری بازی‌های شهری و برنامه‌های تیم‌سازی برای شرکت‌ها؛ فروش B2B پرمارجین.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه (۳ ایونت)',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ تا ۱۰۰ میلیون'},
+ steps:['دو سناریوی آماده (کوئست تاریخی، مسابقهٔ نقشه) با ابزار ساده طراحی کن.','یک ایونت دمو برای یک شرکت آشنا؛ ویدیو و عکس مستند برای پیتچ.','قرارداد فصلی با منابع انسانی شرکت‌ها؛ هر ایونت ۲۰ تا ۵۰ نفر.'],
+ risks:[['آب‌وهوا و لغو','پلن جایگزین سرپوشیده در قرارداد.'],['امنیت و مسئولیت','بیمهٔ رویداد + قرارداد مسئولیت مکتوب با شرکت.']],
+ tools:['چاپ کارت‌ها','لینکدین B2B','بیمهٔ رویداد'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:72,pf:74}},
+{dom:6,t:'ریتیریت کار ماهانه (Workation)',tags:['Workation','ریتیریت','سفر کاری'],kw:['ریتیریت','کار از راه دور','سفر','واترکمپینگ','فریلنسر'],w:'سفرهای ماهانهٔ کار و تفریح برای فریلنسرها و تیم‌های دورکار؛ بستهٔ اقامت + فضای کار.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه (۱ سفر ۱۵ نفره)',m:'۳۰ تا ۵۵ میلیون',y:'۶۰ تا ۹۰ میلیون'},
+ steps:['یک مقصد نزدیک با اقامت‌گر کاری قرارداد ببند.','بستهٔ ۵ روزه شامل اقامت، اینترنت تضمینی و یک کارگاه؛ ۱۵ نفر سقف.','تقویم ۶ ماهه پیش‌فروش کن؛ هر ریتیریت، مستندات سفر بعدی است.'],
+ risks:[['پرنشدن ظرفیت','پیش‌فروش با تخفیف زودهنگام؛ لغو زیر ۱۰ نفر = بازگشت کامل.'],['کیفیت اینترنت','تست اینترنت پیش از هر سفر؛ اینترنت پشتیبان سیم‌کارت دوم.']],
+ tools:['تلگرام جامعه','قرارداد اقامت‌گر','زرین‌پال'],
+ time:'۴ تا ۶ هفته',req:{c:2,h:1,r:3,mk:'national'},base:{mk:64,pf:62}},
+{dom:6,t:'پیاده‌روی تخصصی شهری + راهنمای دیجیتال',tags:['راهنما','شهری','تجربه'],kw:['پیاده روی','شهری','تاریخ','راهنما','تور','محله'],w:'پیاده‌روی‌های تخصصی تاریخی/معماری شهر با بلیت‌فروشی آنلاین و نقشهٔ دیجیتال همراه.',
+ rev:{s:'۴ تا ۸ میلیون تومان در ماه (۸ پیاده‌روی)',m:'۱۵ تا ۲۵ میلیون',y:'۳۵ تا ۵۰ میلیون'},
+ steps:['یک مسیر ۹۰ دقیقه‌ای با ۱۰ روایت تخصصی آماده کن؛ خودت روایتگر باش.','در پلتفرم بلیت + اینستاگرام با عکس‌های مسیر فروش کن.','هر ماه یک مسیر تازهٔ فصلی؛ اشتراک «۴ پیاده‌روی» بفروش.'],
+ risks:[['مخاطب محدود','همکاری با کتاب‌فروشی‌ها و کافه‌های فرهنگی برای ارجاع.'],['هوای نامناسب','تاریخ جایگزین یا نسخهٔ سرپوشیدهٔ موزه‌محور.']],
+ tools:['پلتفرم بلیت','اینستاگرام','نقشهٔ دیجیتال'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:1,r:1,mk:'local'},base:{mk:66,pf:62}},
+/* --- ۷ کشاورزی و تولید --- */
+{dom:7,t:'مزرعهٔ کوچک سبزیجات تازه‌برش',tags:['کشاورزی','هیدروپونیک','تازه'],kw:['کشاورزی','هیدروپونیک','سبزی','میکروگرین','رستوران'],w:'واحد کوچک سبزیجات تازه‌برش (ریحان، جعفری، میکروگرین) با قرارداد مستقیم با رستوران‌ها.',
+ rev:{s:'۶ تا ۱۰ میلیون تومان در ماه',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['۱۰۰ متر فضای سبز یا سولهٔ کوچک با سیستم آبیاری ساده راه‌اندازی کن.','۵ رستوران را تست مجانی بده؛ قرارداد هفتگی با تحویل روز صفر ببند.','هم‌زمان میکروگرین پرمارجین را برای فروشگاه‌های ارگانیک تولید کن.'],
+ risks:[['آفت و افت محصول','کاشت مرحله‌ای هفتگی؛ هرگز همهٔ تولید یک‌جا نباشد.'],['مشتری محدود محلی','تنوع محصولی و ارسال شهرستان با بسته‌بندی مخصوص.']],
+ tools:['گلخانهٔ ساده','قرارداد رستورانی','حمل یخچالی کوچک'],
+ time:'۴ تا ۸ هفته',req:{c:2,h:2,r:2,mk:'local'},base:{mk:68,pf:64}},
+{dom:7,t:'برند بسته‌بندی زعفران و حبوبات',tags:['زعفران','بسته‌بندی','برند'],kw:['زعفران','حبوبات','بسته‌بندی','برند','عمده','صادرات'],w:'خرید عمده، بسته‌بندی برنددار و فروش B2B به فروشگاه‌ها + آنلاین.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه',m:'۴۰ تا ۷۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['تأمین مستقیم از مزرعه با آزمون کیفیت نمونه‌ای.','بسته‌بندی ساده اما برنددار (۱، ۵، ۱۰ گرمی زعفران؛ ۹۰۰ گرمی حبوب).','فروش عمده به ۲۰ فروشگاه محله + ویترین باسلام و دیوار.'],
+ risks:[['تقلب در زعفران','خرید فقط از تأمین‌کنندهٔ آزمون‌شده با برگهٔ آنالیز.'],['نقدینگی چرخهٔ عمده','فروش نقدی محلی برای گردش، عمدهٔ مدت‌دار فقط به مشتری ثابت.']],
+ tools:['دستگاه بسته‌بندی ساده','باسلام','فروشگاه‌های زنجیره‌ای محلی'],
+ time:'۳ تا ۶ هفته',req:{c:3,h:2,r:2,mk:'national'},base:{mk:72,pf:76}},
+{dom:7,t:'دمنوش کارکردی برنددار',tags:['دمنوش','برند','اشتراک'],kw:['دمنوش','چای گیاهی','برند','خواب','تمرکز','سلامت'],w:'ترکیب و بسته‌بندی دمنوش‌های کارکردی (خواب، تمرکز، گوارش) با فروش اشتراکی.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['سه ترکیب با تأیید عطاری معتبر و تست ذائقه روی ۵۰ نفر.','بستهٔ برنددار با روایت صادقانه: «کمک‌خواب است، دارو نیست».','اشتراک ماهانه + فروش عمده به کافه‌های سالم و باشگاه‌های یوگا.'],
+ risks:[['ادعای درمانی','هرگز ادعای درمان نکن؛ برچسب «تغذیه‌ای» قانون است.'],['فصلی بودن فروش','محصول تابستانی دمنوش سرد (آیس‌تی) بساز.']],
+ tools:['تأمین گیاه عمده','باسلام','اینستاگرام روایت‌محور'],
+ time:'۴ تا ۶ هفته',req:{c:2,h:2,r:2,mk:'online'},base:{mk:66,pf:68}},
+{dom:7,t:'پرورش قارچ خوراکی واحد کوچک',tags:['قارچ','تولید','کشاورزی'],kw:['قارچ','صدفی','دکمه‌ای','پرورش','تولید','خانگی'],w:'واحد پرورش قارچ صدفی/دکمه‌ای با قرارداد هفتگی با رستوران‌ها و سبزی‌فروشی‌ها.',
+ rev:{s:'۶ تا ۱۲ میلیون تومان در ماه',m:'۲۰ تا ۳۵ میلیون',y:'۴۵ تا ۷۰ میلیون'},
+ steps:['یک سالن ۵۰ متری با رطوبت و دمای کنترل‌شده راه‌اندازی کن.','قرارداد تحویل هفتگی با ۸ رستوران؛ قارچ صدفی گران‌تر و کم‌ریسک‌تر است.','کیت «پرورش قارچ خانگی» را محصول جانبی و برندساز بفروش.'],
+ risks:[['آلودگی سالن','بهداشت آهنین + چرخهٔ بلوک‌های تولید.'],['قیمت شکنندهٔ عمده','قرارداد ثابت ماهانه به‌جای فروش روزمزد.']],
+ tools:['سالن کوچک','اسپان کمپوست','شبکهٔ رستوران'],
+ time:'۴ تا ۶ هفته',req:{c:2,h:2,r:2,mk:'local'},base:{mk:66,pf:66}},
+{dom:7,t:'اشتراک هفتگی محصولات دام محلی',tags:['تخم‌مرغ','دام','اشتراک'],kw:['تخم مرغ','مرغ','محلی','اشتراک','لبنیات','محله'],w:'اشتراک هفتگی تخم‌مرغ و لبنیات محلی با مسیر تحویل ثابت در محله‌های مشخص.',
+ rev:{s:'۸ تا ۱۴ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['با ۲ دامدار معتبر قرارداد تأمین و کیفیت ببند.','در ۳ محله، ۵۰ اشتراک هفتگی با تحویل درب منزل جمع کن.','کارت کیفیت + کد پیگیری در هر بسته؛ اعتماد = تمدید.'],
+ risks:[['نوسان تأمین','همیشه ۲ دامدار فعال؛ کمبود یعنی ریختن اعتبار.'],['لجستیک سرد','زنجیرهٔ حمل کوتاه و بسته‌بندی مناسب لبنیات.']],
+ tools:['بسته‌بندی سرد','گروه‌های محله‌ای','تلگرام سفارش'],
+ time:'۳ تا ۴ هفته',req:{c:2,h:2,r:1,mk:'local'},base:{mk:70,pf:68}},
+{dom:7,t:'گل شاخه‌بریدهٔ فصلی',tags:['گل','فصلی','تولید'],kw:['گل','شاخه بریده','لیلیوم','رز','گلخانه','فروش گل'],w:'واحد کوچک گل شاخه‌بریدهٔ فصلی با قرارداد هفتگی به گل‌فروشی‌ها و رویدادها.',
+ rev:{s:'۶ تا ۱۰ میلیون تومان در ماه',m:'۲۰ تا ۳۵ میلیون',y:'۴۵ تا ۷۰ میلیون'},
+ steps:['۲۰۰ متر گلخانهٔ ساده + دو گونهٔ پرگردش (رز/لیلیوم) شروع کن.','قرارداد هفتگی با ۶ گل‌فروشی؛ تحویل صبح‌گاهی روز چیدن.','فصل مناسبت‌ها: قرارداد مستقیم با آتلیه‌ها و تالارها.'],
+ risks:[['مرگ محصول','کاشت مرحله‌ای + بیمهٔ گلخانه در صورت امکان.'],['قیمت شکنندهٔ عمده','قرارداد قیمت ثابت ماهانه با دو گل‌فروشی ثابت.']],
+ tools:['گلخانهٔ ساده','نهال/پیاز معتبر','حمل سریع'],
+ time:'۶ تا ۱۰ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:66,pf:64}},
+{dom:7,t:'زنبورداری کوچک با قرارداد برداشت',tags:['عسل','زنبورداری','تولید'],kw:['عسل','زنبورداری','کندو','تولید','طبیعی'],w:'۲۰ تا ۴۰ کندو با پیش‌فروش عسل برنددار + اشتراک برداشت فصلی.',
+ rev:{s:'۸ تا ۱۴ میلیون تومان در ماه (فصل برداشت)',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['آموزش عملی از یک زنبوردار محلی + ۲۰ کندوی استاندارد شروع کن.','پیش‌فروش عسل با تضمین آنالیز آزمایشگاهی؛ برچسب برنددار.','اشتراک سالانهٔ «برداشت سه‌فصله»؛ هر فصل یک بسته به مشترک.'],
+ risks:[['مرگ کلنی','دامپزشکی ناحیه‌ای + قرارداد پشتیبان با زنبوردار همکار.'],['تقلب در بازار عسل','آنالیز آزمایشگاهی هر برداشت = برگ برندهٔ برند تو.']],
+ tools:['کندو و ست','آنالیز آزمایشگاهی','باسلام'],
+ time:'۸ تا ۱۲ هفته',req:{c:3,h:3,r:2,mk:'local'},base:{mk:64,pf:66}},
+{dom:7,t:'شمع و عطر فضا دست‌ساز برنددار',tags:['شمع','دست‌ساز','برند'],kw:['شمع','سویا','عطر','بو','دست ساز','هدیه'],w:'کارگاه کوچک شمع سویا و عطر فضا با بسته‌بندی برنددار؛ فروش هدیه‌محور و B2B کافه‌ها.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه',m:'۱۸ تا ۳۵ میلیون',y:'۴۰ تا ۷۰ میلیون'},
+ steps:['دستور ۳ رایحهٔ امضا با موم سویا تست کن؛ سوختن تمیز = کیفیت.','برند + بستهٔ هدیه؛ عکاسی استودیویی ساده و فروش در باسلام.','B2B: رایحهٔ اختصاصی کافه‌ها و فروشگاه‌ها با قرارداد ماهانه.'],
+ risks:[['ایمنی موم و فتیله','استاندارد فتیله و تست سوختن؛ کیفیتی پایین = بازگشت کالا.'],['فصلی بودن','تابستان: محصول سرد (اسپری فضا، دیفیوزر) جایگزین.']],
+ tools:['موم سویا','قالب و لیبل','باسلام'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:1,r:2,mk:'online'},base:{mk:66,pf:64}},
+/* --- ۸ B2B و اداری --- */
+{dom:8,t:'واحد فروش برون‌سپاری‌شده (B2B)',tags:['فروش B2B','سرنخ','تماس'],kw:['فروش','سرنخ','تماس','B2B','تفاهم','مشتری'],w:'جذب سرنخ B2B و تماس فروش برای شرکت‌ها به ازای پاداش هر معامله.',
+ rev:{s:'۱۲ تا ۲۵ میلیون تومان در ماه (۲ مشتری)',m:'۴۰ تا ۸۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['یک صنف را قفل کن (تجهیزات پزشکی، نرم‌افزار، خدمات صنعتی).','بانک ۲۰۰ شرکتی با نیاز مشخص بساز؛ روزی ۲۰ تماس با اسکریپت تست‌شده.','قرارداد: حق‌الزحمهٔ ثابت ماهانه + ۵٪ پاداش هر معاملهٔ بسته‌شده.'],
+ risks:[['نرخ پاسخ پایین','به آماری فکر کن: از ۱۰۰ تماس، ۱۰ جلسه؛ ریتم را نشکن.'],['مشتری بی‌حوصلهٔ نتیجه','حداقل دورهٔ ۳ ماهه با معیار جلسات، نه فقط فروش.']],
+ tools:['Google Sheets CRM','تلفن/واتس‌اپ کاری','لینکدین'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:3,r:2,mk:'national'},base:{mk:80,pf:80}},
+{dom:8,t:'بستهٔ مالی و حقوقی اشتراکی SME',tags:['حسابداری','مالی','قانون کار'],kw:['حسابداری','مالی','قانون کار','مالیات','مشاور اداری'],w:'بستهٔ ماهانهٔ حسابداری + قانون کار + مالیات برای کسب‌وکارهای نوپا با تعرفهٔ ثابت.',
+ rev:{s:'۱۵ تا ۳۰ میلیون تومان در ماه (۵ مشتری)',m:'۴۵ تا ۸۰ میلیون',y:'۹۰ میلیون به بالا'},
+ steps:['پکیج سه‌سطحی مشخص با قیمت ثابت و سقف خدمات ببند.','۵ کسب‌وکار نوپا را با ماه اول نیم‌بها جذب کن؛ ارجاع از حسابدارهای بازنشسته بگیر.','خروجی ماهانهٔ مکتوب بده: وضعیت مالیات، چک‌ها، ریسک‌ها.'],
+ risks:[['مسئولیت مالیاتی','قرارداد با سقف مسئولیت و مستندسازی کامل داده‌ها.'],['اتلاف وقت کارهای خرد','چک‌لیست استاندارد ماهانه برای هر مشتری.']],
+ tools:['نرم‌افزار حسابداری','قرارداد استاندارد','تلگرام کاری'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:1,mk:'national'},base:{mk:78,pf:74}},
+{dom:8,t:'مشاورهٔ جذب استارتاپی',tags:['HR','جذب','استارتاپ'],kw:['استخدام','جذب','hr','استارتاپ','مصاحبه','سورسینگ'],w:'سورسینگ و مصاحبهٔ فنی برای استارتاپ‌ها به ازای ۸۰٪ حقوق ماه اولِ فرد استخدام‌شده.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه (۲ استخدام)',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ میلیون به بالا'},
+ steps:['در دو تخصص پرتقاضا (برنامه‌نویس، دیجیتال‌مارکتر) شبکهٔ ۵۰ نفرهٔ سنجیده بساز.','با ۵ استارتاپ قرارداد کاری برای یک پوزیشن شروع کن.','فرایند مصاحبهٔ استاندارد (۳ مرحله، معیار مکتوب) را برند کن.'],
+ risks:[['استخدام ناموفق','ضمانت ۳۰ روزهٔ جایگزینی رایگان — اعتبار تو در همین است.'],['وابستگی به یک کلاینت','حداکثر ۲ استخدام هم‌زمان برای هر مشتری.']],
+ tools:['لینکدین','جابینجا','فرم مصاحبهٔ استاندارد'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:2,mk:'online'},base:{mk:74,pf:76}},
+{dom:8,t:'مشاورهٔ پروندهٔ تسهیلات کسب‌وکار',tags:['تسهیلات','بانک','مشاوره'],kw:['وام','تسهیلات','بانک','پرونده','مشاوره','اعتباری'],w:'بسته‌بندی پروندهٔ استاندارد تسهیلات و رتبهٔ اعتباری برای کسب‌وکارهای کوچک.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه (۳ پرونده)',m:'۳۰ تا ۵۰ میلیون',y:'۶۰ میلیون به بالا'},
+ steps:['چک‌لیست استاندارد پروندهٔ بانکی را حرفه‌ای یاد بگیر و مستند کن.','۳ مغازه یا شرکت آشنا را با موفقیت ببند و نتیجه را سند کن.','پکیج «پرونده + مذاکره» با حق‌الزحمهٔ ثابت + درصد موفقیت.'],
+ risks:[['وعدهٔ تضمین وام','هرگز تضمین نتیجه نکن؛ فقط کیفیت پرونده.'],['تغییر ضوابط بانکی','به‌روزرسانی ماهانهٔ ضوابط؛ شبکهٔ کارشناس بانکی بساز.']],
+ tools:['چک‌لیست پرونده','نرم‌افزار مالی','شبکهٔ بانکی'],
+ time:'۴ تا ۶ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:72,pf:78}},
+{dom:8,t:'پاسخ‌گویی و منشی مجازی دورکار',tags:['منشی مجازی','پشتیبانی','دورکار'],kw:['منشی','پشتیبانی','تلفن','چت','دورکاری','مشاور املاک'],w:'تیم منشی مجازی و پاسخ‌گویی (تلفن/چت) برای کسب‌وکارها؛ اشتراک ماهانه.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۵ میلیون',y:'۶۰ تا ۱۰۰ میلیون'},
+ steps:['خودت + ۲ نفر، سرویس ۹ تا ۱۸ برای ۵ کسب‌وکار راه بینداز.','اسکریپت پاسخ‌گویی صنفی بنویس؛ گزارش تماس روزانه تحویل بده.','اشتراک پایه ۲ میلیونی + پلن‌های ساعت اضافه؛ قرارداد ۳ ماهه.'],
+ risks:[['خطای انسانی در پیام','چک‌لیست پاسخ + بازبینی هفتگی تماس‌ها.'],['جذب نیروی مطمئن','آزمون صدای تلفنی + دورهٔ آزمایشی دو هفته‌ای.']],
+ tools:['خط ثابت ابری','CRM سبک','گزارش روزانه'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:3,r:1,mk:'national'},base:{mk:74,pf:70}},
+{dom:8,t:'دیجیتال‌سازی فرم و گردش‌کار اداری',tags:['فرم','گردش کار','دیجیتال'],kw:['فرم','گردش کار','خودکارسازی','اداری','گوگل فرم','نوشن'],w:'دیجیتال‌سازی فرم‌ها و گردش‌کار روزمرهٔ دفاتر (مرخصی، فاکتور، انبار) با ابزارهای آماده.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۶۰ میلیون به بالا'},
+ steps:['سه قالب آماده (مرخصی، فاکتور، انبار) در Google Workspace بساز.','به ۲۰ دفتر دمو ۲۰ دقیقه‌ای بده؛ راه‌اندازی ۵ روزه با آموزش ویدیویی.','اشتراک پشتیبانی و به‌روزرسانی ماهانه + قرارداد گردش‌کار جدید.'],
+ risks:[['مقاومت کارکنان','آموزش ویدیویی + دو هفتهٔ همراهی زنده؛ بدون استثنا.'],['وابستگی به ابزار خارجی','راه‌حل با ابزارهای قابل‌دسترس ایران هم طراحی کن.']],
+ tools:['Google Workspace','Notion','تلگرام پشتیبانی'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:2,r:1,mk:'national'},base:{mk:74,pf:72}},
+{dom:8,t:'مشاورهٔ آماده‌سازی استاندارد و ایزو',tags:['ایزو','استاندارد','مشاوره'],kw:['ایزو','استاندارد','مشاوره','گواهی','شرکت','تولید'],w:'آماده‌سازی مستندات و فرایندها برای گرفتن استاندارد/ایزو در کارگاه‌های کوچک.',
+ rev:{s:'۱۵ تا ۲۵ میلیون تومان در ماه (۱-۲ پروژه)',m:'۴۰ تا ۷۰ میلیون',y:'۸۰ میلیون به بالا'},
+ steps:['دو مستندسازی آزمایشی با یک کارگاه آشنا انجام بده؛ خروجی مکتوب.','پکیج ثابت «مستندات + آموزش + همراهی ممیزی» بفروش.','شبکهٔ ارجاع با ممیزان و آزمایشگاه‌های معتبر بساز.'],
+ risks:[['تغییر ضوابط','به‌روزرسانی مستمر ضوابط؛ ارتباط فعال با نهادهای مرجع.'],['پروژه‌های طولانی','قرارداد با فازهای مشخص و پرداخت مرحله‌ای.']],
+ tools:['قالب مستندات','Excel','شبکهٔ ممیزان'],
+ time:'۴ تا ۶ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:70,pf:74}},
+{dom:8,t:'آژانس ترجمهٔ تخصصی قرارداد',tags:['ترجمه','قرارداد','ارزی'],kw:['ترجمه','قرارداد','انگلیسی','مستند','تجاری','ارزی'],w:'آژانس کوچک ترجمهٔ تخصصی قرارداد و مستندات تجاری با شبکهٔ مترجم‌های سنجیده.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ میلیون به بالا'},
+ steps:['۵ مترجم سنجیده با آزمون نمونه و قرارداد تقسیم درآمد جذب کن.','به ۳۰ شرکت بازرگانی و حقوقی، ترجمهٔ آزمایشی یک صفحهٔ رایگان بده.','تعرفهٔ صفحه‌ای ثابت + زمان تحویل تضمینی؛ گواهی صحت برای هر پروژه.'],
+ risks:[['کیفیت ناهماهنگ مترجم‌ها','واژه‌نامهٔ تخصصی مشترک + بازبینی دوم الزامی.'],['تسویهٔ مترجم‌ها','پرداخت پس از تأیید مشتری + قرارداد شفاف ۷۰/۳۰.']],
+ tools:['CAT Tools','قرارداد مترجم','لینکدین B2B'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:1,r:1,mk:'global'},base:{mk:72,pf:70}},
+/* --- ۹ خلاقانه و طراحی --- */
+{dom:9,t:'استودیو برندینگ مینی',tags:['برندینگ','لوگو','طراحی'],kw:['برندینگ','لوگو','طراحی','هویت بصری','فتوشاپ','ایلاستریتور'],w:'پکیج هویت بصری ۱۴ روزه (لوگو، پالت، فونت، راهنمای مختصر) برای کسب‌وکارهای نوپا.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه (۳ پروژه)',m:'۳۵ تا ۶۰ میلیون',y:'۸۰ میلیون به بالا'},
+ steps:['سه پکیج با قیمت ثابت و خروجی مکتوب تعریف کن؛ بدون «کار ساعتی».','۶ نمونه‌کار (حتی دمو) در یک پیج اینستاگرامی منظم کن.','به ۳۰ کسب‌وکار نوپا با هویت ضعیف، نقد محترمانهٔ رایگان + پیشنهاد بده.'],
+ risks:[['حلقهٔ بی‌پایان بازبینی','سقف ۲ بار بازبینی در قرارداد.'],['قیمت‌گذاری پایین','هرگز زیر نصف قیمت بازار شروع نکن؛ نمونه‌کار حرف اول را می‌زند.']],
+ tools:['Illustrator/Figma','اینستاگرام نمونه‌کار','قرارداد ساده'],
+ time:'۲ تا ۳ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:76,pf:74}},
+{dom:9,t:'اشتراک قالب محتوای اینستاگرام',tags:['قالب','اینستاگرام','طراحی'],kw:['قالب','استوری','پست','طراحی','کتابخانه','اشتراک'],w:'کتابخانهٔ قالب‌های قابل‌ویرایش پست و استوری برای صنف‌های مشخص با اشتراک ماهانه.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه (۱۰۰ مشترک)',m:'۲۰ تا ۳۵ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['برای یک صنف (کلینیک دندانپزشکی، کافه، املاک) ۵۰ قالب بساز.','نسخهٔ رایگان ۱۰تایی برای جذب؛ اشتراک ۱۵۰ هزار تومانی ماهانه.','هر ماه ۱۰ قالب تازه + قالب مناسبتی؛ ریزش را همین‌جا می‌بری.'],
+ risks:[['کپی‌شدن فایل','قالب‌ها را پله‌ای تحویل بده و نسخهٔ آپدیت را فقط برای مشترک فعال بگذار.'],['اشباع بازار','عمق تخصصی صنفی برو؛ قالب عمومی دیگر کسی نمی‌خرد.']],
+ tools:['Canva یا Figma','اینستاگرام','زرین‌پال'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:2,mk:'online'},base:{mk:70,pf:72}},
+{dom:9,t:'پرتره و کالای هنری سفارشی',tags:['هنر','پرتره','هدیه'],kw:['هنر','نقاشی','پرتره','هدیه','طراحی دیجیتال'],w:'پرترهٔ دیجیتال/برجستهٔ سفارشی + فروش به شرکت‌ها به‌عنوان هدیهٔ سازمانی.',
+ rev:{s:'۴ تا ۸ میلیون تومان در ماه',m:'۱۵ تا ۲۵ میلیون',y:'۳۰ تا ۶۰ میلیون'},
+ steps:['۱۰ نمونه‌کار پرتره بساز و در باسلام و اینستاگرام بگذار.','سفارش هدیهٔ سازمانی (تندیس/چاپ روی چوب) برای شرکت‌ها را هدف بگیر.','پکیج «هدیهٔ سالگرد ازدواج» با قاب و بسته‌بندی خاص بساز.'],
+ risks:[['فروش پراکنده','سبد فروش را به ۲ محصول مشخص محدود کن.'],['تقلید طرح','واترمارک روی نمونه‌کارها و تحویل فایل نهایی پس از تسویه.']],
+ tools:['باسلام','اینستاگرام','چاپ‌خانهٔ محلی'],
+ time:'۱ تا ۳ هفته',req:{c:1,h:1,r:2,mk:'online'},base:{mk:64,pf:60}},
+{dom:9,t:'استودیو عکاسی محصول آنلاین‌فروش‌ها',tags:['عکاسی محصول','استودیو','فروشگاه'],kw:['عکاسی','محصول','استودیو','عکس','فروشگاه','رتوش'],w:'عکاسی و رتوش محصول با پکیج ثابت (۱۲ عکس) برای فروشگاه‌های باسلام/دیوار/اینستاگرام.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['یک گوشی خوب + نرم‌افزار نور و پس‌زمینه کافی است؛ ۵ محصول آزمایشی مجانی.','پکیج ثابت «۱۲ عکس + رتوش» با تحویل ۴۸ ساعته عرضه کن.','قرارداد ماهانه با فروشنده‌های فعال: ۴۰ محصول در ماه با تخفیف.'],
+ risks:[['رقابت عکاس ارزان','سرعت تحویل + ثبات سبک را برند کن.'],['رفت‌وآمد مرسولات','پکیج «عکاسی در محل» با ست سیار برای فروشنده‌های بزرگ.']],
+ tools:['نورپردازی ساده','Lightroom','باسلام/دیوار'],
+ time:'۱ تا ۳ هفته',req:{c:1,h:2,r:1,mk:'online'},base:{mk:72,pf:70}},
+{dom:9,t:'طراحی کاراکتر و هویت انیمیشنی برند',tags:['کاراکتر','ایلاستریتور','برند'],kw:['کاراکتر','ماسکات','ایلاستریتور','انیمیشن','آواتار','طراحی'],w:'طراحی ماسکات و ست ایموجی برند برای برندها و پیج‌های بزرگ؛ درآمد پکیجی و ارزی.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۵۰ میلیون',y:'۵۰ میلیون به بالا'},
+ steps:['۱۰ کاراکتر دمو در ۳ سبک بساز و در به‌انس/اینستاگرام منتشر کن.','پکیج «ماسکات + ۱۰ پوز» با قیمت ثابت به برندهای فعال پیتچ بده.','پلتفرم‌های فریلنسری ارزی را ستون دوم کن.'],
+ risks:[['سبک قفل‌شده','۲ سبک عرضه کن و بازخورد بازار را تصمیم‌گیر بگذار.'],['حق مالکیت طرح','قرارداد واگذاری مالکیت کامل پس از تسویه.']],
+ tools:['Illustrator','به‌انس','پلتفرم فریلنسری ارزی'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:2,mk:'global'},base:{mk:70,pf:70}},
+{dom:9,t:'طراحی و چاپ بسته‌بندی محصول',tags:['بسته‌بندی','چاپ','طراحی'],kw:['بسته بندی','چاپ','جعبه','طراحی','برند','محصول'],w:'طراحی بسته‌بندی برنددار + هماهنگی چاپ برای برندهای خوراکی و دست‌ساز؛ پروژه‌ای پرمارجین.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه (۳ پروژه)',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ میلیون به بالا'},
+ steps:['۳ نمونهٔ بسته‌بندی (حتی دمو) طراحی و چاپ کوچک کن؛ عکس حرفه‌ای.','به ۴۰ تولیدکنندهٔ کوچک (باسلام) پیام با تحلیل رایگان بستهٔ فعلی‌شان.','پکیج «طراحی + چاپ ۵۰۰ عددی» با قیمت ثابت و تحویل ۲ هفته‌ای.'],
+ risks:[['خطای چاپ','پروف چاپی قبل از تیراژ؛ هزینهٔ پروف در قرارداد.'],['چرخهٔ بازبینی','سقف ۲ بازبینی؛ هر افزون، هزینهٔ مکتوب.']],
+ tools:['Illustrator','چاپخانه','باسلام'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:74,pf:74}},
+{dom:9,t:'استودیو ضبط پادکست و صدا',tags:['پادکست','استودیو','صدا'],kw:['پادکست','استودیو','ضبط','صدا','میکس','پادکستر'],w:'استودیو پادکست ساعتی + بستهٔ تولید کامل (تدوین، میکس، کاور) برای پادکسترها و برندها.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۶۰ تا ۹۰ میلیون'},
+ steps:['یک اتاق آکوستیک‌شده + تجهیزات دو نفره جمع کن؛ ساعتی ۸۰۰ هزار تومان.','بستهٔ «۴ قسمت در ماه» با تدوین و کاور برای برندهای محتوا.','ساعات خالی روز را برای دوبله و ویس‌اور فریلنسرها بفروش.'],
+ risks:[['استفادهٔ کم از ساعت','قرارداد ماهانهٔ ساعتی با سقف؛ حداقل تمدید ۳ ماهه.'],['رقابت استودیوهای بزرگ','بستهٔ کامل (ضبط تا انتشار) را برند کن، نه ساعت خام.']],
+ tools:['میکروفون و آکوستیک','Reaper/Audition','کاور و تیتر'],
+ time:'۳ تا ۵ هفته',req:{c:2,h:2,r:2,mk:'local'},base:{mk:68,pf:68}},
+{dom:9,t:'جعبهٔ تجربهٔ اشتراکی (Experience Box)',tags:['جعبه','اشتراک','تجربه'],kw:['جعبه','باکس','اشتراک','تجربه','هدیه','سورپرایز'],w:'باکس ماهانهٔ تجربه‌محور (ابزار دست‌ساز + کارگاه آنلاین کوچک) برای مشترکین.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه (۲۰۰ مشترک)',m:'۲۰ تا ۴۰ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['باکس اول را با ۱۰۰ نسخه و مارجین ۴۰٪ بساز و پیش‌فروش کن.','هر باکس یک کارگاه آنلاین کوچک همراه دارد؛ روایت = تمایز.','اشتراک ۳ ماهه با تخفیف؛ محتوای هر باکس را مشترکین انتخاب کنند.'],
+ risks:[['هزینهٔ لجستیک باکس','وزن و ابعاد استاندارد؛ سقف هزینهٔ ارسال ۱۵٪ فروش.'],['ریزش اشتراک','پیش‌نمایش باکس بعدی از ماه دوم.']],
+ tools:['تأمین قطعات','باسلام','زرین‌پال'],
+ time:'۴ تا ۶ هفته',req:{c:2,h:2,r:3,mk:'online'},base:{mk:64,pf:62}},
+/* --- ۱۰ مالی و سرمایه --- */
+{dom:10,t:'کلینیک مالی کسب‌وکار کوچک',tags:['مالی','قیمت‌گذاری','مشاوره'],kw:['مالی','قیمت‌گذاری','هزینه','سود','حسابداری','مشاوره'],w:'تحلیل و بازطراحی هزینه و قیمت‌گذاری کسب‌وکارهای کوچک؛ حق‌الزحمه درصدی از صرفه‌جویی.',
+ rev:{s:'۱۰ تا ۲۰ میلیون تومان در ماه (۲ پروژه)',m:'۳۵ تا ۶۰ میلیون',y:'۸۰ میلیون به بالا'},
+ steps:['با ۲ مغازهٔ آشنا تحلیل مجانی کن و نتیجهٔ عددی را مستند کن.','پیشنهاد: «۳۰٪ صرفه‌جوییِ اول سال را بده، بقیه مال تو».','قرارداد ۳ ماهه با گزارش ماهانهٔ عددی.'],
+ risks:[['دادهٔ ناقص مشتری','فقط با دفاتر و فاکتور واقعی کار کن؛ حدس ممنوع.'],['مقاومت تغییر','تغییرها را کوچک و قابل‌سنجش پیشنهاد بده، نه انقلابی.']],
+ tools:['Excel/Sheets','قرارداد درصدی','شبکهٔ ارجاع'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:2,mk:'national'},base:{mk:74,pf:80}},
+{dom:10,t:'مدرسهٔ سواد مالی عملی',tags:['آموزش','مالی','کارگاه'],kw:['آموزش','مالی','بودجه','بدهی','کارگاه','خانواده'],w:'کارگاه ۳ جلسه‌ای بودجه و بدهی برای خانواده‌ها و تیم شرکت‌ها (مدل B2B2C).',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه',m:'۲۰ تا ۳۵ میلیون',y:'۴۰ تا ۷۰ میلیون'},
+ steps:['مخاطب کارگاه را در یک جلسهٔ مجانی آزمایشی بسنج.','برای شرکت‌ها بفروش: «سلامت مالی کارمند، تمرکز کاری می‌آورد».','دفترچهٔ تمرین چاپی را محصول جانبی و تبلیغ جلوتر بفروش.'],
+ risks:[['ادعای سرمایه‌گذاری','آموزش سواد مالی بده، نه سیگنال خرید سهام.'],['حضور کم','قرارداد با شرکت، نه فروش تکی به افراد.']],
+ tools:['اسکای‌روم/حضوری','دفترچهٔ تمرین','لینکدین B2B'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:1,r:1,mk:'online'},base:{mk:70,pf:66}},
+{dom:10,t:'تولید محتوای مالی معتبر',tags:['محتوا','مالی','نویسندگی'],kw:['محتوا','نویسندگی','مالی','مقاله','فینتک','ترجمه'],w:'ستون مالی برای رسانه‌ها و برندهای فینتک با نرخ کلمه‌ای حرفه‌ای و ارزی.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['۵ نمونهٔ مقالهٔ مالی عمیق بنویس و در لینکدین منتشر کن.','به ۱۰ برند فینتک و رسانهٔ مالی پیتچ بده با تحلیل رایگان یک مقالهٔ خودشان.','قرارداد ماهانهٔ ۴ مقالهٔ عمیق + ارزی برای مشتری خارجی.'],
+ risks:[['خطر محتوای توصیه‌ای','همیشه دیسکلیمر بنویس؛ محتوا آموزشی است نه سیگنال.'],['رقابت ارزان','تخصص عمیق (مثلاً مالی شخصی) را برند کن.']],
+ tools:['لینکدین','Google Trends','ابزار سئو'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:1,r:1,mk:'global'},base:{mk:72,pf:68}},
+{dom:10,t:'بایکیت ماهانهٔ مغازه‌ها',tags:['بایکیت','حسابداری','مغازه'],kw:['بایکیت','دفتر','حسابداری','مالیات','مغازه','فاکتور'],w:'سرویس ماهانهٔ بایکیت، دفاتر و تنظیم مالیات مغازه‌ها با تعرفهٔ ثابت صنفی.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه (۱۰ مغازه)',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ میلیون به بالا'},
+ steps:['دو مغازهٔ آشنا را با نرخ ورودی آزمایشی بگیر و خروجی تمیز تحویل بده.','قرارداد سالانهٔ بایکیت ماهانه + مقدمات اظهارنامه.','معرفی‌نامه از هر مشتری؛ حسابدارهای بازنشسته را شبکهٔ ارجاع کن.'],
+ risks:[['مسئولیت اظهارنامه','دادهٔ امضاشدهٔ مشتری + سقف مسئولیت در قرارداد.'],['کار پراکندهٔ خرد','روز ثابت ماهانهٔ هر مشتری؛ نظم = ظرفیت بیشتر.']],
+ tools:['نرم‌افزار حسابداری','قرارداد سالانه','فاکتور رسمی'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:2,r:1,mk:'local'},base:{mk:74,pf:74}},
+{dom:10,t:'محتوای تخصصی بیمه و سرمایه برای برندها',tags:['محتوا','بیمه','برند'],kw:['بیمه','محتوا','سرمایه','برند','مقاله','فریلنس'],w:'تولید محتوای تخصصی بیمه و سرمایه‌گذاری برای شرکت‌های بیمه و فینتک؛ نرخ حرفه‌ای.',
+ rev:{s:'۸ تا ۱۴ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['۵ مقالهٔ عمیق نمونهٔ بیمه‌ای/سرمایه‌ای بنویس و PDF نمونه‌کار بساز.','به ۱۰ شرکت بیمه و فینتک پیتچ با تحلیل رایگان محتوای فعلی‌شان.','قرارداد ماهانهٔ ۴ تا ۶ محتوای سئوشده با بازبینی حقوقی کارفرما.'],
+ risks:[['ادعای درست/غلط حقوقی','بازبینی حقوقی هر محتوا توسط کارفرما؛ تو محتوا تحویل می‌دهی.'],['ریتم تولید','بانک ایدهٔ ۵۰تایی از سوالات واقعی مخاطبان بساز.']],
+ tools:['لینکدین','ابزار سئو','Google Docs'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:1,r:1,mk:'national'},base:{mk:70,pf:68}},
+{dom:10,t:'بیمهٔ اشخاص و دارایی (بازاریاب مجاز)',tags:['بیمه','مشاوره','فروش'],kw:['بیمه','بدنه','ثالث','عمر','مشاوره','بازاریابی'],w:'با مجوز بازاریابی بیمه، سرویس مقایسه و پیشنهاد بهینهٔ بیمه‌نامهٔ اشخاص و خودرو.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۶۰ میلیون به بالا'},
+ steps:['مجوز بازاریابی از یک شرکت بیمه معتبر بگیر؛ آموزش شرکت‌ها رایگان است.','به ۱۰۰ بیمه‌گذار سرسید، تجدید بیمه‌نامه با قیمت بهینه پیشنهاد بده.','کمیسیون تجدید سالانه = درآمد تکرارشو؛ CRM سبک برای یادآوری.'],
+ risks:[['بدون مجوز فروش نرو','کار بدون مجوز بازاریابی غیرقانونی است؛ اول مجوز، بعد فروش.'],['خدمات بعد از فروش','پیگیری خسارت مشتری = تمایز و تمدید.']],
+ tools:['مجوز بازاریابی','CRM سبک','گروه‌های محله‌ای'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:2,r:1,mk:'local'},base:{mk:74,pf:72}},
+{dom:10,t:'فروش فایل‌های اکسل مالی آماده',tags:['اکسل','قالب','دیجیتال'],kw:['اکسل','فایل','قالب','مالی','حسابداری','دانلود'],w:'ساخت و فروش قالب‌های اکسل مالی حرفه‌ای (بودجه، جریان نقد، قیمت‌گذاری) به‌صورت دیجیتال.',
+ rev:{s:'۴ تا ۸ میلیون تومان در ماه',m:'۱۵ تا ۲۵ میلیون',y:'۳۵ تا ۵۰ میلیون'},
+ steps:['۵ قالب عمیق با راهنمای فارسی بساز؛ کیفیت بر تعداد مقدم است.','نسخهٔ رایگان سبک برای جذب؛ نسخهٔ کامل ۳۰۰ تا ۸۰۰ هزار تومان.','فروش در باسلام + لینکدین B2B؛ هر فصل یک قالب تازه.'],
+ risks:[['کپی فایل','واترمارک + آپدیت‌های فقط برای خریداران اصلی.'],['بازار کوچک فارسی','نسخهٔ انگلیسی برای Gumroad = بازار دوم ارزی.']],
+ tools:['Excel','باسلام','Gumroad'],
+ time:'۳ تا ۵ هفته',req:{c:1,h:1,r:2,mk:'online'},base:{mk:64,pf:66}},
+{dom:10,t:'کارگاه بازسازی بودجهٔ بدهی‌دار',tags:['بدهی','بودجه','مشاوره'],kw:['بدهی','قسط','بودجه','مالی شخصی','بازسازی'],w:'برنامهٔ ۶ هفته‌ای سازمان‌دهی بدهی و بازسازی بودجهٔ خانوار؛ جلسه‌های خصوصی + گروهی.',
+ rev:{s:'۵ تا ۱۰ میلیون تومان در ماه',m:'۱۸ تا ۳۰ میلیون',y:'۴۰ تا ۶۰ میلیون'},
+ steps:['چارچوب ۶ هفته‌ای (فهرست بدهی، اولویت، مذاکره) را با ۲ پروندهٔ آزمایشی بساز.','فروش جلسهٔ اول رایگان؛ بستهٔ کامل با پرداخت سه‌قستی.','قرارداد با شرکت‌ها برای کارکنانِ بدهی‌دار (B2B2C) با حریم کامل.'],
+ risks:[['وعدهٔ کاهش بدهی','هیچ تعهدی به نتیجهٔ مالی نده؛ فقط چارچوب و نظم.'],['حساسیت اطلاعات','توافق محرمانگی مکتوب؛ داده‌ها فقط روی دستگاه خودت.']],
+ tools:['قالب بودجه','قرارداد محرمانگی','زرین‌پال'],
+ time:'۲ تا ۴ هفته',req:{c:1,h:1,r:1,mk:'online'},base:{mk:70,pf:64}},
+/* --- ۱۱ خودرو و حمل‌ونقل --- */
+{dom:11,t:'دیتیلینگ پریمیوم سیار',tags:['خودرو','دیتیلینگ','سرامیک'],kw:['خودرو','دیتیلینگ','سرامیک','واکس','شستشو','ماشین'],w:'سرامیک و دیتیلینگ در محل مشتری با پکیج‌های ۳ تا ۱۲ میلیونی.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۵ میلیون',y:'۷۰ تا ۱۰۰ میلیون'},
+ steps:['یک خودروی آشنا را مجانی سرامیک کن؛ قبل/بعد حرفه‌ای مستند کن.','پکیج سه‌سطحی با قیمت ثابت در دیوار و گروه‌های خودرویی بفروش.','قرارداد ماهانه با ۵ شرکت (ناوگان مدیران).'],
+ risks:[['خسارت رنگ','روی رنگ‌های آسیب‌دیده کار نگیر؛ چک‌لیست قبل از شروع.'],['رقابت مغازه','خدمت در محل + تضمین را برند کن، نه قیمت.']],
+ tools:['ست دیتیلینگ','دیوار','گروه‌های خودرویی'],
+ time:'۱ تا ۲ هفته',req:{c:2,h:2,r:2,mk:'local'},base:{mk:74,pf:76}},
+{dom:11,t:'کارشناسی پیش‌خرید خودرو',tags:['خودرو','کارشناسی','بازرسی'],kw:['خودرو','کارشناسی','بازرسی','خرید ماشین','فنی'],w:'بازرسی ۱۲۰ نقطه‌ای خودرو قبل از خرید مشتری با گزارش مکتوب و امضا.',
+ rev:{s:'۸ تا ۱۵ میلیون تومان در ماه',m:'۲۵ تا ۴۵ میلیون',y:'۵۰ تا ۸۰ میلیون'},
+ steps:['دستگاه تستر رنگ + چک‌لیست ۱۲۰ نقطه‌ای تهیه کن.','قرارداد با ۵ معاون معتبر: «هر ماشین قبل از خرید، کارشناسی تو».','گزارش مکتوب با عکس؛ همین گزارش، بازاریاب بعدیِ توست.'],
+ risks:[['مسئولیت قضاوت','گزارش «شرایط لحظهٔ بازرسی» است؛ دامنهٔ مسئولیت مکتوب.'],['فروش کم در روزهای رکود','هم‌زمان قرارداد کارشناسی دوره‌ای ناوگان شرکت‌ها.']],
+ tools:['تستر ضخامت رنگ','چک‌لیست استاندارد','تلگرام گزارش'],
+ time:'۱ تا ۳ هفته',req:{c:1,h:2,r:1,mk:'local'},base:{mk:72,pf:70}},
+{dom:11,t:'لجستیک آخرین‌مایل محلی',tags:['لجستیک','پیک','حمل'],kw:['لجستیک','پیک','ارسال','حمل','توزیع','فروشگاه آنلاین'],w:'تحویل همان‌روز سفارش فروشندگان آنلاین شهر با پیک‌های قراردادی و سامانهٔ پیگیری.',
+ rev:{s:'۱۵ تا ۲۵ میلیون تومان در ماه',m:'۴۵ تا ۸۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['با ۱۰ فروشندهٔ اینستاگرامی/باسلامی شهر قرارداد «تحویل همان‌روز» ببند.','۳ پیک قراردادی با تعرفهٔ ثابت و پیگیری تلگرامی سفارش‌ها.','از ماه دوم، قرارداد ماهانهٔ ثابت با فروشنده‌های پرفروش ببند.'],
+ risks:[['مفقودی مرسوله','سیستم تحویل با امضا و عکس اجباری.'],['ناپایداری پیک‌ها','پاداش تحویل به‌موقع + قرارداد حداقلی ماهانه.']],
+ tools:['تلگرام سازمانی','فرم سفارش آنلاین','موتوسیکل پیک'],
+ time:'۲ تا ۴ هفته',req:{c:2,h:3,r:3,mk:'local'},base:{mk:70,pf:66}},
+{dom:11,t:'سرویس دوره‌ای سیار خودرو',tags:['خودرو','سرویس','سیار'],kw:['تعویض روغن','سرویس','خودرو','سیار','دوره‌ای'],w:'تعویض روغن، فیلتر و چک دوره‌ای در محل؛ اشتراک سرویس سالانهٔ خودرو.',
+ rev:{s:'۱۰ تا ۱۶ میلیون تومان در ماه',m:'۳۰ تا ۵۰ میلیون',y:'۵۰ تا ۹۰ میلیون'},
+ steps:['ون کوچک + ابزار و موجودی پرگردش (روغن، فیلتر) تجهیز کن.','اشتراک سالانهٔ ۲ سرویس + چک ۲۰ نقطه‌ای بفروش؛ یادآوری خودکار تقویمی.','قرارداد ناوگان با شرکت‌ها و تاکسیرانی‌های محلی.'],
+ risks:[['روغن تقلبی','تأمین فقط از پخش رسمی؛ فاکتور زنجیرهٔ تأمین.'],['دسترسی پارکینگ','زمان‌بندی واقع‌بینانه؛ سرویس در محل کار مشتری.']],
+ tools:['ون تجهیزشده','تأمین روغن رسمی','تلگرام یادآور'],
+ time:'۲ تا ۴ هفته',req:{c:2,h:3,r:2,mk:'local'},base:{mk:72,pf:70}},
+{dom:11,t:'بازرگانی خودرو تضمینی',tags:['خودرو','بازرگانی','معاوضه'],kw:['خرید ماشین','فروش خودرو','معاوضه','بازرگانی','کارگزار'],w:'خرید، کارشناسی و فروش خودروهای پرگردش با حاشیهٔ معامله و ضمانت سلامت مکتوب.',
+ rev:{s:'۱۵ تا ۳۰ میلیون تومان در ماه (۲-۳ معامله)',m:'۵۰ تا ۹۰ میلیون',y:'۱۰۰ میلیون به بالا'},
+ steps:['با ۱۵۰ تا ۳۰۰ میلیون گردش، ۲ خودروی پرگردش شروع کن.','هر خودرو با کارشناسی ۱۲۰ نقطه‌ای + گزارش مکتوب عرضه کن.','ضمانت بازگشت ۷ روزه؛ اعتبار، بازاریاب معاملهٔ بعدی است.'],
+ risks:[['نقدشوندگی سرمایه','فقط خودروهای پرگردش؛ شتاب نکن.'],['نوسان بازار','حاشیهٔ حداقل ۴٪ معامله؛ در بازار ریزشی خرید نکن.']],
+ tools:['تستر رنگ','دیوار خودرو','قرارداد محضری'],
+ time:'۳ تا ۶ هفته',req:{c:3,h:3,r:3,mk:'national'},base:{mk:74,pf:80}},
+{dom:11,t:'لوازم جانبی خودرو با نصب سیار',tags:['خودرو','لوازم','نصب'],kw:['لوازم خودرو','دوربین','سانروف','نصب','اکسسوری'],w:'فروش لوازم جانبی (دوربین، سانروف، دیاگ) + نصب در محل مشتری؛ پکیج کالا+نصب.',
+ rev:{s:'۱۰ تا ۱۸ میلیون تومان در ماه',m:'۳۰ تا ۵۵ میلیون',y:'۶۰ تا ۱۰۰ میلیون'},
+ steps:['تأمین از پخش رسمی؛ ۶ کالای پرگردش با نصب ساده بخر.','آگهی «قیمت + نصب در محل + گارانتی نصب» در دیوار و گروه‌ها.','قرارداد با ۳ نمایشگاه خودرو و شرکت‌های اجاره برای ناوگان.'],
+ risks:[['خرابی پس از نصب','گارانتی نصب ۳۰ روزه + تأمین قطعهٔ یدکی.'],['رقابت آنلاین ارزان','نصب حرفه‌ای در محل را برند کن؛ کالا فقط حامل است.']],
+ tools:['ابزار نصب','دیوار','پخش رسمی'],
+ time:'۲ تا ۳ هفته',req:{c:2,h:2,r:2,mk:'local'},base:{mk:72,pf:72}},
+{dom:11,t:'کارواش بخار ناوگان و در محل',tags:['کارواش','بخار','B2B'],kw:['کارواش','بخار','ناوگان','شرکت','در محل','شستشو'],w:'کارواش بخار کم‌آب در محل شرکت‌ها و ناوگان‌ها با قرارداد ماهانهٔ تعداد خودرو.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه',m:'۳۵ تا ۶۰ میلیون',y:'۷۰ تا ۱۰۰ میلیون'},
+ steps:['دستگاه بخار + مواد؛ ۱۰ خودروی آشنا را دمو و مستند کن.','قرارداد ماهانه با شرکت‌ها: سرویس هفتگی ناوگان در پارکینگ خودشان.','پکیج «بیرون + داخل» با تعرفهٔ ثابت؛ گزارش هفتگی تعداد سرویس.'],
+ risks:[['محدودیت آب شهری','بخار = مزیت تبلیغاتی و الزام محیطی هم‌زمان.'],['لغو قرارداد ناوگان','هیچ مشتری بیش از ۳۰٪ درآمد؛ حداقل ۴ قرارداد موازی.']],
+ tools:['دستگاه بخار','قرارداد B2B','اینستاگرام قبل/بعد'],
+ time:'۲ تا ۴ هفته',req:{c:2,h:2,r:1,mk:'local'},base:{mk:74,pf:72}},
+{dom:11,t:'رینگ و لاستیک تخصصی با کارشناسی',tags:['رینگ','لاستیک','فروش'],kw:['رینگ','لاستیک','بالانس','فروش','تایر','خودرو'],w:'فروش رینگ و لاستیک سالم با کارشناسی صادقانه + بالانس و نصب در محل.',
+ rev:{s:'۱۲ تا ۲۰ میلیون تومان در ماه',m:'۳۵ تا ۶۵ میلیون',y:'۷۰ تا ۱۲۰ میلیون'},
+ steps:['تأمین از تعویض‌های حرفه‌ای و عمدهٔ معتبر؛ هر لاستیک با عمق سنجه.','گزارش صادقانهٔ وضعیت هر ست (عکس + عمق + قیمت) = اعتبار برند.','فروش + بالانس و تعویض در محل با ماشین قراردادی.'],
+ risks:[['لاستیک معیوب','هرگز کالای مشکوک نفروش؛ اعتبار از صداقت می‌آید.'],['نوسان ارز تأمین','خرید نقدی کوچک و پرتعداد؛ موجودی ۳۰ روزه.']],
+ tools:['عمق‌سنج','دیوار','ماشین نصب قراردادی'],
+ time:'۳ تا ۴ هفته',req:{c:3,h:2,r:2,mk:'local'},base:{mk:70,pf:70}}
+];
+
+/* ====== STATE ====== */
+let focusIdea=null,currentBrief=null,lastProfile=null;
+let refine={presen:false,network:false,quick:false};
+const stars=new Set(store_get('rb_stars',[]));
+function store_get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
+function store_set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+/* ====== TOAST / MODAL ====== */
+function toast(msg,err){
+  const t=document.createElement('div');
+  t.className='toast'+(err?' err':'');
+  t.textContent=msg;
+  $('toasts').appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(()=>t.remove(),400)},3400);
+}
+function openModal(html){$('modalBody').innerHTML=html;$('modal').classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(){$('modal').classList.remove('show');document.body.style.overflow=''}
+$('modalClose').addEventListener('click',closeModal);
+$('modalBg').addEventListener('click',closeModal);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();hideSug()}});
+
+/* ====== NAV / PROGRESS / REVEAL / FAQ / NEWS ====== */
+$('navBtn').addEventListener('click',()=>{
+  const m=$('mobileMenu'),open=m.classList.toggle('open');
+  $('navBtn').setAttribute('aria-expanded',open);
+});
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>$('mobileMenu').classList.remove('open')));
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  $('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+function animateCount(el){
+  const target=+el.dataset.count;
+  if(reduceMotion){el.textContent=fa(target);return}
+  let cur=0;const step=Math.max(1,Math.round(target/48));
+  const iv=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(iv)}el.textContent=fa(cur)},26);
+}
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('[data-count]').forEach(animateCount);
+    if(e.target.hasAttribute('data-count'))animateCount(e.target);
+    io.unobserve(e.target);
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement,open=item.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
+  });
+});
+$('newsForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=$('newsEmail').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){toast('یک ایمیل معتبر وارد کن.',true);return}
+  $('newsEmail').value='';
+  toast('عضویت در خبرنامه ثبت شد — خوش آمدی.');
+});
+
+/* ====== SELECT FILL ====== */
+(function(){
+  const d=$('fDom');
+  d.innerHTML='<option value="">بدون محدودیت — بهترین تطبیق را خودت پیدا کن</option>'+DOMAINS.map((x,i)=>`<option value="${i}">${x}</option>`).join('');
+  const s=$('fSDom');
+  s.innerHTML='<option value="">همهٔ حوزه‌ها</option>'+DOMAINS.map((x,i)=>`<option value="${i}">${x}</option>`).join('');
+})();
+
+/* ============================================================
+   موتور تحلیل بومی
+   ============================================================ */
+const URG_WORDS=['سریع','فوری','بدهی','قسط','اجاره','بیکار','بی کار','ضرورت','همین امروز','معطل'];
+const B2B_WORDS=['شرکت','مغازه','فروشگاه','کارخانه','رستوران','کسب و کار','دفتر','تیم','برند'];
+const HOME_WORDS=['خونه','خانه','منزل','خانگی','درب منزل'];
+function extractSignals(p){
+  const hay=norm(p.pain||'');
+  const sig=[];
+  const hasUrg=URG_WORDS.some(w=>hay.includes(w));
+  sig.push({k:'فوریت درآمد',v:hasUrg?'بالا':'عادی',t:hasUrg?'amb':''});
+  const hasB2B=B2B_WORDS.some(w=>hay.includes(w));
+  const hasHome=HOME_WORDS.some(w=>hay.includes(w));
+  if(hasB2B)sig.push({k:'گرایش بازار',v:'B2B',t:'acc'});
+  else if(hasHome)sig.push({k:'گرایش بازار',v:'B2C خانگی',t:''});
+  const nSk=(p.skills||'').split(/[,،]/).filter(x=>x.trim()).length;
+  sig.push({k:'پوشش مهارتی',v:nSk>=3?'پهن ('+fa(nSk)+' مهارت)':nSk===0?'ثبت‌نشده':fa(nSk)+' مهارت',t:nSk>=3?'acc':''});
+  sig.push({k:'بودجه',v:CAPL[p.cap],t:''});
+  sig.push({k:'زمان هفتگی',v:HRSL[p.hrs],t:''});
+  sig.push({k:'بازار هدف',v:MKL[p.mk],t:''});
+  sig.push({k:'ریسک‌پذیری',v:RISKL[p.risk],t:p.risk>=3?'amb':''});
+  sig.urgent=hasUrg;
+  return sig;
+}
+function skillFit(scn,p){
+  const hay=norm(scn.tags.join(' ')+' '+scn.kw.join(' ')+' '+scn.t+' '+scn.w);
+  const toks=tokenize(p.skills||'');
+  if(!toks.length)return 14;
+  let hits=0;
+  toks.forEach(t=>{if(hay.includes(t.slice(0,4)))hits++});
+  return Math.min(30,6+hits*8);
+}
+function mkMatch(a,b){
+  if(a===b)return 16;
+  const g=x=>(x==='online'||x==='global')?'o':x==='national'?'n':'l';
+  const A=g(a),B=g(b);
+  if(A==='o'&&B==='o')return 13;
+  if((A==='n'&&B==='o')||(A==='o'&&B==='n'))return 12;
+  if((A==='n'&&B==='l')||(A==='l'&&B==='n'))return 7;
+  return 4;
+}
+function isQuick(scn){return /هفتهٔ اول|۱ هفته|۲ هفته/.test(scn.time)}
+function computeScores(scn,p,sig){
+  const b={};
+  b.skill=skillFit(scn,p);
+  b.cap=scn.req.c===p.cap?16:scn.req.c<p.cap?11:3;
+  b.hrs=scn.req.h<=p.hrs?14:scn.req.h===p.hrs+1?8:0;
+  const gap=Math.abs(scn.req.r-p.risk);
+  b.risk=gap===0?12:gap===1?7:2;
+  let m=mkMatch(scn.req.mk,p.mk);
+  if(refine.presen&&scn.req.mk==='local')m=Math.min(16,m+4);
+  b.mkt=m;
+  let urg=sig.urgent?(isQuick(scn)?10:3):5;
+  if(refine.quick)urg=isQuick(scn)?Math.min(10,urg+5):Math.max(0,urg-3);
+  if(refine.network&&CHANNELS[scn.dom].some(c=>/محله|آشنا|معرف|ارجاع|شبکه/.test(c)))urg=Math.min(10,urg+2);
+  const pref=(p.dom!==''&&p.dom!=null&&+p.dom===scn.dom);
+  if(pref)urg=Math.min(10,urg+5);
+  if(p.dom!==''&&p.dom!=null&&!pref)urg=Math.max(0,urg-3);
+  b.urg=urg;
+  let fit=b.skill+b.cap+b.hrs+b.risk+b.mkt+b.urg;
+  fit=Math.min(100,fit);
+  let mk=scn.base.mk+(scn.req.mk===p.mk?8:0);
+  if(scn.req.mk==='local'&&p.mk!=='local')mk-=4;
+  if(scn.req.mk==='global'&&p.mk!=='global'&&p.mk!=='online')mk-=6;
+  mk=Math.max(40,Math.min(97,mk));
+  let pf=scn.base.pf+(p.cap>=scn.req.c+1?6:p.cap===scn.req.c?0:-8);
+  pf=Math.max(35,Math.min(97,pf));
+  const final=Math.round(mk*.34+pf*.33+fit*.33);
+  return{mk:Math.round(mk),pf:Math.round(pf),fit:Math.round(fit),final,bd:b};
+}
+function gradeOf(n){return n>=86?'S':n>=72?'A':n>=58?'B':'C'}
+function personalWhy(scn,p,sig){
+  const bits=[];
+  bits.push('با بودجهٔ '+CAPL[p.cap]+' و '+HRSL[p.hrs]+' در هفته، الزامات این سناریو با منابع تو همخوانی دارد');
+  if(sig.urgent&&isQuick(scn))bits.push('سیگنال فوریت پروفایل تو با زمان رسیدن به اولین درآمد این مسیر ('+scn.time+') هم‌راستاست');
+  if(p.mk===scn.req.mk)bits.push('بازار هدف انتخابی تو ('+MKL[p.mk]+') دقیقاً بازاری است که این سناریو برایش طراحی شده');
+  return bits.join('؛ ')+'.';
+}
+function ideaFromScn(scn,p,sig,scores,focus){
+  return{
+    title:scn.t,dom:DOMAINS[scn.dom],pitch:scn.w,
+    why:(focus?'این ایده را خودت از جستجو انتخاب کردی و بریف حول آن تنظیم شده. ':'')+personalWhy(scn,p,sig),
+    rev:scn.rev,steps:scn.steps,risks:scn.risks,tools:scn.tools,
+    channels:CHANNELS[scn.dom],time:scn.time,
+    g90:'هدف ۹۰ روزه: رسیدن به بازهٔ '+scn.rev.m+' درآمد ماهانه و تثبیت حداقل یک کانال جذب تکرارشو.',
+    scores:{mk:scores.mk,pf:scores.pf,fit:scores.fit,final:scores.final,grade:gradeOf(scores.final)},
+    bd:scores.bd,idx:DB.indexOf(scn),focus:!!focus
+  };
+}
+function matchedSkills(scn,p){
+  const hay=norm(scn.tags.join(' ')+' '+scn.kw.join(' ')+' '+scn.t);
+  return tokenize(p.skills||'').filter(t=>hay.includes(t.slice(0,4))).slice(0,3);
+}
+function nativeBrief(p){
+  const sig=extractSignals(p);
+  const scored=DB.map(s=>({s,r:computeScores(s,p,sig)}));
+  scored.sort((a,b)=>b.r.final-a.r.final);
+  let picks;
+  if(focusIdea&&DB[focusIdea.idx]){
+    const f=DB[focusIdea.idx];
+    const rest=scored.filter(x=>x.s!==f).slice(0,2);
+    picks=[[f,computeScores(f,p,sig)],...rest.map(x=>[x.s,x.r])];
+  }else{
+    picks=scored.slice(0,3).map(x=>[x.s,x.r]);
+  }
+  const alts=scored.filter(x=>!picks.some(pk=>pk[0]===x.s)).slice(0,3)
+    .map(x=>({idx:DB.indexOf(x.s),title:x.s.t,pitch:x.s.w,final:x.r.final,dom:DOMAINS[x.s.dom]}));
+  const ideas=picks.map(([s,r],i)=>ideaFromScn(s,p,sig,r,i===0&&!!focusIdea));
+  const strong=scored.filter(x=>x.r.final>=62).length;
+  const close=scored.filter(x=>x.r.final>=50).length;
+  const pain=(p.pain||'').trim();
+  const mk=matchedSkills(ideas[0].idx!=null?DB[ideas[0].idx]:DB[0],p);
+  const kwTxt=mk.length?applyFa(' مهارت‌های «'+mk.join('، ')+'» از متن تو با این مسیر هم‌خوان است.':'');
+  const exec='پروفایل تو بر اساس «'+(pain.length>90?pain.slice(0,90)+'…':pain||'—')+'» تحلیل شد. موتور رصد ۹۶ سناریو را روی شش معیار شفاف نمره داد؛ <b>'+esc(ideas[0].title)+'</b> بالاترین هم‌گرایی را دارد.'+kwTxt+' تفکیک کامل امتیازها پایین هر ایده آمده است.';
+  let coach;
+  if(sig.urgent)coach='سیگنال فوریت در پروفایل تو پررنگ است: از ایدهٔ رتبهٔ ۱ همین امروز شروع کن؛ قدم اولش برای همین هفته طراحی شده. دو ایدهٔ دیگر را موازی بارگذاری نکن.';
+  else if(p.risk===1)coach='ریسک‌پذیری تو کم است؛ مسیرهای انتخابی با کمترین الزام سرمایه‌ای فیلتر شده‌اند. قرارداد و پیش‌پرداخت را جدی بگیر و تا ماه دوم روی یک ایده تمرکز کن.';
+  else coach='ترتیب پیشنهادی: دو هفتهٔ اول را کامل روی ایدهٔ رتبهٔ ۱ بگذار؛ اگر پس از ۲۰ تعامل واقعی (تماس، پیام، بازدید) سیگنال خرید ضعیف بود، به رتبهٔ ۲ سوییچ کن — نه زودتر.';
+  return{engine:'موتور رصد (بومی)',exec,coach,ideas,alts,sig,stats:{scanned:DB.length,strong,close}};
+}
+function applyFa(s){return s}
+
+/* ====== GEMINI ====== */
+async function geminiBrief(p,key){
+  const schema='{"exec":"2-3 جملهٔ خلاصهٔ اجرایی فارسی","coach":"یک پیام مربی فارسی","ideas":[{"title":"نام ایده","dom":"حوزه","pitch":"توضیح یک‌پاراگرافی","why":"چرا برای این پروفایل (با ارجاع به مهارت/بودجه/زمان)","rev":{"s":"بازهٔ ماه ۱-۳","m":"بازهٔ ماه ۴-۱۲","y":"بازهٔ سال دوم"},"steps":["قدم ۱ هفتهٔ اول","قدم ۲","قدم ۳"],"risks":[["ریسک","راهکار"],["ریسک","راهکار"]],"tools":["ابزار ۱","ابزار ۲","ابزار ۳"],"channels":["کانال ۱","کانال ۲","کانال ۳"],"time":"زمان تا اولین درآمد","g90":"هدف ۹۰ روزه","scores":{"mk":0,"pf":0,"fit":0}}]}';
+  const sys='تو یک مشاور ارشد استراتژی کسب‌وکار برای بازار ایران هستی. پروفایل کاربر را تحلیل کن و دقیقاً ۳ ایدهٔ درآمدی واقع‌بینانه و مختص همین پروفایل بده. اعداد را با تومان و بازهٔ واقع‌بینانهٔ ایران بده. هیچ ادعای تضمین سود نکن. خروجی فقط و فقط JSON معتبر با این ساختار: '+schema+' مقادیر mk/pf/fit اعداد ۰ تا ۱۰۰ باشند.';
+  const user='پروفایل کاربر: درد/هدف: '+p.pain+' | مهارت‌ها: '+p.skills+' | حوزهٔ علاقه: '+(p.dom===''?'بدون محدودیت':DOMAINS[+p.dom])+' | بودجه: '+CAPL[p.cap]+' | زمان هفتگی: '+HRSL[p.hrs]+' | بازار: '+MKL[p.mk]+' | ریسک‌پذیری: '+RISKL[p.risk];
+  const body={contents:[{parts:[{text:sys+'\n\n'+user}]}],generationConfig:{temperature:.75,maxOutputTokens:4096,responseMimeType:'application/json'}};
+  const models=['gemini-2.5-flash','gemini-2.0-flash'];
+  let lastErr;
+  for(const m of models){
+    try{
+      const ctrl=new AbortController();
+      const to=setTimeout(()=>ctrl.abort(),45000);
+      const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+m+':generateContent?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ctrl.signal});
+      clearTimeout(to);
+      if(!res.ok)throw new Error('HTTP '+res.status);
+      const data=await res.json();
+      const txt=(data.candidates?.[0]?.content?.parts?.[0]?.text||'').replace(/```json|```/g,'').trim();
+      const j=JSON.parse(txt);
+      const ideas=(j.ideas||[]).slice(0,3).map(i=>{
+        const mk=Math.max(35,Math.min(97,Math.round(+i.scores?.mk||70)));
+        const pf=Math.max(35,Math.min(97,Math.round(+i.scores?.pf||70)));
+        const fit=Math.max(35,Math.min(100,Math.round(+i.scores?.fit||70)));
+        const final=Math.round(mk*.34+pf*.33+fit*.33);
+        return{
+          title:String(i.title||'ایدهٔ پیشنهادی'),dom:String(i.dom||''),pitch:String(i.pitch||''),
+          why:String(i.why||''),rev:{s:String(i.rev?.s||'—'),m:String(i.rev?.m||'—'),y:String(i.rev?.y||'—')},
+          steps:[String(i.steps?.[0]||''),String(i.steps?.[1]||''),String(i.steps?.[2]||'')].filter(Boolean),
+          risks:[[String(i.risks?.[0]?.[0]||'ریسک اصلی'),String(i.risks?.[0]?.[1]||'—')],[String(i.risks?.[1]?.[0]||'ریسک دوم'),String(i.risks?.[1]?.[1]||'—')]],
+          tools:(i.tools||[]).slice(0,3).map(String),channels:(i.channels||[]).slice(0,3).map(String),
+          time:String(i.time||'—'),g90:String(i.g90||'هدف ۹۰ روزه: تثبیت درآمد ماهانه و یک کانال تکرارشو.'),
+          scores:{mk,pf,fit,final,grade:gradeOf(final)},bd:null,idx:null,focus:false
+        };
+      });
+      if(ideas.length<3)throw new Error('خروجی ناقص');
+      return{engine:'Gemini زنده',exec:String(j.exec||''),coach:String(j.coach||''),ideas,alts:[],sig:extractSignals(p),stats:{scanned:DB.length,strong:null,close:null}};
+    }catch(e){lastErr=e}
+  }
+  throw lastErr||new Error('Gemini در دسترس نیست');
+}
+
+/* ====== RENDER BRIEF ====== */
+const bar=(l,v)=>'<div class="sc-row"><label><span>'+l+'</span><b>'+fa(v)+'</b></label><div class="bar"><i data-w="'+v+'"></i></div></div>';
+const BD_LABEL={skill:['مهارت',30],cap:['سرمایه',16],hrs:['زمان',14],risk:['ریسک',12],mkt:['بازار',18],urg:['فوریت',10]};
+function bdChips(bd){
+  if(!bd)return'<span class="chip">تفکیک فقط در موتور بومی</span>';
+  return Object.keys(BD_LABEL).map(k=>'<span class="chip" title="'+BD_LABEL[k][0]+' از '+BD_LABEL[k][1]+'">'+BD_LABEL[k][0]+' '+fa(bd[k])+'<i>/'+BD_LABEL[k][1]+'</i></span>').join('');
+}
+function refinerHTML(){
+  return'<div class="refine"><b>◆ دقت‌سنج دستیار — سه پاسخ کوتاه بده تا رتبه‌بندی دقیق‌تر شود:</b><div class="rrow">'
+    +'<button type="button" class="fchip'+(refine.presen?' on':'')+'" data-ref="presen">فروش حضوری/ملاقات مشتری ممکن است</button>'
+    +'<button type="button" class="fchip'+(refine.network?' on':'')+'" data-ref="network">شبکهٔ معرفین و آشنایان فعال دارم</button>'
+    +'<button type="button" class="fchip'+(refine.quick?' on':'')+'" data-ref="quick">اولویتم رسیدن سریع پول است</button>'
+    +'</div></div>';
+}
+function wireRefiner(){
+  document.querySelectorAll('[data-ref]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.ref;
+    refine[k]=!refine[k];
+    b.classList.toggle('on',refine[k]);
+    if(currentBrief&&lastProfile&&currentBrief.engine.indexOf('بومی')>-1){
+      const b=nativeBrief(lastProfile);
+      renderBrief(b,false);
+      toast('رتبه‌بندی با پاسخ تو باز-محاسبه شد.');
+    }
+  }));
+}
+function renderBrief(b,save){
+  currentBrief=b;
+  $('briefSerial').textContent='RS-'+Date.now().toString(36).toUpperCase().slice(-5)+'-'+Math.floor(Math.random()*900+100);
+  $('briefEngine').textContent=b.engine;
+  const sigHtml='<div class="sig-row"><span class="sig-l">سیگنال‌های پروفایل:</span>'+(b.sig||[]).map(s=>'<span class="chip '+s.t+'">'+esc(s.k)+': '+esc(s.v)+'</span>').join('')+'</div>';
+  const statsHtml=(b.stats&&b.stats.strong!=null)?'<div class="scan"><span class="chip acc">۹۶ سناریو اسکن شد</span><span class="chip acc">'+fa(b.stats.strong)+' هم‌خوان قوی</span><span class="chip">'+fa(b.stats.close)+' سناریوی نزدیک</span><span class="chip">۶ معیار شفاف</span></div>':'';
+  $('exec').innerHTML='<h3>خلاصهٔ اجرایی</h3><p>'+b.exec+'</p>'+sigHtml+statsHtml
+    +'<div class="strategy"><b>استراتژی اجرا:</b> یک ایده را تا سیگنال واقعیِ بازار (پول، نه تحسین) دنبال کن؛ بقیهٔ ایده‌ها پشتیبان‌اند، نه موازی‌کاری.</div>'
+    +(b.engine.indexOf('بومی')>-1?refinerHTML():'')
+    +'<div class="coach">◆ '+esc(b.coach)+'</div>';
+  $('mtxWrap').innerHTML='<table class="mtx"><thead><tr><th>#</th><th>مسیر</th><th>نهایی</th><th>بازار</th><th>سود</th><th>تناسب</th></tr></thead><tbody>'+b.ideas.map((i,x)=>'<tr><td>'+fa(x+1)+'</td><td>'+esc(i.title)+'</td><td><b class="acc">'+fa(i.scores.final)+'</b></td><td>'+fa(i.scores.mk)+'</td><td>'+fa(i.scores.pf)+'</td><td>'+fa(i.scores.fit)+'</td></tr>').join('')+'</tbody></table>';
+  $('ideas').innerHTML=b.ideas.map((i,ix)=>{
+    const g=i.scores.grade;
+    return '<article class="idea">'
+      +'<div class="idea-top"><div class="idea-rank"><div class="rank-num">'+fa(ix+1)+'</div><div><h4>'+esc(i.title)+(i.focus?' <span class="chip acc">انتخاب تو</span>':'')+'</h4><div class="dom">'+esc(i.dom)+' · تا اولین درآمد: '+esc(i.time)+'</div></div></div>'
+      +'<div class="score-final"><b>'+fa(i.scores.final)+'</b><span class="grade g-'+g+'">ردهٔ '+g+'</span></div></div>'
+      +'<p class="pitch">'+esc(i.pitch)+'</p>'
+      +'<div class="why"><b>چرا برای تو:</b> '+esc(i.why)+'</div>'
+      +'<div class="scores3">'+bar('جذابیت بازار',i.scores.mk)+bar('سودآوری',i.scores.pf)+bar('تناسب با تو',i.scores.fit)+'</div>'
+      +'<div class="bd-row">'+bdChips(i.bd)+'</div>'
+      +'<div class="mini-grid"><div class="mini-box"><h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>مدل درآمد (تومان)</h5>'
+      +'<div class="rev-row"><span>ماه اول تا سوم</span><b>'+esc(i.rev.s)+'</b></div>'
+      +'<div class="rev-row"><span>ماه ۴ تا ۱۲</span><b>'+esc(i.rev.m)+'</b></div>'
+      +'<div class="rev-row"><span>سال دوم</span><b>'+esc(i.rev.y)+'</b></div>'
+      +'<div class="g90">🎯 '+esc(i.g90)+'</div></div>'
+      +'<div class="mini-box"><h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>نقشهٔ ۷ روز اول</h5>'
+      +'<ol class="steps">'+i.steps.map((s,x)=>'<li><b>'+fa(x+1)+'</b><span>'+esc(s)+'</span></li>').join('')+'</ol></div></div>'
+      +'<div class="mini-grid"><div class="mini-box"><h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4m0 4h.01"/></svg>ریسک‌های واقعی</h5>'
+      +i.risks.map(r=>'<div class="risk-row"><b>'+esc(r[0])+':</b> '+esc(r[1])+'</div>').join('')+'</div>'
+      +'<div class="mini-box"><h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.8-3.8a6 6 0 01-7.9 7.9l-6.9 6.9a2.1 2.1 0 01-3-3l6.9-6.9a6 6 0 017.9-7.9l-3.8 3.8z"/></svg>ابزار و کانال جذب</h5>'
+      +'<div class="tools-row">'+i.tools.map(t=>'<span class="chip">'+esc(t)+'</span>').join('')+'</div>'
+      +'<div class="tools-row" style="margin-top:8px">'+i.channels.map(t=>'<span class="chip amb">'+esc(t)+'</span>').join('')+'</div></div></div>'
+      +'<div class="idea-foot"><div class="acts">'
+      +(i.idx!=null?'<button class="link-btn acc" data-open="'+i.idx+'">عمق بیشتر</button>':'')
+      +'<button class="link-btn" data-copyidea="'+ix+'">رونوشت این ایده</button></div>'
+      +'<span class="s-mini">امتیاز: بازار '+fa(i.scores.mk)+' · سود '+fa(i.scores.pf)+' · تناسب '+fa(i.scores.fit)+'</span></div></article>';
+  }).join('');
+  $('altsWrap').innerHTML=(b.alts&&b.alts.length)?'<div class="alts">'+b.alts.map(a=>'<div class="alt"><h6>'+esc(a.title)+'</h6><div class="a-score">امتیاز '+fa(a.final)+' · '+esc(a.dom)+'</div><div class="acts"><button class="link-btn" data-altopen="'+a.idx+'">باز کن</button><button class="link-btn acc" data-altswap="'+a.idx+'">جای رتبهٔ ۳</button></div></div>').join('')+'</div>':'';
+  $('briefEmpty').style.display='none';
+  $('loading').classList.remove('show');
+  $('brief').classList.add('show');
+  requestAnimationFrame(()=>{document.querySelectorAll('#brief .bar i').forEach(el=>{el.style.width=el.dataset.w+'%'})});
+  document.querySelectorAll('#ideas [data-copyidea]').forEach(btn=>btn.addEventListener('click',()=>{
+    const i=b.ideas[+btn.dataset.copyidea];
+    copyText(ideaToText(i));toast('ایدهٔ «'+i.title+'» رونوشت شد.');
+  }));
+  document.querySelectorAll('#ideas [data-open]').forEach(btn=>btn.addEventListener('click',()=>openScenario(DB[+btn.dataset.open])));
+  document.querySelectorAll('[data-altopen]').forEach(btn=>btn.addEventListener('click',()=>openScenario(DB[+btn.dataset.altopen])));
+  document.querySelectorAll('[data-altswap]').forEach(btn=>btn.addEventListener('click',()=>{
+    const idx=+btn.dataset.altswap;
+    if(!lastProfile)return;
+    const s=DB[idx],sig=b.sig||extractSignals(lastProfile),r=computeScores(s,lastProfile,sig);
+    b.ideas[2]=ideaFromScn(s,lastProfile,sig,r,false);
+    renderBrief(b,false);
+    toast('«'+s.t+'» جایگزین رتبهٔ ۳ شد.');
+  }));
+  wireRefiner();
+  if(save!==false){store_set('rb_last',b);saveHistory(b)}
+  $('brief').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+}
+function ideaToText(i){
+  let t=i.title+' — '+i.dom+'\n'+i.pitch+'\nچرا برای تو: '+i.why
+  +'\nدرآمد: ماه ۱-۳: '+i.rev.s+' | ماه ۴-۱۲: '+i.rev.m+' | سال دوم: '+i.rev.y
+  +'\nنقشهٔ ۷ روز اول:\n'+i.steps.map((s,x)=>'  '+(x+1)+') '+s).join('\n')
+  +'\nریسک‌ها:\n'+i.risks.map(r=>'  • '+r[0]+' → '+r[1]).join('\n')
+  +'\nابزارها: '+i.tools.join('، ')+'\nکانال‌ها: '+i.channels.join('، ')
+  +'\nتا اولین درآمد: '+i.time+'\n'+i.g90
+  +'\nامتیاز: '+i.scores.final+' (بازار '+i.scores.mk+' / سود '+i.scores.pf+' / تناسب '+i.scores.fit+')';
+  return t.replace(/<[^>]*>/g,'');
+}
+function briefToText(b){
+  let t='بریف استراتژیک کسب‌وکار — رصد (RASAD)\nموتور: '+b.engine+'\n\nخلاصهٔ اجرایی:\n'+b.exec.replace(/<[^>]*>/g,'')+'\n\nپیام مربی:\n'+b.coach+'\n';
+  b.ideas.forEach((i,x)=>{t+='\n━━━ ایدهٔ '+(x+1)+' ━━━\n'+ideaToText(i)+'\n'});
+  return t+'\nرصد چارچوب تصمیم‌گیری است، نه پیش‌بینی. تضمین سودی وجود ندارد.';
+}
+function copyText(t){
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).catch(()=>{});
+  else{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove()}
+}
+$('copyBrief').addEventListener('click',()=>{if(currentBrief){copyText(briefToText(currentBrief));toast('بریف کامل رونوشت شد.')}});
+$('dlBrief').addEventListener('click',()=>{
+  if(!currentBrief)return;
+  const blob=new Blob([briefToText(currentBrief)],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='rasad-brief-'+$('briefSerial').textContent+'.txt';
+  document.body.appendChild(a);a.click();a.remove();
+  toast('فایل متنی بریف دانلود شد.');
+});
+$('printBrief').addEventListener('click',()=>window.print());
+$('newBrief').addEventListener('click',()=>{
+  $('brief').classList.remove('show');
+  $('briefEmpty').style.display='';
+  $('genForm').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+});
+
+/* ====== HISTORY ====== */
+function saveHistory(b){
+  const h=store_get('rb_history',[]);
+  h.unshift({serial:$('briefSerial').textContent,ts:Date.now(),engine:b.engine,pain:($('fPain').value||'').slice(0,80),brief:b});
+  store_set('rb_history',h.slice(0,12));
+}
+$('historyBtn').addEventListener('click',()=>{
+  const h=store_get('rb_history',[]);
+  if(!h.length){openModal('<h3 class="m-title">بریف‌های من</h3><p style="color:var(--muted)">هنوز بریفی نساخته‌ای. فرم موتور بریف را کامل کن و اولین سند استراتژیک خودت را بساز.</p>');return}
+  let html='<h3 class="m-title">بریف‌های من</h3><p style="color:var(--faint);font-size:13px;margin-bottom:16px">'+fa(h.length)+' بریف ذخیره‌شده — همه‌چیز فقط روی مرورگر خودت.</p>';
+  h.forEach((it,ix)=>{
+    const cls=it.engine.indexOf('Gemini')>-1?'amb':'acc';
+    html+='<div style="border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><b style="font-size:14px">'+esc(it.pain||'بدون توضیح')+'</b><span class="chip '+cls+'">'+esc(it.engine)+'</span></div><div style="color:var(--faint);font-size:11px;margin-top:4px" class="lat">'+esc(it.serial)+' · '+new Date(it.ts).toLocaleDateString('fa-IR')+'</div><div style="display:flex;gap:8px;margin-top:10px"><button class="link-btn acc" data-restore="'+ix+'">بازیابی</button><button class="link-btn" data-del="'+ix+'">حذف</button></div></div>';
+  });
+  openModal(html);
+  document.querySelectorAll('[data-restore]').forEach(b=>b.addEventListener('click',()=>{const hh=store_get('rb_history',[]);renderBrief(hh[+b.dataset.restore].brief,false);closeModal()}));
+  document.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{let hh=store_get('rb_history',[]);hh.splice(+b.dataset.del,1);store_set('rb_history',hh);closeModal();toast('بریف حذف شد.')}))
+});
+
+/* ====== GENERATE FLOW ====== */
+document.querySelectorAll('input[name="engine"]').forEach(r=>r.addEventListener('change',()=>{
+  $('apiWrap').classList.toggle('show',document.querySelector('input[name="engine"]:checked').value==='gemini');
+}));
+$('focusClear').addEventListener('click',()=>{focusIdea=null;$('focusChip').classList.remove('show')});
+$('genForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const pain=$('fPain'),skills=$('fSkills');
+  let ok=true;
+  [pain,skills].forEach(f=>{if(!f.value.trim()){f.classList.add('err');ok=false}else f.classList.remove('err')});
+  if(!ok){toast('دو فیلد اجباری را کامل کن.',true);return}
+  const p={
+    pain:pain.value.trim(),skills:skills.value.trim(),
+    dom:$('fDom').value,cap:+$('fCap').value,hrs:+$('fHrs').value,
+    mk:$('fMk').value,risk:+$('fRisk').value
+  };
+  lastProfile=p;
+  const engine=document.querySelector('input[name="engine"]:checked').value;
+  $('briefEmpty').style.display='none';
+  $('brief').classList.remove('show');
+  $('loading').classList.add('show');
+  $('loading').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'});
+  if(engine==='gemini'){
+    const key=$('apiKey').value.trim();
+    if(!key){toast('برای موتور Gemini، کلید API را وارد کن — یا موتور بومی را انتخاب کن.',true);$('loading').classList.remove('show');$('briefEmpty').style.display='';return}
+    try{
+      const b=await geminiBrief(p,key);
+      await new Promise(r=>setTimeout(r,reduceMotion?0:1200));
+      renderBrief(b);
+    }catch(err){
+      toast('Gemini پاسخ نداد؛ بریف با موتور بومی ساخته شد.',true);
+      await new Promise(r=>setTimeout(r,reduceMotion?0:2600));
+      renderBrief(nativeBrief(p));
+    }
+  }else{
+    await new Promise(r=>setTimeout(r,reduceMotion?0:3200));
+    renderBrief(nativeBrief(p));
+  }
+});
+(function(){
+  const last=store_get('rb_last',null);
+  if(last&&last.exec&&last.ideas){try{renderBrief(last,false)}catch(e){}}
+})();
+
+/* ============================================================
+   موتور جستجوی طبیعی
+   ============================================================ */
+const SYN={
+  'پول':'سرمایه بودجه','درامد':'درآمد فروش سود','درآمد':'پول فروش سود','سود':'درآمد پول',
+  'خونه':'خانه منزل خانگی','خانه':'منزل خانگی خانواده','ماشین':'خودرو','اینترنتی':'آنلاین وب سایت',
+  'وب':'سایت آنلاین','سایت':'وب آنلاین','کد':'برنامه کدنویسی نرم‌افزار','پیج':'اینستاگرام شبکه',
+  'کار':'شغل درآمد کسب','شغل':'کار درآمد کسب','ارزان':'کم سبک بودجه','سبک':'کم ارزان',
+  'خارج':'ارزی جهانی خارجی دلار','ارزی':'جهانی خارجی دلار','بیزنس':'کسب کار','استارت':'شروع نوپا',
+  'اموزش':'آموزش تدریس دوره','املاک':'ویلا اقامتی مسکن','ورزش':'فیتنس تمرین سلامت',
+  'غذا':'آشپزی کترینگ خوراکی','قهوه':'کافه رست','لوازم':'فروش کالا'
+};
+const STEMS=['هایی','های','ترین','تر','ها','ان','ات','ه'];
+function stem(t){
+  let s=t;
+  for(const suf of STEMS){
+    if(s.length-suf.length>=3&&s.endsWith(suf)){s=s.slice(0,-suf.length);break}
+  }
+  return s;
+}
+function lev(a,b){
+  if(Math.abs(a.length-b.length)>1)return 2;
+  let i=0,j=0,d=0;
+  while(i<a.length&&j<b.length){
+    if(a[i]!==b[j])d++;
+    else{i++;j++;continue}
+    if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++}
+    if(d>1)return 2;
+  }
+  d+=a.length-i+b.length-j;
+  return d;
+}
+function facetsOf(s){
+  const f=[];
+  const hay=s.t+' '+s.tags.join(' ')+' '+s.kw.join(' ');
+  if(s.req.c===1)f.push('کم‌سرمایه');
+  if(isQuick(s))f.push('سریع‌درآمد');
+  if(s.req.h===1)f.push('جانبی');
+  if(/شرکت|عمده|B2B/.test(hay))f.push('B2B');
+  if(s.req.mk==='global')f.push('ارزی');
+  if(s.req.r===1)f.push('کم‌ریسک');
+  if(/اشتراک|ماهانه|قرارداد/.test(s.t+' '+hay))f.push('تکرارشو');
+  return f;
+}
+const IDX=DB.map((s,i)=>{
+  const toks=new Set();
+  tokenize(s.t+' '+s.tags.join(' ')+' '+s.kw.join(' ')+' '+s.tools.join(' ')+' '+DOMAINS[s.dom]).forEach(t=>toks.add(stem(t)));
+  return{i,s,toks,t:norm(s.t),hay:norm(s.t+' '+s.tags.join(' ')+' '+s.kw.join(' ')+' '+s.w+' '+s.tools.join(' ')+' '+DOMAINS[s.dom]),facets:facetsOf(s)};
+});
+function parseQuery(raw){
+  let q=norm(raw);
+  const auto={capMax:0,hrsMax:0,facets:[]};
+  const capM=q.match(/(\d+)\s*(میلیون|میلیونی|م\b)/);
+  if(capM){const n=+capM[1];auto.capMax=n<=10?1:n<=50?2:3;q=q.replace(capM[0],' ')}
+  const hM=q.match(/(\d+)\s*ساعت/);
+  if(hM){const n=+hM[1];auto.hrsMax=n<=10?1:n<=25?2:3;q=q.replace(hM[0],' ')}
+  const fmap=[[/(سریع|فوری)/,'سریع‌درآمد'],[/کم ?ریسک|بی ?خطر/,'کم‌ریسک'],[/ارزی|دلار(ی)?/,'ارزی'],[/b2b/,'B2B'],[/اشتراک|تکرارشو/,'تکرارشو'],[/دورکار|جانبی/,'جانبی'],[/کم ?سرمایه|بی ?سرمایه/,'کم‌سرمایه']];
+  fmap.forEach(pair=>{if(pair[0].test(q)){auto.facets.push(pair[1]);q=q.replace(pair[0],' ')}});
+  return{auto,text:q.trim(),toks:expandToks(q).map(stem)};
+}
+function expandToks(q){
+  const base=tokenize(q);
+  const out=[...base];
+  base.forEach(t=>{if(SYN[t])SYN[t].split(' ').forEach(x=>{if(!out.includes(x))out.push(x)})});
+  return out;
+}
+let facetSel='',lastToks=[],lastRes=[];
+function searchScore(doc,toks){
+  if(!toks.length)return 1;
+  let sc=0,matched=0;
+  toks.forEach(t=>{
+    if(doc.t.includes(t)){sc+=5;matched+=1;return}
+    if(doc.toks.has(t)){sc+=3;matched+=1;return}
+    let best=0;
+    doc.toks.forEach(dt=>{
+      if(dt.length>2&&t.length>2&&(dt.startsWith(t)||t.startsWith(dt)))best=Math.max(best,2);
+      else if(t.length>=5&&lev(t,dt)<=1)best=Math.max(best,1.4);
+    });
+    sc+=best;
+    if(best>0)matched+=.6;
+  });
+  sc+=(matched/toks.length)*14;
+  return sc;
+}
+function runSearch(){
+  const t0=performance.now();
+  const raw=$('q').value.trim();
+  const {auto,text,toks}=parseQuery(raw);
+  lastToks=toks;
+  let items=IDX.filter(doc=>{
+    const s=doc.s;
+    if(facetSel&&!doc.facets.includes(facetSel))return false;
+    if(auto.facets.some(f=>!doc.facets.includes(f)))return false;
+    if(auto.capMax&&s.req.c>auto.capMax)return false;
+    if(auto.hrsMax&&s.req.h>auto.hrsMax)return false;
+    if($('fSDom').value!==''&&s.dom!==+$('fSDom').value)return false;
+    if($('fSCap').value!==''&&s.req.c!==+$('fSCap').value)return false;
+    if($('fSHrs').value!==''&&s.req.h!==+$('fSHrs').value)return false;
+    if($('fSMk').value!==''&&s.req.mk!==$('fSMk').value)return false;
+    if($('fSRisk').value!==''&&s.req.r!==+$('fSRisk').value)return false;
+    return true;
+  });
+  if(toks.length){
+    items=items.map(doc=>({doc,sc:searchScore(doc,toks)})).filter(x=>x.sc>0);
+  }else{
+    items=items.map(doc=>({doc,sc:doc.s.base.mk+doc.s.base.pf}));
+  }
+  const sort=$('sortSel').value;
+  items.sort((a,b)=>{
+    if(sort==='rel')return b.sc-a.sc;
+    if(sort==='mk')return b.doc.s.base.mk-a.doc.s.base.mk;
+    if(sort==='pf')return b.doc.s.base.pf-a.doc.s.base.pf;
+    if(sort==='rf')return a.doc.s.req.r-b.doc.s.req.r||b.doc.s.base.mk-a.doc.s.base.mk;
+    return 0;
+  });
+  lastRes=items;
+  renderResults(text,(performance.now()-t0),auto);
+}
+function hl(text){
+  let out=esc(text);
+  if(lastToks.length&&lastToks.length<12){
+    lastToks.forEach(t=>{
+      try{out=out.replace(new RegExp('('+escRe(esc(t))+')','gi'),'<mark>$1</mark>')}catch(e){}
+    });
+  }
+  return out;
+}
+function renderResults(q,ms,auto){
+  const g=$('sGrid');
+  if(!lastRes.length){
+    g.innerHTML='<div class="s-empty" style="grid-column:1/-1"><div style="font-size:40px;margin-bottom:12px">🔍</div><b style="color:var(--muted)">چیزی پیدا نشد</b><p style="font-size:14px;margin-top:6px">عبارت دیگری امتحان کن یا فیلترها را بردار.</p><div class="pop-chips" style="margin-top:16px"><button onclick="document.getElementById(\'q\').value=\'\';runSearch()">پاک‌کردن جستجو</button></div></div>';
+    $('sCount').textContent='';
+    return;
+  }
+  let autoTxt='';
+  if(auto&&auto.capMax)autoTxt+=' · سرمایه تا '+fa(auto.capMax===1?'۱۰ میلیون':auto.capMax===2?'۵۰ میلیون':'بیشتر');
+  if(auto&&auto.facets.length)autoTxt+=' · '+auto.facets.join(' + ');
+  $('sCount').innerHTML='<b>'+fa(lastRes.length)+'</b> نتیجه'+(q?' برای «'+esc(q)+'»'+esc(autoTxt):'')+' · '+fa(ms.toFixed(0))+'ms';
+  const CAPS={1:'زیر ۱۰م',2:'۱۰-۵۰م',3:'+۵۰م'},HRS={1:'<۱۰س',2:'۱۰-۲۵س',3:'+۳۰س'};
+  g.innerHTML=lastRes.map(({doc})=>{
+    const s=doc.s,star=stars.has(doc.i);
+    return '<div class="s-card" data-sc="'+doc.i+'" tabindex="0" role="button" aria-label="باز کردن '+esc(s.t)+'">'
+      +'<button class="star'+(star?' on':'')+'" data-star="'+doc.i+'" aria-label="ستاره">'+(star?'★':'☆')+'</button>'
+      +'<div class="chips"><span class="chip acc">'+esc(DOMAINS[s.dom])+'</span><span class="chip">بازار '+fa(s.base.mk)+'</span><span class="chip">سود '+fa(s.base.pf)+'</span></div>'
+      +'<h4>'+hl(s.t)+'</h4>'
+      +'<p>'+hl(s.w)+'</p>'
+      +'<div class="s-mini"><span>💰 '+CAPS[s.req.c]+'</span><span>⏱ '+HRS[s.req.h]+'</span><span>⚠ '+RISKL[s.req.r]+'</span></div>'
+      +'<div class="foot"><div class="s-mini"><b>'+esc(s.time)+'</b><span>تا اولین درآمد</span></div><span class="go">جزئیات و بریف اختصاصی ←</span></div></div>';
+  }).join('');
+  g.querySelectorAll('.s-card').forEach(c=>{
+    c.addEventListener('click',e=>{
+      if(e.target.closest('.star'))return;
+      openScenario(DB[+c.dataset.sc]);
+    });
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openScenario(DB[+c.dataset.sc])}});
+  });
+  g.querySelectorAll('[data-star]').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const idx=+b.dataset.star;
+    if(stars.has(idx)){stars.delete(idx);b.textContent='☆';b.classList.remove('on')}
+    else{
+      if(stars.size>=4){toast('حداکثر ۴ سناریو را هم‌زمان می‌توانی مقایسه کنی.',true);return}
+      stars.add(idx);b.textContent='★';b.classList.add('on');
+    }
+    store_set('rb_stars',[...stars]);
+    updateCmpBar();
+  }));
+  updateCmpBar();
+}
+function renderFacets(){
+  $('facets').innerHTML=FACETS.map(f=>'<button class="fchip'+(facetSel===f?' on':'')+'" data-facet="'+f+'">'+f+'</button>').join('');
+  $('facets').querySelectorAll('[data-facet]').forEach(b=>b.addEventListener('click',()=>{
+    facetSel=facetSel===b.dataset.facet?'':b.dataset.facet;
+    renderFacets();runSearch();
+  }));
+}
+function renderAChips(auto){
+  const box=$('achips');
+  let html='';
+  const label={fSDom:['حوزه',v=>DOMAINS[+v]],fSCap:['سرمایه',v=>({1:'زیر ۱۰م',2:'۱۰-۵۰م',3:'+۵۰م'})[v]],fSHrs:['زمان',v=>({1:'<۱۰س',2:'۱۰-۲۵س',3:'+۳۰س'})[v]],fSMk:['بازار',v=>MKL[v]],fSRisk:['ریسک',v=>RISKL[v]]};
+  Object.keys(label).forEach(id=>{
+    const v=$(id).value;
+    if(v!=='')html+='<span class="chip acc">'+label[id][0]+': '+label[id][1](v)+'<span class="x" data-clear="'+id+'" role="button" aria-label="حذف فیلتر">×</span></span>';
+  });
+  if(auto&&auto.facets.length)html+=auto.facets.map(f=>'<span class="chip amb">نیت: '+f+'</span>').join('');
+  if($('q').value.trim())html+='<span class="chip acc">جستجو: '+esc($('q').value.trim())+'<span class="x" data-clear="q" role="button" aria-label="حذف جستجو">×</span></span>';
+  box.innerHTML=html;
+  box.querySelectorAll('[data-clear]').forEach(x=>x.addEventListener('click',()=>{
+    const id=x.dataset.clear;
+    if(id==='q')$('q').value='';else $(id).value='';
+    runSearch();
+  }));
+}
+const _runSearch=runSearch;
+runSearch=function(){const {auto}=parseQuery($('q').value.trim());_runSearch();renderAChips(auto)};
+/* پیشنهاد زنده + جستجوهای اخیر */
+let sugIdx=-1;
+function showSug(){
+  const q=$('q').value.trim();
+  const box=$('sug');
+  if(!q){
+    const rec=store_get('rb_recent',[]);
+    if(rec.length){
+      box.innerHTML='<div class="sug-item" style="cursor:default;color:var(--faint);font-size:11px">جستجوهای اخیر</div>'+rec.map(r=>'<div class="sug-item" data-rec="'+esc(r)+'"><span>🕘 '+esc(r)+'</span></div>').join('');
+      box.classList.add('show');sugIdx=-1;
+      box.querySelectorAll('[data-rec]').forEach(el=>el.addEventListener('click',()=>{$('q').value=el.dataset.rec;hideSug();runSearch()}));
+    }else hideSug();
+    return;
+  }
+  if(q.length<2){hideSug();return}
+  const {toks}=parseQuery(q);
+  const cands=IDX.map(doc=>{
+    let sc=0;
+    toks.forEach(t=>{if(doc.t.includes(t))sc+=4;else if(doc.toks.has(t))sc+=2});
+    return{doc,sc};
+  }).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).slice(0,6);
+  if(!cands.length){hideSug();return}
+  sugIdx=-1;
+  box.innerHTML=cands.map((c,x)=>'<div class="sug-item" data-si="'+x+'" role="option"><span>'+hl(DB[c.doc.i].t)+'</span><small>'+esc(DOMAINS[DB[c.doc.i].dom])+'</small></div>').join('');
+  box.classList.add('show');
+  box.querySelectorAll('.sug-item').forEach(el=>el.addEventListener('click',()=>{
+    openScenario(DB[cands[+el.dataset.si].doc.i]);hideSug();
+  }));
+}
+function hideSug(){$('sug').classList.remove('show');sugIdx=-1}
+function markSug(items){items.forEach((el,x)=>el.classList.toggle('on',x===sugIdx))}
+$('q').addEventListener('input',()=>{showSug();runSearch()});
+$('q').addEventListener('focus',showSug);
+$('q').addEventListener('keydown',e=>{
+  const items=$('sug').querySelectorAll('.sug-item');
+  if(e.key==='ArrowDown'&&items.length){e.preventDefault();sugIdx=(sugIdx+1)%items.length;markSug(items)}
+  else if(e.key==='ArrowUp'&&items.length){e.preventDefault();sugIdx=(sugIdx-1+items.length)%items.length;markSug(items)}
+  else if(e.key==='Enter'){
+    if(sugIdx>=0&&items[sugIdx]&&items[sugIdx].dataset.si!==undefined){e.preventDefault();items[sugIdx].click();return}
+    const v=$('q').value.trim();
+    if(v){
+      const rec=store_get('rb_recent',[]).filter(r=>r!==v);
+      rec.unshift(v);store_set('rb_recent',rec.slice(0,5));
+      hideSug();
+    }
+  }
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))hideSug()});
+['fSDom','fSCap','fSHrs','fSMk','fSRisk','sortSel'].forEach(id=>$(id).addEventListener('change',runSearch));
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('q').focus();$('q').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'})}
+  else if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('q').focus()}
+});
+(function(){
+  const pops=['با ۱۰ میلیون','کم‌ریسک','فروش','آموزش','دورکاری','ارزی','B2B','اینستاگرام','تولید','سریع درآمد'];
+  $('popChips').innerHTML=pops.map(p=>'<button data-q="'+p+'">'+p+'</button>').join('');
+  $('popChips').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    $('q').value=b.dataset.q;runSearch();showSug();
+    $('q').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'});
+  }));
+})();
+
+/* ====== مقایسه‌گر ====== */
+function updateCmpBar(){
+  const bar=$('cmpbar');
+  if(stars.size>=2){
+    $('cmpLabel').textContent=fa(stars.size)+' سناریو ستاره‌شده';
+    bar.classList.add('show');
+  }else bar.classList.remove('show');
+}
+$('cmpClear').addEventListener('click',()=>{
+  stars.clear();store_set('rb_stars',[]);runSearch();toast('ستاره‌ها پاک شد.');
+});
+$('cmpOpen').addEventListener('click',()=>{
+  const arr=[...stars].filter(i=>DB[i]);
+  if(arr.length<2){toast('حداقل دو سناریو ستاره کن.',true);return}
+  const CAPS={1:'زیر ۱۰ میلیون',2:'۱۰ تا ۵۰ میلیون',3:'بالای ۵۰ میلیون'},HRS={1:'کمتر از ۱۰ ساعت',2:'۱۰ تا ۲۵ ساعت',3:'بیش از ۳۰ ساعت'};
+  const row=(l,fn)=>'<tr><td style="color:var(--faint);font-weight:700">'+l+'</td>'+arr.map(i=>'<td>'+fn(DB[i])+'</td>').join('')+'</tr>';
+  let html='<h3 class="m-title">مقایسهٔ '+fa(arr.length)+' سناریو</h3><div style="overflow-x:auto"><table class="mtx"><thead><tr><th>معیار</th>'+arr.map(i=>'<th>'+esc(DB[i].t)+'</th>').join('')+'</tr></thead><tbody>'
+    +row('حوزه',s=>esc(DOMAINS[s.dom]))
+    +row('سرمایه',s=>CAPS[s.req.c])
+    +row('زمان هفتگی',s=>HRS[s.req.h])
+    +row('ریسک',s=>RISKL[s.req.r])
+    +row('بازار',s=>MKL[s.req.mk])
+    +row('تا اولین درآمد',s=>esc(s.time))
+    +row('درآمد ماه ۱-۳',s=>esc(s.rev.s))
+    +row('درآمد ماه ۴-۱۲',s=>esc(s.rev.m))
+    +row('جذابیت بازار',s=>'<b class="acc">'+fa(s.base.mk)+'</b>')
+    +row('سودآوری',s=>'<b class="acc">'+fa(s.base.pf)+'</b>')
+    +row('گام اول',s=>esc(s.steps[0]))
+    +row('ریسک اصلی',s=>esc(s.risks[0][0]))
+    +'</tbody></table></div><div class="m-sec" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><button class="link-btn acc" id="cmpBrief">ساخت بریف از بهینه‌ترین</button><span class="chip">بریف روی سناریوی با بالاترین جذابیت بازار تنظیم می‌شود</span></div>';
+  openModal(html);
+  $('cmpBrief').addEventListener('click',()=>{
+    const best=arr.sort((a,b)=>DB[b].base.mk-DB[a].base.mk)[0];
+    focusIdea={idx:best,title:DB[best].t};
+    $('focusText').textContent='ایدهٔ منتخب: '+DB[best].t;
+    $('focusChip').classList.add('show');
+    closeModal();
+    $('engine').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+    toast('«'+DB[best].t+'» قفل شد؛ فرم را کامل کن و بریف بساز.');
+  });
+});
+
+/* ====== SCENARIO MODAL ====== */
+function openScenario(s){
+  focusIdea={idx:DB.indexOf(s),title:s.t};
+  $('focusText').textContent='ایدهٔ منتخب: '+s.t;
+  $('focusChip').classList.add('show');
+  const CAPS={1:'زیر ۱۰ میلیون',2:'۱۰ تا ۵۰ میلیون',3:'بالای ۵۰ میلیون'},HRS={1:'کمتر از ۱۰ ساعت',2:'۱۰ تا ۲۵ ساعت',3:'بیش از ۳۰ ساعت'};
+  const idx=DB.indexOf(s),star=stars.has(idx);
+  openModal('<h3 class="m-title">'+esc(s.t)+'</h3><div class="m-dom">'+esc(DOMAINS[s.dom])+'</div>'
+    +'<button class="star'+(star?' on':'')+'" id="mStar" style="position:absolute;top:20px;left:70px" aria-label="ستاره">'+(star?'★':'☆')+'</button>'
+    +'<div class="m-sec" style="margin-top:0"><h5>چرا این فرصت</h5><p>'+esc(s.w)+'</p></div>'
+    +'<div class="m-sec"><h5>الزامات</h5><div class="m-req"><span class="chip">💰 سرمایه: '+CAPS[s.req.c]+'</span><span class="chip">⏱ زمان: '+HRS[s.req.h]+'</span><span class="chip">⚠ ریسک: '+RISKL[s.req.r]+'</span><span class="chip">🌍 بازار: '+MKL[s.req.mk]+'</span></div></div>'
+    +'<div class="m-sec"><h5>مدل درآمد</h5><div class="tx"><div class="rev-row"><span>ماه ۱-۳</span><b>'+esc(s.rev.s)+'</b></div><div class="rev-row"><span>ماه ۴-۱۲</span><b>'+esc(s.rev.m)+'</b></div><div class="rev-row"><span>سال دوم</span><b>'+esc(s.rev.y)+'</b></div></div></div>'
+    +'<div class="m-sec"><h5>گام‌های شروع</h5><ol class="steps">'+s.steps.map((x,i)=>'<li><b>'+fa(i+1)+'</b><span>'+esc(x)+'</span></li>').join('')+'</ol></div>'
+    +'<div class="m-sec"><h5>ریسک‌ها</h5>'+s.risks.map(r=>'<div class="risk-row"><b>'+esc(r[0])+':</b> '+esc(r[1])+'</div>').join('')+'</div>'
+    +'<div class="m-sec"><h5>ابزارها و کانال‌ها</h5><div class="tools-row">'+s.tools.map(t=>'<span class="chip">'+esc(t)+'</span>').join('')+CHANNELS[s.dom].map(t=>'<span class="chip amb">'+esc(t)+'</span>').join('')+'</div></div>'
+    +'<div class="m-sec" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><button class="link-btn acc" id="mGoBrief">ساخت بریف اختصاصی ←</button><span class="chip">تا اولین درآمد: '+esc(s.time)+'</span></div>');
+  $('mStar').addEventListener('click',()=>{
+    if(stars.has(idx)){stars.delete(idx);$('mStar').textContent='☆';$('mStar').classList.remove('on')}
+    else{
+      if(stars.size>=4){toast('حداکثر ۴ سناریو را هم‌زمان می‌توانی مقایسه کنی.',true);return}
+      stars.add(idx);$('mStar').textContent='★';$('mStar').classList.add('on');
+    }
+    store_set('rb_stars',[...stars]);runSearch();updateCmpBar();
+  });
+  $('mGoBrief').addEventListener('click',()=>{
+    closeModal();
+    $('engine').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+    toast('ایده قفل شد؛ فرم را کامل کن و «تحلیل عمیق» را بزن.');
+  });
+}
+
+/* ====== INIT ====== */
+renderFacets();
+runSearch();
+</script>
+</body>
+</html>
